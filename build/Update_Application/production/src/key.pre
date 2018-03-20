@@ -9895,165 +9895,328 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
-# 119 "src/comman.h"
-typedef union{
-struct{
-unsigned char year;
-unsigned char month;
-unsigned char day;
-unsigned char wk;
-unsigned char hour;
-unsigned char minute;
-unsigned char second;
-}datetime;
-unsigned char array[7];
-}DateTime_t;
+# 13 "D:\Program Files\Microchip\xc8\v1.41\include\stdint.h"
+typedef signed char int8_t;
 
-typedef struct{
-unsigned char hour;
-unsigned char minute;
-}Time_t;
+# 20
+typedef signed int int16_t;
 
-typedef struct{
+# 28
+typedef signed short long int int24_t;
+
+# 36
+typedef signed long int int32_t;
+
+# 43
+typedef unsigned char uint8_t;
+
+# 49
+typedef unsigned int uint16_t;
+
+# 56
+typedef unsigned short long int uint24_t;
+
+# 63
+typedef unsigned long int uint32_t;
+
+# 71
+typedef signed char int_least8_t;
+
+# 78
+typedef signed int int_least16_t;
+
+# 90
+typedef signed short long int int_least24_t;
+
+# 98
+typedef signed long int int_least32_t;
+
+# 105
+typedef unsigned char uint_least8_t;
+
+# 111
+typedef unsigned int uint_least16_t;
+
+# 121
+typedef unsigned short long int uint_least24_t;
+
+# 128
+typedef unsigned long int uint_least32_t;
+
+# 137
+typedef signed char int_fast8_t;
+
+# 144
+typedef signed int int_fast16_t;
+
+# 156
+typedef signed short long int int_fast24_t;
+
+# 164
+typedef signed long int int_fast32_t;
+
+# 171
+typedef unsigned char uint_fast8_t;
+
+# 177
+typedef unsigned int uint_fast16_t;
+
+# 187
+typedef unsigned short long int uint_fast24_t;
+
+# 194
+typedef unsigned long int uint_fast32_t;
+
+# 200
+typedef int32_t intmax_t;
+
+
+
+
+typedef uint32_t uintmax_t;
+
+
+
+
+typedef int16_t intptr_t;
+
+
+
+
+typedef uint16_t uintptr_t;
+
+# 12 "D:\Program Files\Microchip\xc8\v1.41\include\stdbool.h"
+typedef unsigned char bool;
+
+# 4 "D:\Program Files\Microchip\xc8\v1.41\include\__size_t.h"
+typedef unsigned size_t;
+
+# 7 "D:\Program Files\Microchip\xc8\v1.41\include\stdlib.h"
+typedef unsigned short wchar_t;
+
+# 15
+typedef struct {
+int rem;
+int quot;
+} div_t;
+typedef struct {
+unsigned rem;
+unsigned quot;
+} udiv_t;
+typedef struct {
+long quot;
+long rem;
+} ldiv_t;
+typedef struct {
+unsigned long quot;
+unsigned long rem;
+} uldiv_t;
+
+# 53
+extern double atof(const char *);
+extern double strtod(const char *, const char **);
+extern int atoi(const char *);
+extern unsigned xtoi(const char *);
+extern long atol(const char *);
+extern long strtol(const char *, char **, int);
+
+extern int rand(void);
+extern void srand(unsigned int);
+extern void * calloc(size_t, size_t);
+extern div_t div(int numer, int denom);
+extern udiv_t udiv(unsigned numer, unsigned denom);
+extern ldiv_t ldiv(long numer, long denom);
+extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+extern unsigned int _rotl(unsigned int value, unsigned int shift);
+extern unsigned int _rotr(unsigned int value, unsigned int shift);
+
+
+
+
+extern void * malloc(size_t);
+extern void free(void *);
+extern void * realloc(void *, size_t);
+
+# 86
+extern int atexit(void (*)(void));
+extern char * getenv(const char *);
+extern char ** environ;
+extern int system(char *);
+extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+extern int abs(int);
+extern long labs(long);
+
+extern char * itoa(char * buf, int val, int base);
+extern char * utoa(char * buf, unsigned val, int base);
+
+
+
+
+extern char * ltoa(char * buf, long val, int base);
+extern char * ultoa(char * buf, unsigned long val, int base);
+
+extern char * ftoa(float f, int * status);
+
+# 93 "src/comman.h"
+typedef struct {
+uint8_t hour;
+uint8_t minute;
+} Time_t;
+
+typedef struct {
 Time_t start;
 Time_t end;
-}TimeRamp_t;
+} TimeRamp_t;
 
-typedef union{
-struct{
+typedef union {
+
+struct {
 unsigned fOn : 1;
 unsigned fRsv : 7;
-unsigned char fDyn;
-unsigned int nBrt[5];
-unsigned char nCustomBrt[4][5];
-}manualPara;
-unsigned char array[6*5+2];
-}ManualPara_t;
+uint8_t fDyn;
+uint16_t nBrt[5];
+uint8_t nCustomBrt[4][5];
+} manualPara;
+uint8_t array[6 * 5 + 2];
+} ManualPara_t;
 
-typedef union{
-struct{
+typedef union {
+
+struct {
 TimeRamp_t sunrise;
-unsigned char daylight[5];
+uint8_t daylight[5];
 TimeRamp_t sunset;
-unsigned char moonlight[5];
-}autoPara;
-unsigned char array[2*5+8];
-}AutoPara_t;
+uint8_t moonlight[5];
+} autoPara;
+uint8_t array[2 * 5 + 8];
+} AutoPara_t;
 
-typedef struct{
-unsigned int nDayBrt;
-unsigned int nNightBrt;
-}TouchPara_t;
+typedef struct {
+uint16_t nDayBrt;
+uint16_t nNightBrt;
+} TouchPara_t;
 
-typedef struct{
+typedef struct {
 unsigned fAuto : 1;
 unsigned fSta : 2;
 unsigned fRsv : 5;
 ManualPara_t mPara;
 AutoPara_t aPara;
 TouchPara_t tPara;
-}LedPara_t;
+} LedPara_t;
 
-typedef struct{
+typedef struct {
 unsigned find : 1;
-unsigned fSec : 1;
 unsigned fSave : 1;
 unsigned fPrev : 1;
 unsigned fDr : 1;
 unsigned fNr : 1;
-unsigned fRsv : 2;
-unsigned char nFlashCount;
-unsigned char nPrevCount;
-unsigned char nSaveDelayCount;
-unsigned int nTargetBrt[5];
-unsigned int nCurrentBrt[5];
-unsigned char nCustomIndex;
-}LedRunPara_t;
+unsigned fRsv : 3;
+uint8_t nFlashCount;
+uint8_t nPrevCount;
+uint8_t nSaveDelayCount;
+uint16_t nTargetBrt[5];
+uint16_t nCurrentBrt[5];
+uint8_t nCustomIndex;
+} LedRunPara_t;
 
 extern volatile LedRunPara_t gLedRunPara;
 extern volatile LedPara_t gLedPara;
 
 extern void SYSTEM_Initialize();
-extern unsigned char strCmp(const unsigned char *s1, const unsigned char *s2);
+extern void registerCallback();
 
-# 38 "src/key.h"
-extern volatile unsigned char keyValue;
+# 28 "src/key.h"
+enum Key_State_t {
+KEY_PRESS_SHORT = 0,
+KEY_PRESS_LONG,
+KEY_PRESS_CONT,
+KEY_RELEASE_1
+};
 
-# 43
-extern void keyScan();
-extern void keyAction();
+typedef void (*Key_OnStateChangedCallback_t)(uint8_t key, enum Key_State_t state);
 
-# 41 "src/led.h"
-extern void updatePWM();
-extern void updateLed();
-extern void autoRun();
-extern void turnOnLedRamp();
-extern void turnOffLedRamp();
-extern void turnOffLed();
-extern void initLed();
-extern void findDeviceFlash();
-extern void preview();
-extern void indicateLedOff();
-extern void indicateLedDay();
-extern void indicateLedNight();
-extern void indicateLedBle();
-extern void updateDayBright();
-extern void updateDayRiseStatus();
-extern void updateNightBright();
-extern void updateNightRiseStatus();
+extern void KEY_Scan();
+extern void KEY_SetOnStateChangedCallback(Key_OnStateChangedCallback_t callback);
+
+# 42 "src/led.h"
+extern void LED_UpdateBrightRamp();
+extern void LED_Initialize();
+extern void LED_IndicateBle();
+extern void LED_Action_OnKeyStateChanged(uint8_t key, enum Key_State_t state);
+extern void LED_ActionOnSecond();
+extern void LED_PrepareToSavePara();
+extern void LED_StartFlash();
+extern void LED_StartPreview();
+extern void LED_StopPreview();
+extern bool LED_SetAuto(bool a);
+extern bool LED_SetOn(bool on);
+extern bool LED_SetManualBrights(const uint8_t * const pbuf);
+extern bool LED_SetCustom(uint8_t idx);
+extern bool LED_SetCycle(const uint8_t * const pbuf);
+extern bool LED_ManualIncrease(uint8_t chn, uint8_t delta);
+extern bool LED_ManualDecrease(uint8_t chn, uint8_t delta);
+extern bool LED_SetPreviewBrights(const uint8_t * const pbuf);
 
 # 17 "src/eeprom.h"
-extern void writeLedPara( unsigned char addr, LedPara_t para );
-extern LedPara_t readLedPara( unsigned char addr );
-extern void saveLedPara();
+extern void EEPROM_Write(uint8_t addr, uint8_t byte);
+extern uint8_t EEPROM_Read(uint8_t addr);
+extern void EEPROM_WriteBuffer(uint8_t addr, const uint8_t * const pbuf, uint8_t len);
+extern void EEPROM_ReadBuffer(uint8_t addr, uint8_t * const pbuf, uint8_t len);
 
-# 5 "src/key.c"
-volatile unsigned char keyValue = 0x00;
+# 10 "src/key.c"
+Key_OnStateChangedCallback_t fnKeyAction;
 
-# 11
-static unsigned char ReadKey()
-{
-static unsigned char Trg;
-static unsigned char Cont;
-unsigned char ReadData = (PORTC ^ 0xFF) & 0x01;
-Trg = ReadData & (ReadData ^ Cont);
+static uint8_t KEY_Read( ) {
+static uint8_t Trg;
+static uint8_t Cont;
+uint8_t ReadData = ( PORTC ^ 0xFF ) & 0x01;
+Trg = ReadData & ( ReadData ^ Cont );
 Cont = ReadData;
-return (Trg ^ Cont);
+return ( Trg ^ Cont );
 }
 
-void keyScan()
-{
-static unsigned char lastKey = 0x00;
-static unsigned char rptCount = 0;
+void KEY_Scan( ) {
+static uint8_t lastKey = 0x00;
+static uint8_t rptCount = 0;
 
-unsigned char keyNum = ReadKey();
-if(keyNum != 0x00)
-{
-if(keyNum == lastKey)
-{
+uint8_t keyNum = KEY_Read( );
+if ( keyNum != 0x00 ) {
+if ( keyNum == lastKey ) {
 rptCount++;
-if(rptCount >= 25 + 1)
-{
-rptCount = 25;
-keyValue = 0x40 | keyNum;
+if ( rptCount == 32 ) {
+
+if ( fnKeyAction != (0) ) {
+fnKeyAction( keyNum, KEY_PRESS_LONG );
+}
+} else if ( rptCount >= 32 + 1 ) {
+rptCount = 32;
+
+
+if ( fnKeyAction != (0) ) {
+fnKeyAction( keyNum, KEY_PRESS_CONT );
 }
 }
-else
-{
+} else {
 rptCount = 0;
 }
+} else {
+if ( lastKey != 0x00 ) {
+if ( rptCount >= 32 ) {
+
+
+if ( fnKeyAction != (0) ) {
+fnKeyAction( lastKey, KEY_RELEASE_1 );
 }
-else
-{
-if(lastKey != 0x00)
-{
-if (rptCount >= 25)
-{
-keyValue = 0x20 | lastKey;
+} else if ( rptCount > 2 ) {
+
+
+if ( fnKeyAction != (0) ) {
+fnKeyAction( lastKey, KEY_PRESS_SHORT );
 }
-else if( rptCount > 2 )
-{
-keyValue = lastKey;
 }
 }
 rptCount = 0;
@@ -10061,129 +10224,6 @@ rptCount = 0;
 lastKey = keyNum;
 }
 
-void keyAction()
-{
-unsigned char sta;
-if (keyValue == 0x01)
-{
-gLedPara.fSta++;
-sta = gLedPara.fSta;
-switch(sta)
-{
-case 0:
-for (unsigned char i = 0; i < 5; i++)
-{
-gLedPara.mPara.manualPara.nBrt[i] = 0;
-gLedRunPara.nCurrentBrt[i] = 0;
-}
-updatePWM();
-indicateLedOff();
-break;
-
-case 1:
-updateDayBright();
-indicateLedDay();
-updateDayRiseStatus();
-break;
-
-case 2:
-updateNightBright();
-indicateLedNight();
-updateNightRiseStatus();
-break;
-
-case 3:
-indicateLedBle();
-gLedPara.fAuto = 1;
-break;
-
-default:
-break;
-}
-}
-else if (keyValue == (0x20 | 0x01))
-{
-sta = gLedPara.fSta;
-switch(sta)
-{
-case 1:
-updateDayRiseStatus();
-break;
-
-case 2:
-updateNightRiseStatus();
-break;
-
-default:
-break;
-}
-}
-else if ( keyValue == (0x40 | 0x01) )
-{
-sta = gLedPara.fSta;
-switch(sta)
-{
-case 0:
-gLedPara.tPara.nDayBrt = 10;
-gLedPara.fSta++;
-gLedRunPara.fDr = 1;
-updateDayBright();
-indicateLedDay();
-break;
-
-case 1:
-if (gLedRunPara.fDr)
-{
-if (gLedPara.tPara.nDayBrt + 10 < 1000)
-{
-gLedPara.tPara.nDayBrt += 10;
-}
-else
-{
-gLedPara.tPara.nDayBrt = 1000;
-}
-}
-else
-{
-if (gLedPara.tPara.nDayBrt > 10 + 10)
-{
-gLedPara.tPara.nDayBrt -= 10;
-}
-else
-{
-gLedPara.tPara.nDayBrt = 10;
-}
-}
-updateDayBright();
-break;
-
-case 2:
-if (gLedRunPara.fNr)
-{
-if (gLedPara.tPara.nNightBrt + 10 < 1000)
-{
-gLedPara.tPara.nNightBrt += 10;
-}
-else
-{
-gLedPara.tPara.nNightBrt = 1000;
-}
-}
-else
-{
-if (gLedPara.tPara.nNightBrt > 10 + 10)
-{
-gLedPara.tPara.nNightBrt -= 10;
-}
-else
-{
-gLedPara.tPara.nNightBrt = 10;
-}
-}
-updateNightBright();
-break;
-}
-}
-gLedRunPara.fSave = 1;
-gLedRunPara.nSaveDelayCount = 3;
+void KEY_SetOnStateChangedCallback( Key_OnStateChangedCallback_t callback ) {
+fnKeyAction = callback;
 }

@@ -3,6 +3,7 @@
  src/main.c  \
 src/comman.h  \
 src/led.h  \
+src/key.h  \
 src/eeprom.h  \
 src/eusart.h  \
 src/pin.h  \

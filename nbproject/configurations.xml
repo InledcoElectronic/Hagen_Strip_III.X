@@ -12,6 +12,7 @@
       <itemPath>src/pin.h</itemPath>
       <itemPath>src/pwm.h</itemPath>
       <itemPath>src/tmr.h</itemPath>
+      <itemPath>src/util.h</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles" displayName="源文件" projectFiles="true">
       <itemPath>src/ble.c</itemPath>
@@ -25,6 +26,7 @@
       <itemPath>src/pin.c</itemPath>
       <itemPath>src/pwm.c</itemPath>
       <itemPath>src/tmr.c</itemPath>
+      <itemPath>src/util.c</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript" displayName="链接器文件" projectFiles="true">
     </logicalFolder>
@@ -243,7 +245,8 @@
       </makeCustomizationType>
       <HI-TECH-COMP>
         <property key="asmlist" value="true"/>
-        <property key="define-macros" value=""/>
+        <property key="define-macros"
+                  value="LIGHT_TYPE=LIGHT_TYPE_PLANT_FRESH_1100;LIGHT_ID=LIGHT_ID_PLANT_FRESH_1100"/>
         <property key="disable-optimizations" value="false"/>
         <property key="extra-include-directories" value=""/>
         <property key="favor-optimization-for" value="-speed,+space"/>
@@ -328,7 +331,7 @@
                   value="${memories.instruction.ram.ranges}"/>
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-1fff"/>
-        <property key="poweroptions.powerenable" value="true"/>
+        <property key="poweroptions.powerenable" value="false"/>
         <property key="programmertogo.imagename" value=""/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>
@@ -396,7 +399,8 @@
       </makeCustomizationType>
       <HI-TECH-COMP>
         <property key="asmlist" value="true"/>
-        <property key="define-macros" value=""/>
+        <property key="define-macros"
+                  value="LIGHT_TYPE=LIGHT_TYPE_PLANT_FRESH_1100;LIGHT_ID=LIGHT_ID_PLANT_FRESH_1100"/>
         <property key="disable-optimizations" value="false"/>
         <property key="extra-include-directories" value=""/>
         <property key="favor-optimization-for" value="-speed,+space"/>
@@ -481,7 +485,7 @@
                   value="${memories.instruction.ram.ranges}"/>
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-1fff"/>
-        <property key="poweroptions.powerenable" value="true"/>
+        <property key="poweroptions.powerenable" value="false"/>
         <property key="programmertogo.imagename" value=""/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>

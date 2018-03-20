@@ -23,380 +23,370 @@
 #define CMD_DATA_FIND       0x0F
 #define CMD_OTA_RESET       0x00
 
-unsigned char getCRC ( unsigned char *pbuf, unsigned char len )
-{
-    unsigned char result = 0x00;
-    for ( unsigned char i = 0; i < len; i++ )
-    {
-        result ^= *( pbuf + i );
-    }
-    return result;
+#define RX_BUF_SIZE     64  
+
+uint8_t rxBuf[RX_BUF_SIZE];
+static volatile uint8_t nRcvIdx = 0;
+static volatile uint8_t rcvXor = 0;
+
+/*********************************************************************
+ * Function:        void BLE_Receive( uint8_t rcv )
+ * PreCondition:    None
+ * Input:           None
+ * Output:          None
+ * Side Effects:    None
+ * Overview:        None
+ * Note:            None
+ ********************************************************************/
+void BLE_Receive( uint8_t rcv ) {
+	rxBuf[ nRcvIdx++ ] = rcv;
+	rcvXor ^= rcv;
+	if ( nRcvIdx >= sizeof ( rxBuf ) ) {
+		nRcvIdx = 0;
+	}
 }
 
-void BLE_SendCMD ( const unsigned char *pBuf )
-{
-    unsigned char ack[] = { 'A', 'T', '+', 'O', 'K', '\r', '\n' };
-    unsigned char index = 0;
-    unsigned int cnt = 0;
-    unsigned char rev = RCREG;
-    while ( *pBuf != '\0' )
-    {
-        eusartSendByte(*pBuf++);
-    }
+static void BLE_SendCMD( const uint8_t *pBuf ) {
+	uint8_t ack[] = { 'A', 'T', '+', 'O', 'K', '\r', '\n' };
+	uint8_t index = 0;
+	uint16_t cnt = 0;
+	uint8_t rev = RCREG;
+	while ( *pBuf != '\0' ) {
+		//		EUSART_SendByte( *pBuf++ );
+		EUSART_Write( *pBuf++ );
+	}
 
-    //等待ble应答 并判断指令是否成功
-    while ( index < sizeof ( ack ) )
-    {
-//        rev = eusartReadByte();
-        if( PIR1bits.RCIF )
-        {
-            if (RC1STAbits.OERR) 
-            {
-                RC1STAbits.CREN = 0;
-                RC1STAbits.CREN = 1;
-            }
-            rev = RCREG;
-            if ( rev == ack[index] )
-            {
-                index++;
-            }
-            else
-            {
-                index = 0;
-            }
-        }
-        __delay_us(100);
-        cnt++;
-        if( cnt > 1000 )
-        {
-            break;
-        }
-    }
+	//等待ble应答 并判断指令是否成功
+	while ( index < sizeof ( ack ) ) {
+		//        rev = eusartReadByte();
+		if ( PIR1bits.RCIF ) {
+			if ( RC1STAbits.OERR ) {
+				RC1STAbits.CREN = 0;
+				RC1STAbits.CREN = 1;
+			}
+			rev = RCREG;
+			if ( rev == ack[index] ) {
+				index++;
+			} else {
+				index = 0;
+			}
+		}
+		__delay_us( 100 );
+		cnt++;
+		if ( cnt > 1000 ) {
+			break;
+		}
+	}
 }
 
-unsigned char checkDevID ( )
-{
-    unsigned char dev[] = DEVICE_ID_VERSION;
-    unsigned char index = 0;
-    unsigned int cnt = 0;
-    unsigned char rev;
-    BLE_SendCMD(BLE_CMD_GET_ADV);
-    while ( *(dev+index) != '\0' )
-    {
-//        rev = eusartReadByte();
-        if( PIR1bits.RCIF )
-        {
-            if (RC1STAbits.OERR) 
-            {
-                RC1STAbits.CREN = 0;
-                RC1STAbits.CREN = 1;
-            }
-            rev = RCREG;
-            if ( rev == *(dev+index) )
-            {
-                index++;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-        __delay_us( 100 );
-        cnt++;
-        if( cnt > 1000 )
-        {
-            return 0;
-        }
-    }
-    return 1;
+static uint8_t BLE_CheckDevID( ) {
+	uint8_t dev[] = DEVICE_ID_VERSION;
+	uint8_t index = 0;
+	uint16_t cnt = 0;
+	uint8_t rev;
+	BLE_SendCMD( BLE_CMD_GET_ADV );
+	while ( *( dev + index ) != '\0' ) {
+		//        rev = eusartReadByte();
+		if ( PIR1bits.RCIF ) {
+			if ( RC1STAbits.OERR ) {
+				RC1STAbits.CREN = 0;
+				RC1STAbits.CREN = 1;
+			}
+			rev = RCREG;
+			if ( rev == *( dev + index ) ) {
+				index++;
+			} else {
+				return 0;
+			}
+		}
+		__delay_us( 100 );
+		cnt++;
+		if ( cnt > 1000 ) {
+			return 0;
+		}
+	}
+	return 1;
 }
 
-void bleSendData ( const unsigned char *frame, unsigned char len )
-{
-    BLE_WKP = 0;
-    __delay_us(800);
-    while ( len-- )
-    {
-        eusartSendByte(*frame++);
-    }
-    //wait for the frame transmission completed
-    while ( !TRMT );
-    BLE_WKP = 1;
+/*********************************************************************
+ * Function:        void BLE_StartTransmit()
+ * PreCondition:    None
+ * Input:           None
+ * Output:          None
+ * Side Effects:    None
+ * Overview:        None
+ * Note:            None
+ ********************************************************************/
+static void BLE_StartTransmit( ) {
+	BLE_WKP = 0;
+	__delay_us( 800 );
 }
 
-void bleSendDeviceData ( )
-{
-    unsigned char i;
-    unsigned char len;
-    txBuf[0] = FRM_HDR;
-    txBuf[1] = CMD_DATA_READ;
-    txBuf[2] = gLedPara.fAuto;
-    if ( gLedPara.fAuto )
-    {
-        len = sizeof (gLedPara.aPara.array );
-        for ( i = 0; i < len; i++ )
-        {
-            txBuf[3 + i] = gLedPara.aPara.array[i];
-        }
-    }
-    else
-    {
-        len = sizeof (gLedPara.mPara.array );
-        for ( i = 0; i < len; i++ )
-        {
-            txBuf[3 + i] = gLedPara.mPara.array[i];
-        }
-    }
-    txBuf[len + 3] = getCRC(txBuf, len + 3);
-    bleSendData(txBuf, len + 4);
+/*********************************************************************
+ * Function:        void BLE_StopTransmit()
+ * PreCondition:    None
+ * Input:           None
+ * Output:          None
+ * Side Effects:    None
+ * Overview:        None
+ * Note:            None
+ ********************************************************************/
+static void BLE_StopTransmit( ) {
+	while ( !TRMT );
+	__delay_us( 200 );
+	BLE_WKP = 1;
 }
 
-void DecodeDATA ( )
-{
-    if ( gLedRunPara.find || rxBuf[0] != FRM_HDR )
-    {
-        return;
-    }
-    switch ( rxBuf[1] )
-    {
-        case CMD_DATA_AUTO:
-            if ( !gLedRunPara.fPrev && getCRC(rxBuf, 4) == 0x00 )
-            {
-                if ( rxBuf[2] == 0x00 )
-                {
-                    gLedPara.fAuto = 0;
-                    if ( gLedPara.mPara.manualPara.fOn )
-                    {
-                        turnOnLedRamp();
-                    }
-                    else
-                    {
-                        turnOffLedRamp();
-                    }
-                }
-                else if ( rxBuf[2] == 0x01 )
-                {
-                    gLedPara.fAuto = 1;
-                }
-                gLedRunPara.fSave = 1;
-                gLedRunPara.nSaveDelayCount = PARA_SAVE_DELAY;
-                bleSendDeviceData();
-            }
-            break;
-
-        case CMD_DATA_ONOFF:
-            if ( !gLedPara.fAuto )
-            {
-                if ( getCRC(rxBuf, 4) == 0x00 )
-                {
-                    if ( rxBuf[2] == 0x00 )
-                    {
-                        gLedPara.mPara.manualPara.fOn = 0;
-                        turnOffLedRamp();
-                    }
-                    else if ( rxBuf[2] == 0x01 )
-                    {
-                        gLedPara.mPara.manualPara.fOn = 1;
-                        turnOnLedRamp();
-                    }
-                    gLedRunPara.fSave = 1;
-                    gLedRunPara.nSaveDelayCount = PARA_SAVE_DELAY;
-                    bleSendDeviceData();
-                }
-            }
-            break;
-
-        case CMD_DATA_CTRL:
-            if ( gLedPara.mPara.manualPara.fOn && ( !gLedPara.fAuto ) )
-            {
-                gLedPara.mPara.manualPara.fDyn = 0;
-                unsigned char len = 3 + 2 * CHANNEL_COUNT;
-                if ( getCRC(rxBuf, len) == 0x00 )
-                {
-                    for ( unsigned char i = 0; i < CHANNEL_COUNT; i++ )
-                    {
-                        unsigned int val = ( rxBuf[2 + 2 * i] << 8 ) | rxBuf[3 + 2 * i];
-                        if ( val <= MAX_LED_BRIGHT )
-                        {
-                            gLedPara.mPara.manualPara.nBrt[i] = val;
-                            gLedRunPara.nTargetBrt[i] = val;
-                        }
-                    }
-                    gLedRunPara.fSave = 1;
-                    gLedRunPara.nSaveDelayCount = PARA_SAVE_DELAY;
-                }
-            }
-            break;
-
-        case CMD_DATA_READ:
-            if ( rxBuf[0] ^ rxBuf[1] == rxBuf[2] )
-            {
-                bleSendDeviceData();
-            }
-            break;
-
-        case CMD_DATA_CUSTOM:
-            if ( rxBuf[2] < CUSTOM_COUNT && getCRC(rxBuf, 4) == 0x00 )
-            {
-                unsigned char idx = rxBuf[2];
-                for ( unsigned char i = 0; i < CHANNEL_COUNT; i++ )
-                {
-                    gLedPara.mPara.manualPara.nCustomBrt[idx][i] = gLedRunPara.nCurrentBrt[i] / 10;
-                }
-                gLedRunPara.fSave = 1;
-                gLedRunPara.nSaveDelayCount = PARA_SAVE_DELAY;
-                bleSendDeviceData();
-            }
-            break;
-
-        case CMD_DATA_CYCLE:
-            if ( !gLedRunPara.fPrev && getCRC(rxBuf, 2 * CHANNEL_COUNT + 11) == 0x00 )
-            {
-                unsigned char len = sizeof (gLedPara.aPara.array );
-                for ( unsigned char i = 0; i < len; i++ )
-                {
-                    gLedPara.aPara.array[i] = rxBuf[2 + i];
-                }
-                gLedRunPara.fSave = 1;
-                gLedRunPara.nSaveDelayCount = PARA_SAVE_DELAY;
-                bleSendDeviceData();
-            }
-            break;
-
-        case CMD_DATA_INCREASE:
-            if ( gLedPara.mPara.manualPara.fOn && getCRC(rxBuf, 4) == rxBuf[4] && rxBuf[2] < CHANNEL_COUNT )
-            {
-                unsigned char idx = rxBuf[2];
-                if ( gLedPara.mPara.manualPara.nBrt[idx] + rxBuf[3] < MAX_LED_BRIGHT )
-                {
-                    gLedPara.mPara.manualPara.nBrt[idx] += rxBuf[3];
-                    gLedRunPara.nTargetBrt[idx] = gLedPara.mPara.manualPara.nBrt[idx];
-                }
-                else
-                {
-                    gLedPara.mPara.manualPara.nBrt[idx] = MAX_LED_BRIGHT;
-                    gLedRunPara.nTargetBrt[idx] = MAX_LED_BRIGHT;
-                }
-                gLedRunPara.fSave = 1;
-                gLedRunPara.nSaveDelayCount = PARA_SAVE_DELAY;
-            }
-            break;
-
-        case CMD_DATA_DECREASE:
-            if ( gLedPara.mPara.manualPara.fOn && getCRC(rxBuf, 4) == rxBuf[4] && rxBuf[2] < CHANNEL_COUNT )
-            {
-                unsigned char idx = rxBuf[2];
-                if ( gLedPara.mPara.manualPara.nBrt[idx] > rxBuf[3] )
-                {
-                    gLedPara.mPara.manualPara.nBrt[idx] -= rxBuf[3];
-                    gLedRunPara.nTargetBrt[idx] = gLedPara.mPara.manualPara.nBrt[idx];
-                }
-                else
-                {
-                    gLedPara.mPara.manualPara.nBrt[idx] = 0;
-                    gLedRunPara.nTargetBrt[idx] = 0;
-                }
-                gLedRunPara.fSave = 1;
-                gLedRunPara.nSaveDelayCount = PARA_SAVE_DELAY;
-            }
-            break;
-
-        case CMD_DATA_PREVIEW:
-            if ( gLedPara.fAuto )
-            {
-                unsigned char len = 3 + 2 * CHANNEL_COUNT;
-                if ( getCRC(rxBuf, len) == 0x00 )
-                {
-                    for ( unsigned char i = 0; i < CHANNEL_COUNT; i++ )
-                    {
-                        unsigned int val = ( rxBuf[2 + 2 * i] << 8 ) | rxBuf[3 + 2 * i];
-                        if ( val <= MAX_LED_BRIGHT )
-                        {
-                            gLedRunPara.nCurrentBrt[i] = val;
-                        }
-                    }
-                    updatePWM();
-                    gLedRunPara.fPrev = 1;
-                    gLedRunPara.nPrevCount = PREVIEW_COUNT;
-                }
-            }
-            break;
-
-        case CMD_DATA_STOPPREV:
-            if ( rxBuf[0] ^ rxBuf[1] == rxBuf[2] )
-            {
-                gLedRunPara.fPrev = 0;
-                gLedRunPara.nPrevCount = 0;
-            }
-            break;
-
-        case CMD_DATA_SYNCTIME:
-            if ( getCRC(rxBuf, 10) == 0x00 )
-            {
-                gCurrentTime.datetime.year = rxBuf[2];
-                gCurrentTime.datetime.month = rxBuf[3];
-                gCurrentTime.datetime.day = rxBuf[4];
-                gCurrentTime.datetime.wk = rxBuf[5];
-                gCurrentTime.datetime.hour = rxBuf[6];
-                gCurrentTime.datetime.minute = rxBuf[7];
-                gCurrentTime.datetime.second = rxBuf[8];
-                gLedPara.fSta = LED_STATUS_BLE;
-                indicateLedBle();
-                bleSendDeviceData();
-            }
-            break;
-
-        case CMD_DATA_FIND:
-            if ( rxBuf[0] ^ rxBuf[1] == rxBuf[2] )
-            {
-                gLedRunPara.find = 1;
-                gLedRunPara.nFlashCount = FIND_FLASH_COUNT;
-            }
-            break;
-
-        case CMD_OTA_RESET:
-            if ( getCRC(rxBuf, 5) == 0x00 )
-            {
-                NVMADR = END_FLASH - 1;
-                NVMCON1 = 0x94;
-                NVMCON2 = 0x55;
-                NVMCON2 = 0xAA;
-                NVMCON1bits.WR = 1;
-                NOP();
-                NOP();
-                while ( NVMCON1bits.WR );
-                NVMCON1bits.WREN = 0;
-                bleSendData(rxBuf, 5);
-                __delay_ms(96);
-                RESET();
-            }
-            break;
-            
-        default:
-            break;
-    }
+static void BLE_SendDeviceData( ) {
+	uint8_t i;
+	uint8_t len;
+	uint8_t xor = 0;
+	BLE_StartTransmit( );
+	xor ^= EUSART_Write( FRM_HDR );
+	xor ^= EUSART_Write( CMD_DATA_READ );
+	xor ^= EUSART_Write( gLedPara.fAuto );
+	if ( gLedPara.fAuto ) {
+		len = sizeof (gLedPara.aPara.array );
+		for ( i = 0; i < len; i++ ) {
+			xor ^= EUSART_Write( gLedPara.aPara.array[i] );
+		}
+	} else {
+		len = sizeof (gLedPara.mPara.array );
+		for ( i = 0; i < len; i++ ) {
+			xor ^= EUSART_Write( gLedPara.mPara.array[i] );
+		}
+	}
+	EUSART_Write( xor );
+	BLE_StopTransmit( );
 }
 
-void initBLE ( )
-{
-    BLE_WKP = 0;
-    BLE_RST = 0;
-    __delay_ms(20);
-    BLE_RST = 1; //release from reset
-    __delay_ms(240); //delay 200ms after power on
-
-    //检查设备id version是否写入蓝牙模块广播数据
-    if ( checkDevID() == 0 )
-    {
-        __delay_ms(40);
-        BLE_SendCMD(BLE_CMD_SET_ADV);
-    }
-    __delay_ms(40);
-    //设置ble从机模式
-    BLE_SendCMD(BLE_CMD_SLAVE);
-    __delay_ms(40);
-    //设置ble透传模式
-    BLE_SendCMD(BLE_CMD_DATA);
-    __delay_ms(20);
-    BLE_WKP = 1;
+/*********************************************************************
+ * Function:        void BLE_SendOTAAck()
+ * PreCondition:    None
+ * Input:           None
+ * Output:          None
+ * Side Effects:    None
+ * Overview:        None
+ * Note:            None
+ ********************************************************************/
+void BLE_SendOTAAck( ) {
+	BLE_StartTransmit( );
+	EUSART_Write( 0x68 );
+	EUSART_Write( 0x00 );
+	EUSART_Write( 0x00 );
+	EUSART_Write( 0x00 );
+	EUSART_Write( 0x68 );
+	BLE_StopTransmit( );
 }
+
+void BLE_DecodeData( ) {
+	if ( rxBuf[0] != FRM_HDR || rcvXor != 0 ) {
+		return;
+	}
+	switch ( rxBuf[1] ) {
+		case CMD_DATA_AUTO:
+			if ( nRcvIdx == 4 ) {
+				if ( LED_SetAuto( rxBuf[2] ) ) {
+					LED_PrepareToSavePara( );
+					BLE_SendDeviceData( );
+				}
+			}
+			break;
+
+		case CMD_DATA_ONOFF:
+			if ( nRcvIdx == 4 ) {
+				if ( LED_SetOn( rxBuf[2] ) ) {
+					LED_PrepareToSavePara( );
+					BLE_SendDeviceData( );
+				}
+			}
+			break;
+
+		case CMD_DATA_CTRL:
+			if ( nRcvIdx == 3 + 2 * CHANNEL_COUNT ) {
+				if ( LED_SetManualBrights( &rxBuf[2] ) ) {
+					LED_PrepareToSavePara( );
+				}
+			}
+			break;
+
+		case CMD_DATA_READ:
+			if ( nRcvIdx == 3 ) {
+				BLE_SendDeviceData( );
+			}
+			break;
+
+		case CMD_DATA_CUSTOM:
+			if ( nRcvIdx == 4 ) {
+				if ( LED_SetCustom( rxBuf[2] ) ) {
+					LED_PrepareToSavePara( );
+					BLE_SendDeviceData( );
+				}
+			}
+			break;
+
+		case CMD_DATA_CYCLE:
+			if ( nRcvIdx == 2 * CHANNEL_COUNT + 11 ) {
+				if ( LED_SetCycle( &rxBuf[2] ) ) {
+					LED_PrepareToSavePara( );
+					BLE_SendDeviceData( );
+				}
+			}
+			break;
+
+		case CMD_DATA_INCREASE:
+			if ( nRcvIdx == 5 ) {
+				if ( LED_ManualIncrease( rxBuf[2], rxBuf[3] ) ) {
+					LED_PrepareToSavePara( );
+				}
+			}
+			break;
+
+		case CMD_DATA_DECREASE:
+			if ( nRcvIdx == 5 ) {
+				if ( LED_ManualDecrease( rxBuf[2], rxBuf[3] ) ) {
+					LED_PrepareToSavePara( );
+				}
+			}
+			break;
+
+		case CMD_DATA_PREVIEW:
+			if ( nRcvIdx == 3 + 2 * CHANNEL_COUNT ) {
+				if ( LED_SetPreviewBrights( &rxBuf[2] ) ) {
+					
+					LED_StartPreview( );
+				}
+			}
+			break;
+
+		case CMD_DATA_STOPPREV:
+			if ( nRcvIdx == 3 ) {
+				LED_StopPreview( );
+			}
+			break;
+
+		case CMD_DATA_SYNCTIME:
+			if ( nRcvIdx == 10 ) {
+				RTC_SetCurrentTime( &rxBuf[2] );
+				//				gLedPara.fSta = LED_STATUS_BLE;
+				LED_IndicateBle( );
+				BLE_SendDeviceData( );
+			}
+			break;
+
+		case CMD_DATA_FIND:
+			if ( nRcvIdx == 3 ) {
+				LED_StartFlash( );
+			}
+			break;
+
+		case CMD_OTA_RESET:
+			if ( nRcvIdx == 5 ) {
+				NVMADR = END_FLASH - 1;
+				NVMCON1 = 0x94;
+				NVMCON2 = 0x55;
+				NVMCON2 = 0xAA;
+				NVMCON1bits.WR = 1;
+				NOP( );
+				NOP( );
+				while ( NVMCON1bits.WR );
+				NVMCON1bits.WREN = 0;
+				//				BLE_SendData( rxBuf, 5 );
+				BLE_SendOTAAck( );
+				__delay_ms( 96 );
+				RESET( );
+			}
+			break;
+
+		default:
+			break;
+	}
+}
+
+void BLE_Initialize( ) {
+	BLE_WKP = 0;
+	BLE_RST = 0;
+	__delay_ms( 40 );
+	BLE_RST = 1; //release from reset
+	__delay_ms( 240 ); //delay 200ms after power on
+
+	//检查设备id version是否写入蓝牙模块广播数据
+	if ( BLE_CheckDevID( ) == 0 ) {
+		__delay_ms( 40 );
+		BLE_SendCMD( BLE_CMD_SET_ADV );
+	}
+	__delay_ms( 40 );
+	//设置ble从机模式
+	BLE_SendCMD( BLE_CMD_SLAVE );
+	__delay_ms( 40 );
+	//设置ble透传模式
+	BLE_SendCMD( BLE_CMD_DATA );
+	__delay_ms( 20 );
+	BLE_WKP = 1;
+}
+
+/*********************************************************************
+ * Function:        bool BLE_ReadyToReceive()
+ * PreCondition:    None
+ * Input:           None
+ * Output:          None
+ * Side Effects:    None
+ * Overview:        None
+ * Note:            None
+ ********************************************************************/
+bool BLE_ReadyToReceive( ) {
+	if ( ( BLE_INT == 0 ) && BLE_WKP ) {
+		return true;
+	}
+	return false;
+}
+
+/*********************************************************************
+ * Function:        void BLE_StartReceive()
+ * PreCondition:    None
+ * Input:           None
+ * Output:          None
+ * Side Effects:    None
+ * Overview:        None
+ * Note:            None
+ ********************************************************************/
+void BLE_StartReceive( ) {
+	nRcvIdx = 0;
+	rcvXor = 0;
+	__delay_us( 800 );
+	BLE_WKP = 0;
+}
+
+/*********************************************************************
+ * Function:        bool BLE_ReceiveComplete()
+ * PreCondition:    None
+ * Input:           None
+ * Output:          None
+ * Side Effects:    None
+ * Overview:        None
+ * Note:            None
+ ********************************************************************/
+bool BLE_ReceiveComplete( ) {
+	if ( BLE_INT && ( BLE_WKP == 0 ) ) {
+		return true;
+	}
+	return false;
+}
+
+/*********************************************************************
+ * Function:        void BLE_StopReceive()
+ * PreCondition:    None
+ * Input:           None
+ * Output:          None
+ * Side Effects:    None
+ * Overview:        None
+ * Note:            None
+ ********************************************************************/
+void BLE_StopReceive( ) {
+	__delay_us( 100 );
+	BLE_WKP = 1;
+	nRcvIdx = 0;
+	rcvXor = 0;
+}
+
+

@@ -40,77 +40,60 @@
 volatile LedRunPara_t gLedRunPara;
 volatile LedPara_t gLedPara;
 
-void OSCILLATOR_Initialize( void )
-{
-    // NOSC HFINTOSC; NDIV 1; 
-    OSCCON1 = 0x60;
-    // CSWHOLD may proceed; SOSCPWR Low power; SOSCBE crystal oscillator; 
-    OSCCON3 = 0x00;
-    // LFOEN disabled; ADOEN disabled; SOSCEN enabled; EXTOEN disabled; HFOEN enabled; 
-    OSCEN = 0x48;
-    // HFFRQ 16_MHz; 
-    OSCFRQ = 0x06;
-    // HFTUN 0; 
-    OSCTUNE = 0x00;
-    // Set the secondary oscillator    
+void OSCILLATOR_Initialize( void ) {
+	// NOSC HFINTOSC; NDIV 1; 
+	OSCCON1 = 0x60;
+	// CSWHOLD may proceed; SOSCPWR Low power; SOSCBE crystal oscillator; 
+	OSCCON3 = 0x00;
+	// LFOEN disabled; ADOEN disabled; SOSCEN enabled; EXTOEN disabled; HFOEN enabled; 
+	OSCEN = 0x48;
+	// HFFRQ 16_MHz; 
+	OSCFRQ = 0x06;
+	// HFTUN 0; 
+	OSCTUNE = 0x00;
+	// Set the secondary oscillator    
 }
 
-void SYSTEM_Initialize( void )
-{
-    PIN_MANAGER_Initialize( );
-    OSCILLATOR_Initialize( );
-    PWM1_Initialize( );
-    PWM2_Initialize( );
-    PWM3_Initialize( );
-    PWM4_Initialize( );
-    PWM5_Initialize();
-    TMR2_Initialize( );
-    TMR0_Initialize( );
-    EUSART_Initialize( );
+void SYSTEM_Initialize( void ) {
+	PIN_Initialize( );
+	OSCILLATOR_Initialize( );
+	PWM1_Initialize( );
+	PWM2_Initialize( );
+	PWM3_Initialize( );
+	PWM4_Initialize( );
+	PWM5_Initialize( );
+	TMR2_Initialize( );
+	TMR0_Initialize( );
+	EUSART_Initialize( );
 }
 
-void TMR2_UserInterruptHandler( )
-{
-    static unsigned char cnt = 0;
+void TMR2_InterruptCallback() {
+	static uint8_t cnt = 0;
 
-    cnt++;
-    if( ( cnt & 0x03 ) == 0x00 )
-    {
-	if( ( cnt & 0x0F ) == 0x00 )
-	{
-	    keyScan( );
-	    if( keyValue != KEY_NONE )
-	    {
-		keyAction( );
-		keyValue = KEY_NONE;
-	    }
+	cnt++;
+	if ( ( cnt & 0x03 ) == 0x00 ) {
+		if ( ( cnt & 0x0F ) == 0x00 ) {
+			KEY_Scan( );
+		}
+		LED_UpdateBrightRamp( );
 	}
-	if( gLedRunPara.find || gLedRunPara.fPrev || gLedPara.fAuto )
-	{
-	    return;
-	}
-	if( gLedPara.fSta == LED_STATUS_BLE )
-	{
-	    updateLed( );
-	}
-    }
 }
 
-void interrupt INTERRUPT_InterruptManager( void )
-{
-    // interrupt handler
-    if( PIR1bits.RCIF == 1 )
-    {
-	EUSART_RCV_ISR( );
-    }
-    else if( PIR0bits.TMR0IF == 1 )
-    {
-	PIR0bits.TMR0IF = 0;
-	runRTC( );
-    }
-    else if( PIR1bits.TMR2IF == 1 )
-    {
-	PIR1bits.TMR2IF = 0;
-	TMR2_UserInterruptHandler( );
-    }
+void registerCallback( ) {
+	KEY_SetOnStateChangedCallback( LED_Action_OnKeyStateChanged );
+	TMR0_SetInterruptCallback( RTC_Run );
+	TMR2_SetInterruptCallback( TMR2_InterruptCallback );
+	EUSART_SetReceiveCallback( BLE_Receive );
+}
+
+void interrupt INTERRUPT_InterruptManager( ) {
+	if ( PIE1bits.RCIE && PIR1bits.RCIF ) {
+		EUSART_RCV_ISR( );
+	} else if ( PIE0bits.TMR0IE && PIR0bits.TMR0IF ) {
+		TMR0_ISR( );
+	} else if ( PIE1bits.TMR2IE && PIR1bits.TMR2IF ) {
+		TMR2_ISR( );
+	} else if ( PIE1bits.TXIE && PIR1bits.TXIF ) {
+		EUSART_Transmit_ISR( );
+	}
 }

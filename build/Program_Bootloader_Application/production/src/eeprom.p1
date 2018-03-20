@@ -29,38 +29,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 "28 D:\Program Files\Microchip\xc8\v1.41\include\pic.h
 [v ___nop `(v ~T0 @X0 0 ef ]
 [p i ___nop ]
-[v F7834 `uc ~T0 @X0 -> 5 `i t ]
-"143 src/comman.h
-[s S963 :1 `uc 1 :7 `uc 1 `uc 1 `ui -> 5 `i `F7834 -> 4 `i ]
-[n S963 . fOn fRsv fDyn nBrt nCustomBrt ]
-"142
-[u S962 `S963 1 `uc + * -> 6 `i -> 5 `i -> 2 `i ]
-[n S962 . manualPara array ]
-"132
-[s S960 `uc 1 `uc 1 ]
-[n S960 . hour minute ]
-"137
-[s S961 `S960 1 `S960 1 ]
-[n S961 . start end ]
-"154
-[s S965 `S961 1 `uc -> 5 `i `S961 1 `uc -> 5 `i ]
-[n S965 . sunrise daylight sunset moonlight ]
-"153
-[u S964 `S965 1 `uc + * -> 2 `i -> 5 `i -> 8 `i ]
-[n S964 . autoPara array ]
-"163
-[s S966 `ui 1 `ui 1 ]
-[n S966 . nDayBrt nNightBrt ]
-"168
-[s S967 :1 `uc 1 :2 `uc 1 :5 `uc 1 `S962 1 `S964 1 `S966 1 ]
-[n S967 . fAuto fSta fRsv mPara aPara tPara ]
-"177
-[s S968 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 `uc 1 `uc 1 `uc 1 `ui -> 5 `i `ui -> 5 `i `uc 1 ]
-[n S968 . find fSec fSave fPrev fDr fNr fRsv nFlashCount nPrevCount nSaveDelayCount nTargetBrt nCurrentBrt nCustomIndex ]
-"193
-[v _gLedRunPara `VS968 ~T0 @X0 0 e ]
-"194
-[v _gLedPara `VS967 ~T0 @X0 0 e ]
+[v F8022 `*Cuc ~T0 @X0 1 t ]
+[v F8027 `*uc ~T0 @X0 1 t ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7573,387 +7543,333 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 192: extern unsigned char __resetbits;
 [; ;pic.h: 193: extern __bit __powerdown;
 [; ;pic.h: 194: extern __bit __timeout;
-[; ;comman.h: 119: typedef union{
-[; ;comman.h: 120: struct{
-[; ;comman.h: 121: unsigned char year;
-[; ;comman.h: 122: unsigned char month;
-[; ;comman.h: 123: unsigned char day;
-[; ;comman.h: 124: unsigned char wk;
-[; ;comman.h: 125: unsigned char hour;
-[; ;comman.h: 126: unsigned char minute;
-[; ;comman.h: 127: unsigned char second;
-[; ;comman.h: 128: }datetime;
-[; ;comman.h: 129: unsigned char array[7];
-[; ;comman.h: 130: }DateTime_t;
-[; ;comman.h: 132: typedef struct{
-[; ;comman.h: 133: unsigned char hour;
-[; ;comman.h: 134: unsigned char minute;
-[; ;comman.h: 135: }Time_t;
-[; ;comman.h: 137: typedef struct{
-[; ;comman.h: 138: Time_t start;
-[; ;comman.h: 139: Time_t end;
-[; ;comman.h: 140: }TimeRamp_t;
-[; ;comman.h: 142: typedef union{
-[; ;comman.h: 143: struct{
-[; ;comman.h: 144: unsigned fOn : 1;
-[; ;comman.h: 145: unsigned fRsv : 7;
-[; ;comman.h: 146: unsigned char fDyn;
-[; ;comman.h: 147: unsigned int nBrt[5];
-[; ;comman.h: 148: unsigned char nCustomBrt[4][5];
-[; ;comman.h: 149: }manualPara;
-[; ;comman.h: 150: unsigned char array[6*5+2];
-[; ;comman.h: 151: }ManualPara_t;
-[; ;comman.h: 153: typedef union{
-[; ;comman.h: 154: struct{
-[; ;comman.h: 155: TimeRamp_t sunrise;
-[; ;comman.h: 156: unsigned char daylight[5];
-[; ;comman.h: 157: TimeRamp_t sunset;
-[; ;comman.h: 158: unsigned char moonlight[5];
-[; ;comman.h: 159: }autoPara;
-[; ;comman.h: 160: unsigned char array[2*5+8];
-[; ;comman.h: 161: }AutoPara_t;
-[; ;comman.h: 163: typedef struct{
-[; ;comman.h: 164: unsigned int nDayBrt;
-[; ;comman.h: 165: unsigned int nNightBrt;
-[; ;comman.h: 166: }TouchPara_t;
-[; ;comman.h: 168: typedef struct{
-[; ;comman.h: 169: unsigned fAuto : 1;
-[; ;comman.h: 170: unsigned fSta : 2;
-[; ;comman.h: 171: unsigned fRsv : 5;
-[; ;comman.h: 172: ManualPara_t mPara;
-[; ;comman.h: 173: AutoPara_t aPara;
-[; ;comman.h: 174: TouchPara_t tPara;
-[; ;comman.h: 175: }LedPara_t;
-[; ;comman.h: 177: typedef struct{
-[; ;comman.h: 178: unsigned find : 1;
-[; ;comman.h: 179: unsigned fSec : 1;
-[; ;comman.h: 180: unsigned fSave : 1;
-[; ;comman.h: 181: unsigned fPrev : 1;
-[; ;comman.h: 182: unsigned fDr : 1;
-[; ;comman.h: 183: unsigned fNr : 1;
-[; ;comman.h: 184: unsigned fRsv : 2;
-[; ;comman.h: 185: unsigned char nFlashCount;
-[; ;comman.h: 186: unsigned char nPrevCount;
-[; ;comman.h: 187: unsigned char nSaveDelayCount;
-[; ;comman.h: 188: unsigned int nTargetBrt[5];
-[; ;comman.h: 189: unsigned int nCurrentBrt[5];
-[; ;comman.h: 190: unsigned char nCustomIndex;
-[; ;comman.h: 191: }LedRunPara_t;
-[; ;comman.h: 193: extern volatile LedRunPara_t gLedRunPara;
-[; ;comman.h: 194: extern volatile LedPara_t gLedPara;
-[; ;comman.h: 196: extern void SYSTEM_Initialize();
-[; ;comman.h: 197: extern unsigned char strCmp(const unsigned char *s1, const unsigned char *s2);
-[; ;eeprom.h: 17: extern void writeLedPara( unsigned char addr, LedPara_t para );
-[; ;eeprom.h: 18: extern LedPara_t readLedPara( unsigned char addr );
-[; ;eeprom.h: 19: extern void saveLedPara();
-"3 src/eeprom.c
-[v _DATAEE_WriteByte `(v ~T0 @X0 1 ef2`ui`uc ]
-"4
+[; ;stdint.h: 13: typedef signed char int8_t;
+[; ;stdint.h: 20: typedef signed int int16_t;
+[; ;stdint.h: 28: typedef signed short long int int24_t;
+[; ;stdint.h: 36: typedef signed long int int32_t;
+[; ;stdint.h: 43: typedef unsigned char uint8_t;
+[; ;stdint.h: 49: typedef unsigned int uint16_t;
+[; ;stdint.h: 56: typedef unsigned short long int uint24_t;
+[; ;stdint.h: 63: typedef unsigned long int uint32_t;
+[; ;stdint.h: 71: typedef signed char int_least8_t;
+[; ;stdint.h: 78: typedef signed int int_least16_t;
+[; ;stdint.h: 90: typedef signed short long int int_least24_t;
+[; ;stdint.h: 98: typedef signed long int int_least32_t;
+[; ;stdint.h: 105: typedef unsigned char uint_least8_t;
+[; ;stdint.h: 111: typedef unsigned int uint_least16_t;
+[; ;stdint.h: 121: typedef unsigned short long int uint_least24_t;
+[; ;stdint.h: 128: typedef unsigned long int uint_least32_t;
+[; ;stdint.h: 137: typedef signed char int_fast8_t;
+[; ;stdint.h: 144: typedef signed int int_fast16_t;
+[; ;stdint.h: 156: typedef signed short long int int_fast24_t;
+[; ;stdint.h: 164: typedef signed long int int_fast32_t;
+[; ;stdint.h: 171: typedef unsigned char uint_fast8_t;
+[; ;stdint.h: 177: typedef unsigned int uint_fast16_t;
+[; ;stdint.h: 187: typedef unsigned short long int uint_fast24_t;
+[; ;stdint.h: 194: typedef unsigned long int uint_fast32_t;
+[; ;stdint.h: 200: typedef int32_t intmax_t;
+[; ;stdint.h: 205: typedef uint32_t uintmax_t;
+[; ;stdint.h: 210: typedef int16_t intptr_t;
+[; ;stdint.h: 215: typedef uint16_t uintptr_t;
+[; ;stdbool.h: 12: typedef unsigned char bool;
+[; ;__size_t.h: 4: typedef unsigned size_t;
+[; ;stdlib.h: 7: typedef unsigned short wchar_t;
+[; ;stdlib.h: 15: typedef struct {
+[; ;stdlib.h: 16: int rem;
+[; ;stdlib.h: 17: int quot;
+[; ;stdlib.h: 18: } div_t;
+[; ;stdlib.h: 19: typedef struct {
+[; ;stdlib.h: 20: unsigned rem;
+[; ;stdlib.h: 21: unsigned quot;
+[; ;stdlib.h: 22: } udiv_t;
+[; ;stdlib.h: 23: typedef struct {
+[; ;stdlib.h: 24: long quot;
+[; ;stdlib.h: 25: long rem;
+[; ;stdlib.h: 26: } ldiv_t;
+[; ;stdlib.h: 27: typedef struct {
+[; ;stdlib.h: 28: unsigned long quot;
+[; ;stdlib.h: 29: unsigned long rem;
+[; ;stdlib.h: 30: } uldiv_t;
+[; ;stdlib.h: 53: extern double atof(const char *);
+[; ;stdlib.h: 54: extern double strtod(const char *, const char **);
+[; ;stdlib.h: 55: extern int atoi(const char *);
+[; ;stdlib.h: 56: extern unsigned xtoi(const char *);
+[; ;stdlib.h: 57: extern long atol(const char *);
+[; ;stdlib.h: 58: extern long strtol(const char *, char **, int);
+[; ;stdlib.h: 60: extern int rand(void);
+[; ;stdlib.h: 61: extern void srand(unsigned int);
+[; ;stdlib.h: 62: extern void * calloc(size_t, size_t);
+[; ;stdlib.h: 63: extern div_t div(int numer, int denom);
+[; ;stdlib.h: 64: extern udiv_t udiv(unsigned numer, unsigned denom);
+[; ;stdlib.h: 65: extern ldiv_t ldiv(long numer, long denom);
+[; ;stdlib.h: 66: extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+[; ;stdlib.h: 67: extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 68: extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 69: extern unsigned int _rotl(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 70: extern unsigned int _rotr(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 75: extern void * malloc(size_t);
+[; ;stdlib.h: 76: extern void free(void *);
+[; ;stdlib.h: 77: extern void * realloc(void *, size_t);
+[; ;stdlib.h: 86: extern int atexit(void (*)(void));
+[; ;stdlib.h: 87: extern char * getenv(const char *);
+[; ;stdlib.h: 88: extern char ** environ;
+[; ;stdlib.h: 89: extern int system(char *);
+[; ;stdlib.h: 90: extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+[; ;stdlib.h: 91: extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+[; ;stdlib.h: 92: extern int abs(int);
+[; ;stdlib.h: 93: extern long labs(long);
+[; ;stdlib.h: 95: extern char * itoa(char * buf, int val, int base);
+[; ;stdlib.h: 96: extern char * utoa(char * buf, unsigned val, int base);
+[; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
+[; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
+[; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
+[; ;comman.h: 93: typedef struct {
+[; ;comman.h: 94: uint8_t hour;
+[; ;comman.h: 95: uint8_t minute;
+[; ;comman.h: 96: } Time_t;
+[; ;comman.h: 98: typedef struct {
+[; ;comman.h: 99: Time_t start;
+[; ;comman.h: 100: Time_t end;
+[; ;comman.h: 101: } TimeRamp_t;
+[; ;comman.h: 103: typedef union {
+[; ;comman.h: 105: struct {
+[; ;comman.h: 106: unsigned fOn : 1;
+[; ;comman.h: 107: unsigned fRsv : 7;
+[; ;comman.h: 108: uint8_t fDyn;
+[; ;comman.h: 109: uint16_t nBrt[5];
+[; ;comman.h: 110: uint8_t nCustomBrt[4][5];
+[; ;comman.h: 111: } manualPara;
+[; ;comman.h: 112: uint8_t array[6 * 5 + 2];
+[; ;comman.h: 113: } ManualPara_t;
+[; ;comman.h: 115: typedef union {
+[; ;comman.h: 117: struct {
+[; ;comman.h: 118: TimeRamp_t sunrise;
+[; ;comman.h: 119: uint8_t daylight[5];
+[; ;comman.h: 120: TimeRamp_t sunset;
+[; ;comman.h: 121: uint8_t moonlight[5];
+[; ;comman.h: 122: } autoPara;
+[; ;comman.h: 123: uint8_t array[2 * 5 + 8];
+[; ;comman.h: 124: } AutoPara_t;
+[; ;comman.h: 126: typedef struct {
+[; ;comman.h: 127: uint16_t nDayBrt;
+[; ;comman.h: 128: uint16_t nNightBrt;
+[; ;comman.h: 129: } TouchPara_t;
+[; ;comman.h: 131: typedef struct {
+[; ;comman.h: 132: unsigned fAuto : 1;
+[; ;comman.h: 133: unsigned fSta : 2;
+[; ;comman.h: 134: unsigned fRsv : 5;
+[; ;comman.h: 135: ManualPara_t mPara;
+[; ;comman.h: 136: AutoPara_t aPara;
+[; ;comman.h: 137: TouchPara_t tPara;
+[; ;comman.h: 138: } LedPara_t;
+[; ;comman.h: 140: typedef struct {
+[; ;comman.h: 141: unsigned find : 1;
+[; ;comman.h: 142: unsigned fSave : 1;
+[; ;comman.h: 143: unsigned fPrev : 1;
+[; ;comman.h: 144: unsigned fDr : 1;
+[; ;comman.h: 145: unsigned fNr : 1;
+[; ;comman.h: 146: unsigned fRsv : 3;
+[; ;comman.h: 147: uint8_t nFlashCount;
+[; ;comman.h: 148: uint8_t nPrevCount;
+[; ;comman.h: 149: uint8_t nSaveDelayCount;
+[; ;comman.h: 150: uint16_t nTargetBrt[5];
+[; ;comman.h: 151: uint16_t nCurrentBrt[5];
+[; ;comman.h: 152: uint8_t nCustomIndex;
+[; ;comman.h: 153: } LedRunPara_t;
+[; ;comman.h: 155: extern volatile LedRunPara_t gLedRunPara;
+[; ;comman.h: 156: extern volatile LedPara_t gLedPara;
+[; ;comman.h: 158: extern void SYSTEM_Initialize();
+[; ;comman.h: 159: extern void registerCallback();
+[; ;eeprom.h: 17: extern void EEPROM_Write(uint8_t addr, uint8_t byte);
+[; ;eeprom.h: 18: extern uint8_t EEPROM_Read(uint8_t addr);
+[; ;eeprom.h: 19: extern void EEPROM_WriteBuffer(uint8_t addr, const uint8_t * const pbuf, uint8_t len);
+[; ;eeprom.h: 20: extern void EEPROM_ReadBuffer(uint8_t addr, uint8_t * const pbuf, uint8_t len);
+"5 src/eeprom.c
+[v _EEPROM_WriteByte `(v ~T0 @X0 1 sf2`ui`uc ]
 {
-[; ;eeprom.c: 3: void DATAEE_WriteByte(unsigned int bAdd, unsigned char bData)
-[; ;eeprom.c: 4: {
-[e :U _DATAEE_WriteByte ]
-"3
-[v _bAdd `ui ~T0 @X0 1 r1 ]
-[v _bData `uc ~T0 @X0 1 r2 ]
-"4
-[f ]
-"5
-[v _GIEBitValue `uc ~T0 @X0 1 a ]
-[; ;eeprom.c: 5: unsigned char GIEBitValue = INTCONbits.GIE;
-[e = _GIEBitValue . . _INTCONbits 0 3 ]
-[; ;eeprom.c: 7: NVMADRH = ((bAdd >> 8) & 0xFF);
-"7
-[e = _NVMADRH -> & >> _bAdd -> 8 `i -> -> 255 `i `ui `uc ]
-[; ;eeprom.c: 8: NVMADRL = (bAdd & 0xFF);
-"8
-[e = _NVMADRL -> & _bAdd -> -> 255 `i `ui `uc ]
-[; ;eeprom.c: 9: NVMDATL = bData;
-"9
-[e = _NVMDATL _bData ]
-[; ;eeprom.c: 10: NVMCON1bits.NVMREGS = 1;
-"10
-[e = . . _NVMCON1bits 0 6 -> -> 1 `i `uc ]
-[; ;eeprom.c: 11: NVMCON1bits.WREN = 1;
-"11
-[e = . . _NVMCON1bits 0 2 -> -> 1 `i `uc ]
-[; ;eeprom.c: 12: INTCONbits.GIE = 0;
-"12
-[e = . . _INTCONbits 0 3 -> -> 0 `i `uc ]
-[; ;eeprom.c: 13: NVMCON2 = 0x55;
-"13
-[e = _NVMCON2 -> -> 85 `i `uc ]
-[; ;eeprom.c: 14: NVMCON2 = 0xAA;
-"14
-[e = _NVMCON2 -> -> 170 `i `uc ]
-[; ;eeprom.c: 15: NVMCON1bits.WR = 1;
-"15
-[e = . . _NVMCON1bits 0 1 -> -> 1 `i `uc ]
-[; ;eeprom.c: 17: while (NVMCON1bits.WR)
-"17
-[e $U 970  ]
-[e :U 971 ]
-[; ;eeprom.c: 18: {
-"18
-{
-"19
-}
-[e :U 970 ]
-"17
-[e $ != -> . . _NVMCON1bits 0 1 `i -> -> -> 0 `i `Vuc `i 971  ]
-[e :U 972 ]
-[; ;eeprom.c: 19: }
-[; ;eeprom.c: 21: NVMCON1bits.WREN = 0;
-"21
-[e = . . _NVMCON1bits 0 2 -> -> 0 `i `uc ]
-[; ;eeprom.c: 22: INTCONbits.GIE = GIEBitValue;
-"22
-[e = . . _INTCONbits 0 3 _GIEBitValue ]
-[; ;eeprom.c: 23: }
-"23
-[e :UE 969 ]
-}
-"25
-[v _DATAEE_ReadByte `(uc ~T0 @X0 1 ef1`ui ]
-"26
-{
-[; ;eeprom.c: 25: unsigned char DATAEE_ReadByte(unsigned int bAdd)
-[; ;eeprom.c: 26: {
-[e :U _DATAEE_ReadByte ]
-"25
-[v _bAdd `ui ~T0 @X0 1 r1 ]
-"26
-[f ]
-[; ;eeprom.c: 27: NVMADRH = ((bAdd >> 8) & 0xFF);
-"27
-[e = _NVMADRH -> & >> _bAdd -> 8 `i -> -> 255 `i `ui `uc ]
-[; ;eeprom.c: 28: NVMADRL = (bAdd & 0xFF);
-"28
-[e = _NVMADRL -> & _bAdd -> -> 255 `i `ui `uc ]
-[; ;eeprom.c: 29: NVMCON1bits.NVMREGS = 1;
-"29
-[e = . . _NVMCON1bits 0 6 -> -> 1 `i `uc ]
-[; ;eeprom.c: 30: NVMCON1bits.RD = 1;
-"30
-[e = . . _NVMCON1bits 0 0 -> -> 1 `i `uc ]
-[; ;eeprom.c: 31: __nop();
-"31
-[e ( ___nop ..  ]
-[; ;eeprom.c: 32: __nop();
-"32
-[e ( ___nop ..  ]
-[; ;eeprom.c: 34: return (NVMDATL);
-"34
-[e ) _NVMDATL ]
-[e $UE 973  ]
-[; ;eeprom.c: 35: }
-"35
-[e :UE 973 ]
-}
-"42
-[v _writeByte `(v ~T0 @X0 1 ef2`uc`uc ]
-"43
-{
-[; ;eeprom.c: 42: void writeByte( unsigned char addr, unsigned char byte )
-[; ;eeprom.c: 43: {
-[e :U _writeByte ]
-"42
-[v _addr `uc ~T0 @X0 1 r1 ]
+[; ;eeprom.c: 5: static void EEPROM_WriteByte( uint16_t addr, uint8_t byte ) {
+[e :U _EEPROM_WriteByte ]
+[v _addr `ui ~T0 @X0 1 r1 ]
 [v _byte `uc ~T0 @X0 1 r2 ]
-"43
 [f ]
-[; ;eeprom.c: 44: DATAEE_WriteByte(0x7000 + addr, byte);
-"44
-[e ( _DATAEE_WriteByte (2 , -> + -> 28672 `i -> _addr `i `ui _byte ]
-[; ;eeprom.c: 45: }
-"45
-[e :UE 974 ]
+"6
+[v _GIEBitValue `uc ~T0 @X0 1 a ]
+[; ;eeprom.c: 6: uint8_t GIEBitValue = INTCONbits.GIE;
+[e = _GIEBitValue . . _INTCONbits 0 3 ]
+[; ;eeprom.c: 8: NVMADRH = ( ( addr >> 8 ) & 0xFF );
+"8
+[e = _NVMADRH -> & >> _addr -> 8 `i -> -> 255 `i `ui `uc ]
+[; ;eeprom.c: 9: NVMADRL = ( addr & 0xFF );
+"9
+[e = _NVMADRL -> & _addr -> -> 255 `i `ui `uc ]
+[; ;eeprom.c: 10: NVMDATL = byte;
+"10
+[e = _NVMDATL _byte ]
+[; ;eeprom.c: 11: NVMCON1bits.NVMREGS = 1;
+"11
+[e = . . _NVMCON1bits 0 6 -> -> 1 `i `uc ]
+[; ;eeprom.c: 12: NVMCON1bits.WREN = 1;
+"12
+[e = . . _NVMCON1bits 0 2 -> -> 1 `i `uc ]
+[; ;eeprom.c: 13: INTCONbits.GIE = 0;
+"13
+[e = . . _INTCONbits 0 3 -> -> 0 `i `uc ]
+[; ;eeprom.c: 14: NVMCON2 = 0x55;
+"14
+[e = _NVMCON2 -> -> 85 `i `uc ]
+[; ;eeprom.c: 15: NVMCON2 = 0xAA;
+"15
+[e = _NVMCON2 -> -> 170 `i `uc ]
+[; ;eeprom.c: 16: NVMCON1bits.WR = 1;
+"16
+[e = . . _NVMCON1bits 0 1 -> -> 1 `i `uc ]
+[; ;eeprom.c: 18: while ( NVMCON1bits.WR );
+"18
+[e $U 972  ]
+[e :U 973 ]
+[e :U 972 ]
+[e $ != -> . . _NVMCON1bits 0 1 `i -> -> -> 0 `i `Vuc `i 973  ]
+[e :U 974 ]
+[; ;eeprom.c: 20: NVMCON1bits.WREN = 0;
+"20
+[e = . . _NVMCON1bits 0 2 -> -> 0 `i `uc ]
+[; ;eeprom.c: 21: INTCONbits.GIE = GIEBitValue;
+"21
+[e = . . _INTCONbits 0 3 _GIEBitValue ]
+[; ;eeprom.c: 22: }
+"22
+[e :UE 971 ]
 }
-"52
-[v _readByte `(uc ~T0 @X0 1 ef1`uc ]
-"53
+"24
+[v _EEPROM_ReadByte `(uc ~T0 @X0 1 sf1`ui ]
 {
-[; ;eeprom.c: 52: unsigned char readByte( unsigned char addr )
-[; ;eeprom.c: 53: {
-[e :U _readByte ]
-"52
-[v _addr `uc ~T0 @X0 1 r1 ]
-"53
+[; ;eeprom.c: 24: static uint8_t EEPROM_ReadByte( uint16_t addr ) {
+[e :U _EEPROM_ReadByte ]
+[v _addr `ui ~T0 @X0 1 r1 ]
 [f ]
-"54
-[v _result `uc ~T0 @X0 1 a ]
-[; ;eeprom.c: 54: unsigned char result = DATAEE_ReadByte(0x7000 + addr);
-[e = _result ( _DATAEE_ReadByte (1 -> + -> 28672 `i -> _addr `i `ui ]
-[; ;eeprom.c: 55: return result;
-"55
-[e ) _result ]
+[; ;eeprom.c: 25: NVMADRH = ( ( addr >> 8 ) & 0xFF );
+"25
+[e = _NVMADRH -> & >> _addr -> 8 `i -> -> 255 `i `ui `uc ]
+[; ;eeprom.c: 26: NVMADRL = ( addr & 0xFF );
+"26
+[e = _NVMADRL -> & _addr -> -> 255 `i `ui `uc ]
+[; ;eeprom.c: 27: NVMCON1bits.NVMREGS = 1;
+"27
+[e = . . _NVMCON1bits 0 6 -> -> 1 `i `uc ]
+[; ;eeprom.c: 28: NVMCON1bits.RD = 1;
+"28
+[e = . . _NVMCON1bits 0 0 -> -> 1 `i `uc ]
+[; ;eeprom.c: 29: __nop();
+"29
+[e ( ___nop ..  ]
+[; ;eeprom.c: 30: __nop();
+"30
+[e ( ___nop ..  ]
+[; ;eeprom.c: 32: return ( NVMDATL );
+"32
+[e ) _NVMDATL ]
 [e $UE 975  ]
-[; ;eeprom.c: 56: }
-"56
+[; ;eeprom.c: 33: }
+"33
 [e :UE 975 ]
 }
-"64
-[v _writeBuffer `(v ~T0 @X0 1 ef3`uc`*uc`uc ]
-"65
+"44
+[v _EEPROM_Write `(v ~T0 @X0 1 ef2`uc`uc ]
 {
-[; ;eeprom.c: 64: void writeBuffer( unsigned char addr, unsigned char *buf, unsigned char len )
-[; ;eeprom.c: 65: {
-[e :U _writeBuffer ]
-"64
+[; ;eeprom.c: 44: void EEPROM_Write( uint8_t addr, uint8_t byte ) {
+[e :U _EEPROM_Write ]
 [v _addr `uc ~T0 @X0 1 r1 ]
-[v _buf `*uc ~T0 @X0 1 r2 ]
-[v _len `uc ~T0 @X0 1 r3 ]
-"65
+[v _byte `uc ~T0 @X0 1 r2 ]
 [f ]
-[; ;eeprom.c: 66: for (unsigned char i = 0; i < len; i++)
-"66
-{
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-[e $U 980  ]
-"67
-[e :U 977 ]
-[; ;eeprom.c: 67: {
-{
-[; ;eeprom.c: 68: writeByte((addr+i), *(buf+i));
-"68
-[e ( _writeByte (2 , -> + -> _addr `i -> _i `i `uc *U + _buf * -> _i `ux -> -> # *U _buf `ui `ux ]
-"69
-}
-"66
-[e ++ _i -> -> 1 `i `uc ]
-[e :U 980 ]
-[e $ < -> _i `i -> _len `i 977  ]
-[e :U 978 ]
-"69
-}
-[; ;eeprom.c: 69: }
-[; ;eeprom.c: 70: }
-"70
+[; ;eeprom.c: 45: EEPROM_WriteByte( 0x7000 + addr, byte );
+"45
+[e ( _EEPROM_WriteByte (2 , -> + -> 28672 `i -> _addr `i `ui _byte ]
+[; ;eeprom.c: 46: }
+"46
 [e :UE 976 ]
 }
-"78
-[v _readBuffer `(v ~T0 @X0 1 ef3`uc`*uc`uc ]
-"79
+"57
+[v _EEPROM_Read `(uc ~T0 @X0 1 ef1`uc ]
 {
-[; ;eeprom.c: 78: void readBuffer( unsigned char addr, unsigned char *buf, unsigned char len )
-[; ;eeprom.c: 79: {
-[e :U _readBuffer ]
-"78
+[; ;eeprom.c: 57: uint8_t EEPROM_Read( uint8_t addr ) {
+[e :U _EEPROM_Read ]
 [v _addr `uc ~T0 @X0 1 r1 ]
-[v _buf `*uc ~T0 @X0 1 r2 ]
-[v _len `uc ~T0 @X0 1 r3 ]
-"79
 [f ]
-[; ;eeprom.c: 80: for (unsigned char i = 0; i < len; i++)
-"80
+[; ;eeprom.c: 58: return EEPROM_ReadByte( 0x7000 + addr );
+"58
+[e ) ( _EEPROM_ReadByte (1 -> + -> 28672 `i -> _addr `i `ui ]
+[e $UE 977  ]
+[; ;eeprom.c: 59: }
+"59
+[e :UE 977 ]
+}
+"70
+[v _EEPROM_WriteBuffer `(v ~T0 @X0 1 ef3`uc`C*Cuc`uc ]
+{
+[; ;eeprom.c: 70: void EEPROM_WriteBuffer( uint8_t addr, const uint8_t * const pbuf, uint8_t len ) {
+[e :U _EEPROM_WriteBuffer ]
+[v _addr `uc ~T0 @X0 1 r1 ]
+[v F8040 `*Cuc ~T0 @X0 1 t ]
+[v _pbuf `C*Cuc ~T0 @X0 1 r2 ]
+[v _len `uc ~T0 @X0 1 r3 ]
+[f ]
+[; ;eeprom.c: 71: for ( uint8_t i = 0; i < len; i++ ) {
+"71
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $U 985  ]
-"81
-[e :U 982 ]
-[; ;eeprom.c: 81: {
+[e $U 982  ]
+[e :U 979 ]
 {
-[; ;eeprom.c: 82: *(buf+i) = readByte(addr+i);
-"82
-[e = *U + _buf * -> _i `ux -> -> # *U _buf `ui `ux ( _readByte (1 -> + -> _addr `i -> _i `i `uc ]
-"83
+[; ;eeprom.c: 72: EEPROM_Write( addr + i, *( pbuf + i ) );
+"72
+[e ( _EEPROM_Write (2 , -> + -> _addr `i -> _i `i `uc *U + _pbuf * -> _i `ux -> -> # *U _pbuf `ui `ux ]
+"73
 }
-"80
+"71
 [e ++ _i -> -> 1 `i `uc ]
+[e :U 982 ]
+[e $ < -> _i `i -> _len `i 979  ]
+[e :U 980 ]
+"73
+}
+[; ;eeprom.c: 73: }
+[; ;eeprom.c: 74: }
+"74
+[e :UE 978 ]
+}
+"85
+[v _EEPROM_ReadBuffer `(v ~T0 @X0 1 ef3`uc`C*uc`uc ]
+{
+[; ;eeprom.c: 85: void EEPROM_ReadBuffer( uint8_t addr, uint8_t * const pbuf, uint8_t len ) {
+[e :U _EEPROM_ReadBuffer ]
+[v _addr `uc ~T0 @X0 1 r1 ]
+[v F8045 `*uc ~T0 @X0 1 t ]
+[v _pbuf `C*uc ~T0 @X0 1 r2 ]
+[v _len `uc ~T0 @X0 1 r3 ]
+[f ]
+[; ;eeprom.c: 86: for ( uint8_t i = 0; i < len; i++ ) {
+"86
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $U 987  ]
+[e :U 984 ]
+{
+[; ;eeprom.c: 87: *( pbuf + i ) = EEPROM_Read( addr + i );
+"87
+[e = *U + _pbuf * -> _i `ux -> -> # *U _pbuf `ui `ux ( _EEPROM_Read (1 -> + -> _addr `i -> _i `i `uc ]
+"88
+}
+"86
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 987 ]
+[e $ < -> _i `i -> _len `i 984  ]
 [e :U 985 ]
-[e $ < -> _i `i -> _len `i 982  ]
-[e :U 983 ]
-"83
+"88
 }
-[; ;eeprom.c: 83: }
-[; ;eeprom.c: 84: }
-"84
-[e :UE 981 ]
-}
-"91
-[v _writeLedPara `(v ~T0 @X0 1 ef2`uc`S967 ]
-"92
-{
-[; ;eeprom.c: 91: void writeLedPara( unsigned char addr, LedPara_t para )
-[; ;eeprom.c: 92: {
-[e :U _writeLedPara ]
-"91
-[v _addr `uc ~T0 @X0 1 r1 ]
-[v _para `S967 ~T0 @X0 1 r2 ]
-"92
-[f ]
-[; ;eeprom.c: 93: writeBuffer(addr, (unsigned char*)&para, sizeof(para));
-"93
-[e ( _writeBuffer (3 , , _addr -> &U _para `*uc -> -> # _para `ui `uc ]
-[; ;eeprom.c: 94: }
-"94
-[e :UE 986 ]
-}
-"101
-[v _readLedPara `(S967 ~T0 @X0 1 ef1`uc ]
-"102
-{
-[; ;eeprom.c: 101: LedPara_t readLedPara( unsigned char addr )
-[; ;eeprom.c: 102: {
-[e :U _readLedPara ]
-"101
-[v _addr `uc ~T0 @X0 1 r1 ]
-"102
-[f ]
-"103
-[v _para `S967 ~T0 @X0 1 a ]
-[; ;eeprom.c: 103: LedPara_t para;
-[; ;eeprom.c: 104: readBuffer(addr, (unsigned char*)&para, sizeof(para));
-"104
-[e ( _readBuffer (3 , , _addr -> &U _para `*uc -> -> # _para `ui `uc ]
-[; ;eeprom.c: 105: return para;
-"105
-[e ) _para ]
-[e $UE 987  ]
-[; ;eeprom.c: 106: }
-"106
-[e :UE 987 ]
-}
-"108
-[v _saveLedPara `(v ~T0 @X0 1 ef ]
-"109
-{
-[; ;eeprom.c: 108: void saveLedPara()
-[; ;eeprom.c: 109: {
-[e :U _saveLedPara ]
-[f ]
-[; ;eeprom.c: 110: if (gLedRunPara.nSaveDelayCount > 0)
-"110
-[e $ ! > -> . _gLedRunPara 9 `i -> 0 `i 989  ]
-[; ;eeprom.c: 111: {
-"111
-{
-[; ;eeprom.c: 112: gLedRunPara.nSaveDelayCount--;
-"112
-[e -- . _gLedRunPara 9 -> -> 1 `i `uc ]
-"113
-}
-[e :U 989 ]
-[; ;eeprom.c: 113: }
-[; ;eeprom.c: 114: if (gLedRunPara.nSaveDelayCount == 0)
-"114
-[e $ ! == -> . _gLedRunPara 9 `i -> 0 `i 990  ]
-[; ;eeprom.c: 115: {
-"115
-{
-[; ;eeprom.c: 116: writeLedPara( 0x10, gLedPara );
-"116
-[e ( _writeLedPara (2 , -> -> 16 `i `uc _gLedPara ]
-[; ;eeprom.c: 117: gLedRunPara.fSave = 0;
-"117
-[e = . _gLedRunPara 2 -> -> 0 `i `uc ]
-"118
-}
-[e :U 990 ]
-[; ;eeprom.c: 118: }
-[; ;eeprom.c: 119: }
-"119
-[e :UE 988 ]
+[; ;eeprom.c: 88: }
+[; ;eeprom.c: 89: }
+"89
+[e :UE 983 ]
 }

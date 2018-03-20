@@ -3,6 +3,7 @@
  src/tmr.c  \
 src/comman.h  \
 src/led.h  \
+src/key.h  \
 src/eusart.h  \
 src/rtc.h  \
 src/tmr.h 

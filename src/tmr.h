@@ -13,12 +13,20 @@ extern "C" {
 #endif
 
 #include "comman.h"
-    
-extern void TMR0_Initialize();
-extern void TMR0_StartTimer();
 
-extern void TMR2_Initialize();
-extern void TMR2_StartTimer();
+    typedef void (*TMR_InterruptCallback_t)();
+
+    extern void TMR0_Initialize();
+    extern void TMR0_StartTimer();
+    extern void TMR0_StopTimer();
+    extern void TMR0_SetInterruptCallback(TMR_InterruptCallback_t callback);
+    extern void TMR0_ISR();
+
+    extern void TMR2_Initialize();
+    extern void TMR2_StartTimer();
+    extern void TMR2_StopTimer();
+    extern void TMR2_SetInterruptCallback(TMR_InterruptCallback_t callback);
+    extern void TMR2_ISR();
 
 #ifdef	__cplusplus
 }

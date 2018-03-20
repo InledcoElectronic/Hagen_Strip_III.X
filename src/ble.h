@@ -9,14 +9,18 @@
 #define	BLE_H
 
 #ifdef	__cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
 #include "comman.h"
 
-extern	void initBLE();
-extern	void DecodeDATA();
+    extern void BLE_Initialize();
+    extern void BLE_Receive(uint8_t rcv);
+    extern void BLE_DecodeData();
+    extern bool BLE_ReadyToReceive();
+    extern void BLE_StartReceive();
+    extern bool BLE_ReceiveComplete();
+    extern void BLE_StopReceive();
 
 #ifdef	__cplusplus
 }

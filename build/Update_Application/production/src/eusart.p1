@@ -1,4 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
+[v F8015 `(v ~T0 @X0 0 tf1`uc ]
 "1694 D:\Program Files\Microchip\xc8\v1.41\include\pic16f18345.h
 [s S89 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S89 . TMR1IE TMR2IE BCL1IE SSP1IE TXIE RCIE ADIE TMR1GIE ]
@@ -27,6 +28,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RC1STAbits `VS176 ~T0 @X0 0 e@413 ]
 "3036
 [v _RCREG `Vuc ~T0 @X0 0 e@409 ]
+"3093
+[v _TXREG `Vuc ~T0 @X0 0 e@410 ]
 "553
 [s S36 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S36 . TMR1IF TMR2IF BCL1IF SSP1IF TXIF RCIF ADIF TMR1GIF ]
@@ -35,10 +38,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S35 . . ]
 "564
 [v _PIR1bits `VS35 ~T0 @X0 0 e@17 ]
-"21956
-[v _TXIF `Vb ~T0 @X0 0 e@140 ]
-"3093
-[v _TXREG `Vuc ~T0 @X0 0 e@410 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7551,243 +7550,401 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 192: extern unsigned char __resetbits;
 [; ;pic.h: 193: extern __bit __powerdown;
 [; ;pic.h: 194: extern __bit __timeout;
-[; ;comman.h: 119: typedef union{
-[; ;comman.h: 120: struct{
-[; ;comman.h: 121: unsigned char year;
-[; ;comman.h: 122: unsigned char month;
-[; ;comman.h: 123: unsigned char day;
-[; ;comman.h: 124: unsigned char wk;
-[; ;comman.h: 125: unsigned char hour;
-[; ;comman.h: 126: unsigned char minute;
-[; ;comman.h: 127: unsigned char second;
-[; ;comman.h: 128: }datetime;
-[; ;comman.h: 129: unsigned char array[7];
-[; ;comman.h: 130: }DateTime_t;
-[; ;comman.h: 132: typedef struct{
-[; ;comman.h: 133: unsigned char hour;
-[; ;comman.h: 134: unsigned char minute;
-[; ;comman.h: 135: }Time_t;
-[; ;comman.h: 137: typedef struct{
-[; ;comman.h: 138: Time_t start;
-[; ;comman.h: 139: Time_t end;
-[; ;comman.h: 140: }TimeRamp_t;
-[; ;comman.h: 142: typedef union{
-[; ;comman.h: 143: struct{
-[; ;comman.h: 144: unsigned fOn : 1;
-[; ;comman.h: 145: unsigned fRsv : 7;
-[; ;comman.h: 146: unsigned char fDyn;
-[; ;comman.h: 147: unsigned int nBrt[5];
-[; ;comman.h: 148: unsigned char nCustomBrt[4][5];
-[; ;comman.h: 149: }manualPara;
-[; ;comman.h: 150: unsigned char array[6*5+2];
-[; ;comman.h: 151: }ManualPara_t;
-[; ;comman.h: 153: typedef union{
-[; ;comman.h: 154: struct{
-[; ;comman.h: 155: TimeRamp_t sunrise;
-[; ;comman.h: 156: unsigned char daylight[5];
-[; ;comman.h: 157: TimeRamp_t sunset;
-[; ;comman.h: 158: unsigned char moonlight[5];
-[; ;comman.h: 159: }autoPara;
-[; ;comman.h: 160: unsigned char array[2*5+8];
-[; ;comman.h: 161: }AutoPara_t;
-[; ;comman.h: 163: typedef struct{
-[; ;comman.h: 164: unsigned int nDayBrt;
-[; ;comman.h: 165: unsigned int nNightBrt;
-[; ;comman.h: 166: }TouchPara_t;
-[; ;comman.h: 168: typedef struct{
-[; ;comman.h: 169: unsigned fAuto : 1;
-[; ;comman.h: 170: unsigned fSta : 2;
-[; ;comman.h: 171: unsigned fRsv : 5;
-[; ;comman.h: 172: ManualPara_t mPara;
-[; ;comman.h: 173: AutoPara_t aPara;
-[; ;comman.h: 174: TouchPara_t tPara;
-[; ;comman.h: 175: }LedPara_t;
-[; ;comman.h: 177: typedef struct{
-[; ;comman.h: 178: unsigned find : 1;
-[; ;comman.h: 179: unsigned fSec : 1;
-[; ;comman.h: 180: unsigned fSave : 1;
-[; ;comman.h: 181: unsigned fPrev : 1;
-[; ;comman.h: 182: unsigned fDr : 1;
-[; ;comman.h: 183: unsigned fNr : 1;
-[; ;comman.h: 184: unsigned fRsv : 2;
-[; ;comman.h: 185: unsigned char nFlashCount;
-[; ;comman.h: 186: unsigned char nPrevCount;
-[; ;comman.h: 187: unsigned char nSaveDelayCount;
-[; ;comman.h: 188: unsigned int nTargetBrt[5];
-[; ;comman.h: 189: unsigned int nCurrentBrt[5];
-[; ;comman.h: 190: unsigned char nCustomIndex;
-[; ;comman.h: 191: }LedRunPara_t;
-[; ;comman.h: 193: extern volatile LedRunPara_t gLedRunPara;
-[; ;comman.h: 194: extern volatile LedPara_t gLedPara;
-[; ;comman.h: 196: extern void SYSTEM_Initialize();
-[; ;comman.h: 197: extern unsigned char strCmp(const unsigned char *s1, const unsigned char *s2);
-[; ;eusart.h: 20: extern unsigned char txBuf[48];
-[; ;eusart.h: 21: extern unsigned char rxBuf[48];
-[; ;eusart.h: 22: extern volatile unsigned char nRcvIdx;
-[; ;eusart.h: 24: extern void EUSART_Initialize();
-[; ;eusart.h: 25: extern void EUSART_RCV_ISR();
-[; ;eusart.h: 26: extern unsigned char eusartReadByte();
-[; ;eusart.h: 27: extern void eusartSendByte(unsigned char byte);
-"3 src/eusart.c
-[v _txBuf `uc ~T0 @X0 -> 48 `i e ]
-[i _txBuf
-:U ..
--> -> 0 `i `uc
-..
-]
-[; ;eusart.c: 3: unsigned char txBuf[48] = {0};
-"4
-[v _rxBuf `uc ~T0 @X0 -> 48 `i e ]
-[i _rxBuf
-:U ..
--> -> 0 `i `uc
-..
-]
-[; ;eusart.c: 4: unsigned char rxBuf[48] = {0};
+[; ;stdint.h: 13: typedef signed char int8_t;
+[; ;stdint.h: 20: typedef signed int int16_t;
+[; ;stdint.h: 28: typedef signed short long int int24_t;
+[; ;stdint.h: 36: typedef signed long int int32_t;
+[; ;stdint.h: 43: typedef unsigned char uint8_t;
+[; ;stdint.h: 49: typedef unsigned int uint16_t;
+[; ;stdint.h: 56: typedef unsigned short long int uint24_t;
+[; ;stdint.h: 63: typedef unsigned long int uint32_t;
+[; ;stdint.h: 71: typedef signed char int_least8_t;
+[; ;stdint.h: 78: typedef signed int int_least16_t;
+[; ;stdint.h: 90: typedef signed short long int int_least24_t;
+[; ;stdint.h: 98: typedef signed long int int_least32_t;
+[; ;stdint.h: 105: typedef unsigned char uint_least8_t;
+[; ;stdint.h: 111: typedef unsigned int uint_least16_t;
+[; ;stdint.h: 121: typedef unsigned short long int uint_least24_t;
+[; ;stdint.h: 128: typedef unsigned long int uint_least32_t;
+[; ;stdint.h: 137: typedef signed char int_fast8_t;
+[; ;stdint.h: 144: typedef signed int int_fast16_t;
+[; ;stdint.h: 156: typedef signed short long int int_fast24_t;
+[; ;stdint.h: 164: typedef signed long int int_fast32_t;
+[; ;stdint.h: 171: typedef unsigned char uint_fast8_t;
+[; ;stdint.h: 177: typedef unsigned int uint_fast16_t;
+[; ;stdint.h: 187: typedef unsigned short long int uint_fast24_t;
+[; ;stdint.h: 194: typedef unsigned long int uint_fast32_t;
+[; ;stdint.h: 200: typedef int32_t intmax_t;
+[; ;stdint.h: 205: typedef uint32_t uintmax_t;
+[; ;stdint.h: 210: typedef int16_t intptr_t;
+[; ;stdint.h: 215: typedef uint16_t uintptr_t;
+[; ;stdbool.h: 12: typedef unsigned char bool;
+[; ;__size_t.h: 4: typedef unsigned size_t;
+[; ;stdlib.h: 7: typedef unsigned short wchar_t;
+[; ;stdlib.h: 15: typedef struct {
+[; ;stdlib.h: 16: int rem;
+[; ;stdlib.h: 17: int quot;
+[; ;stdlib.h: 18: } div_t;
+[; ;stdlib.h: 19: typedef struct {
+[; ;stdlib.h: 20: unsigned rem;
+[; ;stdlib.h: 21: unsigned quot;
+[; ;stdlib.h: 22: } udiv_t;
+[; ;stdlib.h: 23: typedef struct {
+[; ;stdlib.h: 24: long quot;
+[; ;stdlib.h: 25: long rem;
+[; ;stdlib.h: 26: } ldiv_t;
+[; ;stdlib.h: 27: typedef struct {
+[; ;stdlib.h: 28: unsigned long quot;
+[; ;stdlib.h: 29: unsigned long rem;
+[; ;stdlib.h: 30: } uldiv_t;
+[; ;stdlib.h: 53: extern double atof(const char *);
+[; ;stdlib.h: 54: extern double strtod(const char *, const char **);
+[; ;stdlib.h: 55: extern int atoi(const char *);
+[; ;stdlib.h: 56: extern unsigned xtoi(const char *);
+[; ;stdlib.h: 57: extern long atol(const char *);
+[; ;stdlib.h: 58: extern long strtol(const char *, char **, int);
+[; ;stdlib.h: 60: extern int rand(void);
+[; ;stdlib.h: 61: extern void srand(unsigned int);
+[; ;stdlib.h: 62: extern void * calloc(size_t, size_t);
+[; ;stdlib.h: 63: extern div_t div(int numer, int denom);
+[; ;stdlib.h: 64: extern udiv_t udiv(unsigned numer, unsigned denom);
+[; ;stdlib.h: 65: extern ldiv_t ldiv(long numer, long denom);
+[; ;stdlib.h: 66: extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+[; ;stdlib.h: 67: extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 68: extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 69: extern unsigned int _rotl(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 70: extern unsigned int _rotr(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 75: extern void * malloc(size_t);
+[; ;stdlib.h: 76: extern void free(void *);
+[; ;stdlib.h: 77: extern void * realloc(void *, size_t);
+[; ;stdlib.h: 86: extern int atexit(void (*)(void));
+[; ;stdlib.h: 87: extern char * getenv(const char *);
+[; ;stdlib.h: 88: extern char ** environ;
+[; ;stdlib.h: 89: extern int system(char *);
+[; ;stdlib.h: 90: extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+[; ;stdlib.h: 91: extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+[; ;stdlib.h: 92: extern int abs(int);
+[; ;stdlib.h: 93: extern long labs(long);
+[; ;stdlib.h: 95: extern char * itoa(char * buf, int val, int base);
+[; ;stdlib.h: 96: extern char * utoa(char * buf, unsigned val, int base);
+[; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
+[; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
+[; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
+[; ;comman.h: 93: typedef struct {
+[; ;comman.h: 94: uint8_t hour;
+[; ;comman.h: 95: uint8_t minute;
+[; ;comman.h: 96: } Time_t;
+[; ;comman.h: 98: typedef struct {
+[; ;comman.h: 99: Time_t start;
+[; ;comman.h: 100: Time_t end;
+[; ;comman.h: 101: } TimeRamp_t;
+[; ;comman.h: 103: typedef union {
+[; ;comman.h: 105: struct {
+[; ;comman.h: 106: unsigned fOn : 1;
+[; ;comman.h: 107: unsigned fRsv : 7;
+[; ;comman.h: 108: uint8_t fDyn;
+[; ;comman.h: 109: uint16_t nBrt[5];
+[; ;comman.h: 110: uint8_t nCustomBrt[4][5];
+[; ;comman.h: 111: } manualPara;
+[; ;comman.h: 112: uint8_t array[6 * 5 + 2];
+[; ;comman.h: 113: } ManualPara_t;
+[; ;comman.h: 115: typedef union {
+[; ;comman.h: 117: struct {
+[; ;comman.h: 118: TimeRamp_t sunrise;
+[; ;comman.h: 119: uint8_t daylight[5];
+[; ;comman.h: 120: TimeRamp_t sunset;
+[; ;comman.h: 121: uint8_t moonlight[5];
+[; ;comman.h: 122: } autoPara;
+[; ;comman.h: 123: uint8_t array[2 * 5 + 8];
+[; ;comman.h: 124: } AutoPara_t;
+[; ;comman.h: 126: typedef struct {
+[; ;comman.h: 127: uint16_t nDayBrt;
+[; ;comman.h: 128: uint16_t nNightBrt;
+[; ;comman.h: 129: } TouchPara_t;
+[; ;comman.h: 131: typedef struct {
+[; ;comman.h: 132: unsigned fAuto : 1;
+[; ;comman.h: 133: unsigned fSta : 2;
+[; ;comman.h: 134: unsigned fRsv : 5;
+[; ;comman.h: 135: ManualPara_t mPara;
+[; ;comman.h: 136: AutoPara_t aPara;
+[; ;comman.h: 137: TouchPara_t tPara;
+[; ;comman.h: 138: } LedPara_t;
+[; ;comman.h: 140: typedef struct {
+[; ;comman.h: 141: unsigned find : 1;
+[; ;comman.h: 142: unsigned fSave : 1;
+[; ;comman.h: 143: unsigned fPrev : 1;
+[; ;comman.h: 144: unsigned fDr : 1;
+[; ;comman.h: 145: unsigned fNr : 1;
+[; ;comman.h: 146: unsigned fRsv : 3;
+[; ;comman.h: 147: uint8_t nFlashCount;
+[; ;comman.h: 148: uint8_t nPrevCount;
+[; ;comman.h: 149: uint8_t nSaveDelayCount;
+[; ;comman.h: 150: uint16_t nTargetBrt[5];
+[; ;comman.h: 151: uint16_t nCurrentBrt[5];
+[; ;comman.h: 152: uint8_t nCustomIndex;
+[; ;comman.h: 153: } LedRunPara_t;
+[; ;comman.h: 155: extern volatile LedRunPara_t gLedRunPara;
+[; ;comman.h: 156: extern volatile LedPara_t gLedPara;
+[; ;comman.h: 158: extern void SYSTEM_Initialize();
+[; ;comman.h: 159: extern void registerCallback();
+[; ;eusart.h: 17: typedef void ( *EUSART_ReceiveInterruptCallback_t ) (uint8_t rcv);
+[; ;eusart.h: 19: extern void EUSART_Initialize();
+[; ;eusart.h: 20: extern void EUSART_Transmit_ISR();
+[; ;eusart.h: 21: extern void EUSART_RCV_ISR();
+[; ;eusart.h: 22: extern uint8_t EUSART_ReadByte();
+[; ;eusart.h: 24: extern uint8_t EUSART_Write(uint8_t byte);
+[; ;eusart.h: 25: extern void EUSART_SetReceiveCallback(EUSART_ReceiveInterruptCallback_t callback);
+"5 src/eusart.c
+[v _txTail `uc ~T0 @X0 1 e ]
+[; ;eusart.c: 5: uint8_t txTail;
 "6
-[v _nRcvIdx `Vuc ~T0 @X0 1 e ]
-[; ;eusart.c: 6: volatile unsigned char nRcvIdx;
+[v _txRemain `uc ~T0 @X0 1 e ]
+[; ;eusart.c: 6: uint8_t txRemain;
+"7
+[v _txHead `uc ~T0 @X0 1 e ]
+[; ;eusart.c: 7: uint8_t txHead;
 "8
+[v _txBuf `uc ~T0 @X0 -> 64 `i e ]
+[; ;eusart.c: 8: uint8_t txBuf[64];
+"10
+[v _fnReceiveCallback `*F8015 ~T0 @X0 1 e ]
+[; ;eusart.c: 10: EUSART_ReceiveInterruptCallback_t fnReceiveCallback;
+"12
 [v _EUSART_Initialize `(v ~T0 @X0 1 ef ]
-"9
 {
-[; ;eusart.c: 8: void EUSART_Initialize()
-[; ;eusart.c: 9: {
+[; ;eusart.c: 12: void EUSART_Initialize( ) {
 [e :U _EUSART_Initialize ]
 [f ]
-[; ;eusart.c: 11: PIE1bits.RCIE = 0;
-"11
+[; ;eusart.c: 14: PIE1bits.RCIE = 0;
+"14
 [e = . . _PIE1bits 0 5 -> -> 0 `i `uc ]
-[; ;eusart.c: 12: PIE1bits.TXIE = 0;
-"12
+[; ;eusart.c: 15: PIE1bits.TXIE = 0;
+"15
 [e = . . _PIE1bits 0 4 -> -> 0 `i `uc ]
-[; ;eusart.c: 17: BAUD1CON = 0x08;
-"17
-[e = _BAUD1CON -> -> 8 `i `uc ]
-[; ;eusart.c: 20: RC1STA = 0x90;
+[; ;eusart.c: 20: BAUD1CON = 0x08;
 "20
-[e = _RC1STA -> -> 144 `i `uc ]
-[; ;eusart.c: 23: TX1STA = 0x24;
+[e = _BAUD1CON -> -> 8 `i `uc ]
+[; ;eusart.c: 23: RC1STA = 0x90;
 "23
-[e = _TX1STA -> -> 36 `i `uc ]
-[; ;eusart.c: 26: SP1BRGL = 0xA0;
+[e = _RC1STA -> -> 144 `i `uc ]
+[; ;eusart.c: 26: TX1STA = 0x24;
 "26
-[e = _SP1BRGL -> -> 160 `i `uc ]
-[; ;eusart.c: 29: SP1BRGH = 0x01;
+[e = _TX1STA -> -> 36 `i `uc ]
+[; ;eusart.c: 29: SP1BRGL = 0xA0;
 "29
-[e = _SP1BRGH -> -> 1 `i `uc ]
-[; ;eusart.c: 32: PIE1bits.RCIE = 1;
+[e = _SP1BRGL -> -> 160 `i `uc ]
+[; ;eusart.c: 32: SP1BRGH = 0x01;
 "32
-[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
-[; ;eusart.c: 33: }
-"33
-[e :UE 969 ]
-}
+[e = _SP1BRGH -> -> 1 `i `uc ]
+[; ;eusart.c: 35: PIE1bits.RCIE = 1;
 "35
+[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
+[; ;eusart.c: 37: txTail = 0;
+"37
+[e = _txTail -> -> 0 `i `uc ]
+[; ;eusart.c: 38: txHead = 0;
+"38
+[e = _txHead -> -> 0 `i `uc ]
+[; ;eusart.c: 39: txRemain = sizeof (txBuf );
+"39
+[e = _txRemain -> -> # _txBuf `ui `uc ]
+[; ;eusart.c: 40: }
+"40
+[e :UE 971 ]
+}
+"42
 [v _EUSART_RCV_ISR `(v ~T0 @X0 1 ef ]
-"36
 {
-[; ;eusart.c: 35: void EUSART_RCV_ISR()
-[; ;eusart.c: 36: {
+[; ;eusart.c: 42: void EUSART_RCV_ISR( ) {
 [e :U _EUSART_RCV_ISR ]
 [f ]
-[; ;eusart.c: 37: if (RC1STAbits.FERR || RC1STAbits.OERR)
-"37
-[e $ ! || != -> . . _RC1STAbits 0 2 `i -> -> -> 0 `i `Vuc `i != -> . . _RC1STAbits 0 1 `i -> -> -> 0 `i `Vuc `i 971  ]
-[; ;eusart.c: 38: {
-"38
-{
-[; ;eusart.c: 39: RC1STAbits.SPEN = 0;
-"39
-[e = . . _RC1STAbits 0 7 -> -> 0 `i `uc ]
-[; ;eusart.c: 40: RC1STAbits.SPEN = 1;
-"40
-[e = . . _RC1STAbits 0 7 -> -> 1 `i `uc ]
-"41
-}
-[e :U 971 ]
-[; ;eusart.c: 41: }
-[; ;eusart.c: 43: rxBuf[nRcvIdx++] = RCREG;
 "43
-[e = *U + &U _rxBuf * -> ++ _nRcvIdx -> -> 1 `i `uc `ux -> -> # *U &U _rxBuf `ui `ux _RCREG ]
-[; ;eusart.c: 44: if (nRcvIdx >= sizeof(rxBuf))
+[v _rcv `uc ~T0 @X0 1 a ]
+[; ;eusart.c: 43: uint8_t rcv;
+[; ;eusart.c: 44: if ( RC1STAbits.FERR || RC1STAbits.OERR ) {
 "44
-[e $ ! >= -> _nRcvIdx `ui -> # _rxBuf `ui 972  ]
-[; ;eusart.c: 45: {
-"45
+[e $ ! || != -> . . _RC1STAbits 0 2 `i -> -> -> 0 `i `Vuc `i != -> . . _RC1STAbits 0 1 `i -> -> -> 0 `i `Vuc `i 973  ]
 {
-[; ;eusart.c: 46: nRcvIdx = 0;
+[; ;eusart.c: 45: RC1STAbits.SPEN = 0;
+"45
+[e = . . _RC1STAbits 0 7 -> -> 0 `i `uc ]
+[; ;eusart.c: 46: RC1STAbits.SPEN = 1;
 "46
-[e = _nRcvIdx -> -> 0 `i `uc ]
+[e = . . _RC1STAbits 0 7 -> -> 1 `i `uc ]
 "47
 }
-[e :U 972 ]
+[e :U 973 ]
 [; ;eusart.c: 47: }
-[; ;eusart.c: 48: }
-"48
-[e :UE 970 ]
-}
+[; ;eusart.c: 49: rcv = RCREG;
+"49
+[e = _rcv _RCREG ]
+[; ;eusart.c: 50: if ( fnReceiveCallback != (0) ) {
 "50
-[v _eusartReadByte `(uc ~T0 @X0 1 ef ]
+[e $ ! != _fnReceiveCallback -> -> 0 `i `*F8015 974  ]
+{
+[; ;eusart.c: 51: fnReceiveCallback( rcv );
 "51
-{
-[; ;eusart.c: 50: unsigned char eusartReadByte()
-[; ;eusart.c: 51: {
-[e :U _eusartReadByte ]
-[f ]
-[; ;eusart.c: 52: while(!PIR1bits.RCIF);
+[e ( *U _fnReceiveCallback (1 _rcv ]
 "52
-[e $U 974  ]
-[e :U 975 ]
+}
 [e :U 974 ]
-[e $ ! != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 975  ]
-[e :U 976 ]
-[; ;eusart.c: 53: if (RC1STAbits.OERR)
+[; ;eusart.c: 52: }
+[; ;eusart.c: 53: }
 "53
-[e $ ! != -> . . _RC1STAbits 0 1 `i -> -> -> 0 `i `Vuc `i 977  ]
-[; ;eusart.c: 54: {
-"54
-{
-[; ;eusart.c: 55: RC1STAbits.CREN = 0;
+[e :UE 972 ]
+}
 "55
-[e = . . _RC1STAbits 0 4 -> -> 0 `i `uc ]
-[; ;eusart.c: 56: RC1STAbits.CREN = 1;
+[v _EUSART_Transmit_ISR `(v ~T0 @X0 1 ef ]
+{
+[; ;eusart.c: 55: void EUSART_Transmit_ISR( ) {
+[e :U _EUSART_Transmit_ISR ]
+[f ]
+[; ;eusart.c: 56: if ( sizeof ( txBuf ) > txRemain ) {
 "56
-[e = . . _RC1STAbits 0 4 -> -> 1 `i `uc ]
+[e $ ! > -> # _txBuf `ui -> _txRemain `ui 976  ]
+{
+[; ;eusart.c: 57: TXREG = txBuf[txTail++];
 "57
+[e = _TXREG *U + &U _txBuf * -> ++ _txTail -> -> 1 `i `uc `ux -> -> # *U &U _txBuf `ui `ux ]
+[; ;eusart.c: 58: if ( sizeof (txBuf ) <= txTail ) {
+"58
+[e $ ! <= -> # _txBuf `ui -> _txTail `ui 977  ]
+{
+[; ;eusart.c: 59: txTail = 0;
+"59
+[e = _txTail -> -> 0 `i `uc ]
+"60
 }
 [e :U 977 ]
-[; ;eusart.c: 57: }
-[; ;eusart.c: 58: return RCREG;
-"58
-[e ) _RCREG ]
-[e $UE 973  ]
-[; ;eusart.c: 59: }
-"59
-[e :UE 973 ]
+[; ;eusart.c: 60: }
+[; ;eusart.c: 61: txRemain++;
+"61
+[e ++ _txRemain -> -> 1 `i `uc ]
+"62
 }
-"61
-[v _eusartSendByte `(v ~T0 @X0 1 ef1`uc ]
-"62
+[; ;eusart.c: 62: } else {
+[e $U 978  ]
+[e :U 976 ]
 {
-[; ;eusart.c: 61: void eusartSendByte(unsigned char byte)
-[; ;eusart.c: 62: {
-[e :U _eusartSendByte ]
-"61
-[v _byte `uc ~T0 @X0 1 r1 ]
-"62
-[f ]
-[; ;eusart.c: 63: while(!TXIF);
+[; ;eusart.c: 63: PIE1bits.TXIE = 0;
 "63
-[e $U 979  ]
-[e :U 980 ]
-[e :U 979 ]
-[e $ ! _TXIF 980  ]
-[e :U 981 ]
-[; ;eusart.c: 64: TXREG = byte;
+[e = . . _PIE1bits 0 4 -> -> 0 `i `uc ]
 "64
-[e = _TXREG _byte ]
+}
+[e :U 978 ]
+[; ;eusart.c: 64: }
 [; ;eusart.c: 65: }
 "65
-[e :UE 978 ]
+[e :UE 975 ]
+}
+"67
+[v _EUSART_ReadByte `(uc ~T0 @X0 1 ef ]
+{
+[; ;eusart.c: 67: uint8_t EUSART_ReadByte( ) {
+[e :U _EUSART_ReadByte ]
+[f ]
+[; ;eusart.c: 68: while ( !PIR1bits.RCIF );
+"68
+[e $U 980  ]
+[e :U 981 ]
+[e :U 980 ]
+[e $ ! != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 981  ]
+[e :U 982 ]
+[; ;eusart.c: 69: if ( RC1STAbits.OERR ) {
+"69
+[e $ ! != -> . . _RC1STAbits 0 1 `i -> -> -> 0 `i `Vuc `i 983  ]
+{
+[; ;eusart.c: 70: RC1STAbits.CREN = 0;
+"70
+[e = . . _RC1STAbits 0 4 -> -> 0 `i `uc ]
+[; ;eusart.c: 71: RC1STAbits.CREN = 1;
+"71
+[e = . . _RC1STAbits 0 4 -> -> 1 `i `uc ]
+"72
+}
+[e :U 983 ]
+[; ;eusart.c: 72: }
+[; ;eusart.c: 73: return RCREG;
+"73
+[e ) _RCREG ]
+[e $UE 979  ]
+[; ;eusart.c: 74: }
+"74
+[e :UE 979 ]
+}
+"90
+[v _EUSART_Write `(uc ~T0 @X0 1 ef1`uc ]
+{
+[; ;eusart.c: 90: uint8_t EUSART_Write( uint8_t byte ) {
+[e :U _EUSART_Write ]
+[v _byte `uc ~T0 @X0 1 r1 ]
+[f ]
+[; ;eusart.c: 91: while ( 0 == txRemain );
+"91
+[e $U 985  ]
+[e :U 986 ]
+[e :U 985 ]
+[e $ == -> 0 `i -> _txRemain `i 986  ]
+[e :U 987 ]
+[; ;eusart.c: 93: if ( !PIE1bits.TXIE ) {
+"93
+[e $ ! ! != -> . . _PIE1bits 0 4 `i -> -> -> 0 `i `Vuc `i 988  ]
+{
+[; ;eusart.c: 94: TXREG = byte;
+"94
+[e = _TXREG _byte ]
+"95
+}
+[; ;eusart.c: 95: } else {
+[e $U 989  ]
+[e :U 988 ]
+{
+[; ;eusart.c: 96: PIE1bits.TXIE = 0;
+"96
+[e = . . _PIE1bits 0 4 -> -> 0 `i `uc ]
+[; ;eusart.c: 97: txBuf[txHead++] = byte;
+"97
+[e = *U + &U _txBuf * -> ++ _txHead -> -> 1 `i `uc `ux -> -> # *U &U _txBuf `ui `ux _byte ]
+[; ;eusart.c: 98: if ( sizeof ( txBuf ) <= txHead ) {
+"98
+[e $ ! <= -> # _txBuf `ui -> _txHead `ui 990  ]
+{
+[; ;eusart.c: 99: txHead = 0;
+"99
+[e = _txHead -> -> 0 `i `uc ]
+"100
+}
+[e :U 990 ]
+[; ;eusart.c: 100: }
+[; ;eusart.c: 101: txRemain--;
+"101
+[e -- _txRemain -> -> 1 `i `uc ]
+"102
+}
+[e :U 989 ]
+[; ;eusart.c: 102: }
+[; ;eusart.c: 103: PIE1bits.TXIE = 1;
+"103
+[e = . . _PIE1bits 0 4 -> -> 1 `i `uc ]
+[; ;eusart.c: 104: return byte;
+"104
+[e ) _byte ]
+[e $UE 984  ]
+[; ;eusart.c: 105: }
+"105
+[e :UE 984 ]
+}
+"116
+[v _EUSART_SetReceiveCallback `(v ~T0 @X0 1 ef1`*F8015 ]
+{
+[; ;eusart.c: 116: void EUSART_SetReceiveCallback( EUSART_ReceiveInterruptCallback_t callback ) {
+[e :U _EUSART_SetReceiveCallback ]
+[v _callback `*F8015 ~T0 @X0 1 r1 ]
+[f ]
+[; ;eusart.c: 117: fnReceiveCallback = callback;
+"117
+[e = _fnReceiveCallback _callback ]
+[; ;eusart.c: 118: }
+"118
+[e :UE 991 ]
 }

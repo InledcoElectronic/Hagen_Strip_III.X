@@ -7630,84 +7630,151 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 192: extern unsigned char __resetbits;
 [; ;pic.h: 193: extern __bit __powerdown;
 [; ;pic.h: 194: extern __bit __timeout;
-[; ;comman.h: 119: typedef union{
-[; ;comman.h: 120: struct{
-[; ;comman.h: 121: unsigned char year;
-[; ;comman.h: 122: unsigned char month;
-[; ;comman.h: 123: unsigned char day;
-[; ;comman.h: 124: unsigned char wk;
-[; ;comman.h: 125: unsigned char hour;
-[; ;comman.h: 126: unsigned char minute;
-[; ;comman.h: 127: unsigned char second;
-[; ;comman.h: 128: }datetime;
-[; ;comman.h: 129: unsigned char array[7];
-[; ;comman.h: 130: }DateTime_t;
-[; ;comman.h: 132: typedef struct{
-[; ;comman.h: 133: unsigned char hour;
-[; ;comman.h: 134: unsigned char minute;
-[; ;comman.h: 135: }Time_t;
-[; ;comman.h: 137: typedef struct{
-[; ;comman.h: 138: Time_t start;
-[; ;comman.h: 139: Time_t end;
-[; ;comman.h: 140: }TimeRamp_t;
-[; ;comman.h: 142: typedef union{
-[; ;comman.h: 143: struct{
-[; ;comman.h: 144: unsigned fOn : 1;
-[; ;comman.h: 145: unsigned fRsv : 7;
-[; ;comman.h: 146: unsigned char fDyn;
-[; ;comman.h: 147: unsigned int nBrt[5];
-[; ;comman.h: 148: unsigned char nCustomBrt[4][5];
-[; ;comman.h: 149: }manualPara;
-[; ;comman.h: 150: unsigned char array[6*5+2];
-[; ;comman.h: 151: }ManualPara_t;
-[; ;comman.h: 153: typedef union{
-[; ;comman.h: 154: struct{
-[; ;comman.h: 155: TimeRamp_t sunrise;
-[; ;comman.h: 156: unsigned char daylight[5];
-[; ;comman.h: 157: TimeRamp_t sunset;
-[; ;comman.h: 158: unsigned char moonlight[5];
-[; ;comman.h: 159: }autoPara;
-[; ;comman.h: 160: unsigned char array[2*5+8];
-[; ;comman.h: 161: }AutoPara_t;
-[; ;comman.h: 163: typedef struct{
-[; ;comman.h: 164: unsigned int nDayBrt;
-[; ;comman.h: 165: unsigned int nNightBrt;
-[; ;comman.h: 166: }TouchPara_t;
-[; ;comman.h: 168: typedef struct{
-[; ;comman.h: 169: unsigned fAuto : 1;
-[; ;comman.h: 170: unsigned fSta : 2;
-[; ;comman.h: 171: unsigned fRsv : 5;
-[; ;comman.h: 172: ManualPara_t mPara;
-[; ;comman.h: 173: AutoPara_t aPara;
-[; ;comman.h: 174: TouchPara_t tPara;
-[; ;comman.h: 175: }LedPara_t;
-[; ;comman.h: 177: typedef struct{
-[; ;comman.h: 178: unsigned find : 1;
-[; ;comman.h: 179: unsigned fSec : 1;
-[; ;comman.h: 180: unsigned fSave : 1;
-[; ;comman.h: 181: unsigned fPrev : 1;
-[; ;comman.h: 182: unsigned fDr : 1;
-[; ;comman.h: 183: unsigned fNr : 1;
-[; ;comman.h: 184: unsigned fRsv : 2;
-[; ;comman.h: 185: unsigned char nFlashCount;
-[; ;comman.h: 186: unsigned char nPrevCount;
-[; ;comman.h: 187: unsigned char nSaveDelayCount;
-[; ;comman.h: 188: unsigned int nTargetBrt[5];
-[; ;comman.h: 189: unsigned int nCurrentBrt[5];
-[; ;comman.h: 190: unsigned char nCustomIndex;
-[; ;comman.h: 191: }LedRunPara_t;
-[; ;comman.h: 193: extern volatile LedRunPara_t gLedRunPara;
-[; ;comman.h: 194: extern volatile LedPara_t gLedPara;
-[; ;comman.h: 196: extern void SYSTEM_Initialize();
-[; ;comman.h: 197: extern unsigned char strCmp(const unsigned char *s1, const unsigned char *s2);
-[; ;pin.h: 17: void PIN_MANAGER_Initialize (void);
+[; ;stdint.h: 13: typedef signed char int8_t;
+[; ;stdint.h: 20: typedef signed int int16_t;
+[; ;stdint.h: 28: typedef signed short long int int24_t;
+[; ;stdint.h: 36: typedef signed long int int32_t;
+[; ;stdint.h: 43: typedef unsigned char uint8_t;
+[; ;stdint.h: 49: typedef unsigned int uint16_t;
+[; ;stdint.h: 56: typedef unsigned short long int uint24_t;
+[; ;stdint.h: 63: typedef unsigned long int uint32_t;
+[; ;stdint.h: 71: typedef signed char int_least8_t;
+[; ;stdint.h: 78: typedef signed int int_least16_t;
+[; ;stdint.h: 90: typedef signed short long int int_least24_t;
+[; ;stdint.h: 98: typedef signed long int int_least32_t;
+[; ;stdint.h: 105: typedef unsigned char uint_least8_t;
+[; ;stdint.h: 111: typedef unsigned int uint_least16_t;
+[; ;stdint.h: 121: typedef unsigned short long int uint_least24_t;
+[; ;stdint.h: 128: typedef unsigned long int uint_least32_t;
+[; ;stdint.h: 137: typedef signed char int_fast8_t;
+[; ;stdint.h: 144: typedef signed int int_fast16_t;
+[; ;stdint.h: 156: typedef signed short long int int_fast24_t;
+[; ;stdint.h: 164: typedef signed long int int_fast32_t;
+[; ;stdint.h: 171: typedef unsigned char uint_fast8_t;
+[; ;stdint.h: 177: typedef unsigned int uint_fast16_t;
+[; ;stdint.h: 187: typedef unsigned short long int uint_fast24_t;
+[; ;stdint.h: 194: typedef unsigned long int uint_fast32_t;
+[; ;stdint.h: 200: typedef int32_t intmax_t;
+[; ;stdint.h: 205: typedef uint32_t uintmax_t;
+[; ;stdint.h: 210: typedef int16_t intptr_t;
+[; ;stdint.h: 215: typedef uint16_t uintptr_t;
+[; ;stdbool.h: 12: typedef unsigned char bool;
+[; ;__size_t.h: 4: typedef unsigned size_t;
+[; ;stdlib.h: 7: typedef unsigned short wchar_t;
+[; ;stdlib.h: 15: typedef struct {
+[; ;stdlib.h: 16: int rem;
+[; ;stdlib.h: 17: int quot;
+[; ;stdlib.h: 18: } div_t;
+[; ;stdlib.h: 19: typedef struct {
+[; ;stdlib.h: 20: unsigned rem;
+[; ;stdlib.h: 21: unsigned quot;
+[; ;stdlib.h: 22: } udiv_t;
+[; ;stdlib.h: 23: typedef struct {
+[; ;stdlib.h: 24: long quot;
+[; ;stdlib.h: 25: long rem;
+[; ;stdlib.h: 26: } ldiv_t;
+[; ;stdlib.h: 27: typedef struct {
+[; ;stdlib.h: 28: unsigned long quot;
+[; ;stdlib.h: 29: unsigned long rem;
+[; ;stdlib.h: 30: } uldiv_t;
+[; ;stdlib.h: 53: extern double atof(const char *);
+[; ;stdlib.h: 54: extern double strtod(const char *, const char **);
+[; ;stdlib.h: 55: extern int atoi(const char *);
+[; ;stdlib.h: 56: extern unsigned xtoi(const char *);
+[; ;stdlib.h: 57: extern long atol(const char *);
+[; ;stdlib.h: 58: extern long strtol(const char *, char **, int);
+[; ;stdlib.h: 60: extern int rand(void);
+[; ;stdlib.h: 61: extern void srand(unsigned int);
+[; ;stdlib.h: 62: extern void * calloc(size_t, size_t);
+[; ;stdlib.h: 63: extern div_t div(int numer, int denom);
+[; ;stdlib.h: 64: extern udiv_t udiv(unsigned numer, unsigned denom);
+[; ;stdlib.h: 65: extern ldiv_t ldiv(long numer, long denom);
+[; ;stdlib.h: 66: extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+[; ;stdlib.h: 67: extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 68: extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 69: extern unsigned int _rotl(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 70: extern unsigned int _rotr(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 75: extern void * malloc(size_t);
+[; ;stdlib.h: 76: extern void free(void *);
+[; ;stdlib.h: 77: extern void * realloc(void *, size_t);
+[; ;stdlib.h: 86: extern int atexit(void (*)(void));
+[; ;stdlib.h: 87: extern char * getenv(const char *);
+[; ;stdlib.h: 88: extern char ** environ;
+[; ;stdlib.h: 89: extern int system(char *);
+[; ;stdlib.h: 90: extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+[; ;stdlib.h: 91: extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+[; ;stdlib.h: 92: extern int abs(int);
+[; ;stdlib.h: 93: extern long labs(long);
+[; ;stdlib.h: 95: extern char * itoa(char * buf, int val, int base);
+[; ;stdlib.h: 96: extern char * utoa(char * buf, unsigned val, int base);
+[; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
+[; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
+[; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
+[; ;comman.h: 93: typedef struct {
+[; ;comman.h: 94: uint8_t hour;
+[; ;comman.h: 95: uint8_t minute;
+[; ;comman.h: 96: } Time_t;
+[; ;comman.h: 98: typedef struct {
+[; ;comman.h: 99: Time_t start;
+[; ;comman.h: 100: Time_t end;
+[; ;comman.h: 101: } TimeRamp_t;
+[; ;comman.h: 103: typedef union {
+[; ;comman.h: 105: struct {
+[; ;comman.h: 106: unsigned fOn : 1;
+[; ;comman.h: 107: unsigned fRsv : 7;
+[; ;comman.h: 108: uint8_t fDyn;
+[; ;comman.h: 109: uint16_t nBrt[5];
+[; ;comman.h: 110: uint8_t nCustomBrt[4][5];
+[; ;comman.h: 111: } manualPara;
+[; ;comman.h: 112: uint8_t array[6 * 5 + 2];
+[; ;comman.h: 113: } ManualPara_t;
+[; ;comman.h: 115: typedef union {
+[; ;comman.h: 117: struct {
+[; ;comman.h: 118: TimeRamp_t sunrise;
+[; ;comman.h: 119: uint8_t daylight[5];
+[; ;comman.h: 120: TimeRamp_t sunset;
+[; ;comman.h: 121: uint8_t moonlight[5];
+[; ;comman.h: 122: } autoPara;
+[; ;comman.h: 123: uint8_t array[2 * 5 + 8];
+[; ;comman.h: 124: } AutoPara_t;
+[; ;comman.h: 126: typedef struct {
+[; ;comman.h: 127: uint16_t nDayBrt;
+[; ;comman.h: 128: uint16_t nNightBrt;
+[; ;comman.h: 129: } TouchPara_t;
+[; ;comman.h: 131: typedef struct {
+[; ;comman.h: 132: unsigned fAuto : 1;
+[; ;comman.h: 133: unsigned fSta : 2;
+[; ;comman.h: 134: unsigned fRsv : 5;
+[; ;comman.h: 135: ManualPara_t mPara;
+[; ;comman.h: 136: AutoPara_t aPara;
+[; ;comman.h: 137: TouchPara_t tPara;
+[; ;comman.h: 138: } LedPara_t;
+[; ;comman.h: 140: typedef struct {
+[; ;comman.h: 141: unsigned find : 1;
+[; ;comman.h: 142: unsigned fSave : 1;
+[; ;comman.h: 143: unsigned fPrev : 1;
+[; ;comman.h: 144: unsigned fDr : 1;
+[; ;comman.h: 145: unsigned fNr : 1;
+[; ;comman.h: 146: unsigned fRsv : 3;
+[; ;comman.h: 147: uint8_t nFlashCount;
+[; ;comman.h: 148: uint8_t nPrevCount;
+[; ;comman.h: 149: uint8_t nSaveDelayCount;
+[; ;comman.h: 150: uint16_t nTargetBrt[5];
+[; ;comman.h: 151: uint16_t nCurrentBrt[5];
+[; ;comman.h: 152: uint8_t nCustomIndex;
+[; ;comman.h: 153: } LedRunPara_t;
+[; ;comman.h: 155: extern volatile LedRunPara_t gLedRunPara;
+[; ;comman.h: 156: extern volatile LedPara_t gLedPara;
+[; ;comman.h: 158: extern void SYSTEM_Initialize();
+[; ;comman.h: 159: extern void registerCallback();
+[; ;pin.h: 17: extern void PIN_Initialize (void);
 "3 src/pin.c
-[v _PIN_MANAGER_Initialize `(v ~T0 @X0 1 ef ]
+[v _PIN_Initialize `(v ~T0 @X0 1 ef ]
 "4
 {
-[; ;pin.c: 3: void PIN_MANAGER_Initialize(void)
+[; ;pin.c: 3: void PIN_Initialize(void)
 [; ;pin.c: 4: {
-[e :U _PIN_MANAGER_Initialize ]
+[e :U _PIN_Initialize ]
 [f ]
 [; ;pin.c: 8: LATA = 0x02;
 "8
@@ -7756,7 +7823,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _ODCONC -> -> 0 `i `uc ]
 "40
 [v _state `uc ~T0 @X0 1 a ]
-[; ;pin.c: 40: unsigned char state = GIE;
+[; ;pin.c: 40: uint8_t state = GIE;
 [e = _state -> -> _GIE `i `uc ]
 [; ;pin.c: 41: GIE = 0;
 "41
@@ -7805,5 +7872,5 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _GIE -> _state `b ]
 [; ;pin.c: 59: }
 "59
-[e :UE 969 ]
+[e :UE 971 ]
 }

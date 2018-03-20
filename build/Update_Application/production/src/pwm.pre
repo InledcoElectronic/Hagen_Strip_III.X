@@ -1,21 +1,111 @@
 
 # 1 "src/pwm.c"
 
-# 15 "src/pwm.h"
+# 13 "D:\Program Files\Microchip\xc8\v1.41\include\stdint.h"
+typedef signed char int8_t;
+
+# 20
+typedef signed int int16_t;
+
+# 28
+typedef signed short long int int24_t;
+
+# 36
+typedef signed long int int32_t;
+
+# 43
+typedef unsigned char uint8_t;
+
+# 49
+typedef unsigned int uint16_t;
+
+# 56
+typedef unsigned short long int uint24_t;
+
+# 63
+typedef unsigned long int uint32_t;
+
+# 71
+typedef signed char int_least8_t;
+
+# 78
+typedef signed int int_least16_t;
+
+# 90
+typedef signed short long int int_least24_t;
+
+# 98
+typedef signed long int int_least32_t;
+
+# 105
+typedef unsigned char uint_least8_t;
+
+# 111
+typedef unsigned int uint_least16_t;
+
+# 121
+typedef unsigned short long int uint_least24_t;
+
+# 128
+typedef unsigned long int uint_least32_t;
+
+# 137
+typedef signed char int_fast8_t;
+
+# 144
+typedef signed int int_fast16_t;
+
+# 156
+typedef signed short long int int_fast24_t;
+
+# 164
+typedef signed long int int_fast32_t;
+
+# 171
+typedef unsigned char uint_fast8_t;
+
+# 177
+typedef unsigned int uint_fast16_t;
+
+# 187
+typedef unsigned short long int uint_fast24_t;
+
+# 194
+typedef unsigned long int uint_fast32_t;
+
+# 200
+typedef int32_t intmax_t;
+
+
+
+
+typedef uint32_t uintmax_t;
+
+
+
+
+typedef int16_t intptr_t;
+
+
+
+
+typedef uint16_t uintptr_t;
+
+# 17 "src/pwm.h"
 void PWM1_Initialize();
-void PWM1_LoadDutyValue(unsigned int dutyValue);
+void PWM1_LoadDutyValue(uint16_t dutyValue);
 
 void PWM2_Initialize();
-void PWM2_LoadDutyValue(unsigned int dutyValue);
+void PWM2_LoadDutyValue(uint16_t dutyValue);
 
 void PWM3_Initialize();
-void PWM3_LoadDutyValue(unsigned int dutyValue);
+void PWM3_LoadDutyValue(uint16_t dutyValue);
 
 void PWM4_Initialize();
-void PWM4_LoadDutyValue(unsigned int dutyValue);
+void PWM4_LoadDutyValue(uint16_t dutyValue);
 
 void PWM5_Initialize();
-void PWM5_LoadDutyValue(unsigned int dutyValue);
+void PWM5_LoadDutyValue(uint16_t dutyValue);
 
 # 26 "D:\Program Files\Microchip\xc8\v1.41\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -9912,8 +10002,7 @@ extern __bit __powerdown;
 extern __bit __timeout;
 
 # 4 "src/pwm.c"
-void PWM1_Initialize( void )
-{
+void PWM1_Initialize( void ) {
 
 
 
@@ -9929,26 +10018,21 @@ CCPR1L = 0x00;
 CCPTMRSbits.C1TSEL = 0x1;
 }
 
-void PWM1_LoadDutyValue( unsigned int dutyValue )
-{
+void PWM1_LoadDutyValue( uint16_t dutyValue ) {
 dutyValue &= 0x03FF;
 
 
-if( CCP1CONbits.CCP1FMT )
-{
+if ( CCP1CONbits.CCP1FMT ) {
 dutyValue <<= 6;
 CCPR1H = dutyValue >> 8;
 CCPR1L = dutyValue;
-}
-else
-{
+} else {
 CCPR1H = dutyValue >> 8;
 CCPR1L = dutyValue;
 }
 }
 
-void PWM2_Initialize( void )
-{
+void PWM2_Initialize( void ) {
 
 
 
@@ -9964,26 +10048,21 @@ CCPR2L = 0x00;
 CCPTMRSbits.C2TSEL = 0x1;
 }
 
-void PWM2_LoadDutyValue( unsigned int dutyValue )
-{
+void PWM2_LoadDutyValue( uint16_t dutyValue ) {
 dutyValue &= 0x03FF;
 
 
-if( CCP2CONbits.CCP2FMT )
-{
+if ( CCP2CONbits.CCP2FMT ) {
 dutyValue <<= 6;
 CCPR2H = dutyValue >> 8;
 CCPR2L = dutyValue;
-}
-else
-{
+} else {
 CCPR2H = dutyValue >> 8;
 CCPR2L = dutyValue;
 }
 }
 
-void PWM3_Initialize( void )
-{
+void PWM3_Initialize( void ) {
 
 
 
@@ -9999,26 +10078,21 @@ CCPR3L = 0x00;
 CCPTMRSbits.C3TSEL = 0x1;
 }
 
-void PWM3_LoadDutyValue( unsigned int dutyValue )
-{
+void PWM3_LoadDutyValue( uint16_t dutyValue ) {
 dutyValue &= 0x03FF;
 
 
-if( CCP3CONbits.CCP3FMT )
-{
+if ( CCP3CONbits.CCP3FMT ) {
 dutyValue <<= 6;
 CCPR3H = dutyValue >> 8;
 CCPR3L = dutyValue;
-}
-else
-{
+} else {
 CCPR3H = dutyValue >> 8;
 CCPR3L = dutyValue;
 }
 }
 
-void PWM4_Initialize( void )
-{
+void PWM4_Initialize( void ) {
 
 
 
@@ -10034,34 +10108,28 @@ CCPR4L = 0x00;
 CCPTMRSbits.C4TSEL = 0x1;
 }
 
-void PWM4_LoadDutyValue( unsigned int dutyValue )
-{
+void PWM4_LoadDutyValue( uint16_t dutyValue ) {
 dutyValue &= 0x03FF;
 
 
-if( CCP4CONbits.CCP4FMT )
-{
+if ( CCP4CONbits.CCP4FMT ) {
 dutyValue <<= 6;
 CCPR4H = dutyValue >> 8;
 CCPR4L = dutyValue;
-}
-else
-{
+} else {
 CCPR4H = dutyValue >> 8;
 CCPR4L = dutyValue;
 }
 }
 
-void PWM5_Initialize( void )
-{
+void PWM5_Initialize( void ) {
 PWM5DCH = 0;
 PWM5DCL = 0;
 PWMTMRSbits.P5TSEL = 0X01;
 PWM5CON = 0X80;
 }
 
-void PWM5_LoadDutyValue( unsigned int dutyValue )
-{
+void PWM5_LoadDutyValue( uint16_t dutyValue ) {
 dutyValue &= 0x03FF;
 PWM5DCH = dutyValue >> 2;
 PWM5DCL = dutyValue << 6;

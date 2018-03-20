@@ -27,7 +27,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=Hagen_Strip_III.X
 
 # Active Configuration
-DEFAULTCONF=Update_Application
+DEFAULTCONF=Program_Bootloader_Application
 CONF=${DEFAULTCONF}
 
 # All Configurations

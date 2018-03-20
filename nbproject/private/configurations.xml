@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="62">
   <projectmakefile>Makefile</projectmakefile>
-  <defaultConf>2</defaultConf>
+  <defaultConf>1</defaultConf>
   <confs>
     <conf name="default" type="2">
       <platformToolSN>:=MPLABComm-USB-Microchip:=&lt;vid>04D8:=&lt;pid>900A:=&lt;rev>0002:=&lt;man>Microchip Technology Inc.:=&lt;prod>PICkit 3:=&lt;sn>BUR132284452:=&lt;drv>x:=&lt;xpt>h:=end</platformToolSN>
@@ -22,7 +22,7 @@
       </runprofile>
     </conf>
     <conf name="Program_Bootloader_Application" type="2">
-      <platformToolSN>:=MPLABComm-USB-Microchip:=&lt;vid>04D8:=&lt;pid>900A:=&lt;rev>0002:=&lt;man>Microchip Technology Inc.:=&lt;prod>PICkit 3:=&lt;sn>BUR154273226:=&lt;drv>x:=&lt;xpt>h:=end</platformToolSN>
+      <platformToolSN>:=MPLABComm-USB-Microchip:=&lt;vid>04D8:=&lt;pid>900A:=&lt;rev>0002:=&lt;man>Microchip Technology Inc.:=&lt;prod>PICkit 3:=&lt;sn>BUR130008072:=&lt;drv>x:=&lt;xpt>h:=end</platformToolSN>
       <languageToolchainDir>D:\Program Files\Microchip\xc8\v1.41\bin</languageToolchainDir>
       <mdbdebugger version="1">
         <placeholder1>place holder 1</placeholder1>
@@ -40,7 +40,7 @@
       </runprofile>
     </conf>
     <conf name="Update_Application" type="2">
-      <platformToolSN>:=MPLABComm-USB-Microchip:=&lt;vid>04D8:=&lt;pid>900A:=&lt;rev>0002:=&lt;man>Microchip Technology Inc.:=&lt;prod>PICkit 3:=&lt;sn>BUR132284452:=&lt;drv>x:=&lt;xpt>h:=end</platformToolSN>
+      <platformToolSN></platformToolSN>
       <languageToolchainDir>D:\Program Files\Microchip\xc8\v1.41\bin</languageToolchainDir>
       <mdbdebugger version="1">
         <placeholder1>place holder 1</placeholder1>

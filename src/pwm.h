@@ -12,20 +12,22 @@
 extern "C" {
 #endif
 
-void PWM1_Initialize();
-void PWM1_LoadDutyValue(unsigned int dutyValue);
+#include <stdint.h>
 
-void PWM2_Initialize();
-void PWM2_LoadDutyValue(unsigned int dutyValue);
+    void PWM1_Initialize();
+    void PWM1_LoadDutyValue(uint16_t dutyValue);
 
-void PWM3_Initialize();
-void PWM3_LoadDutyValue(unsigned int dutyValue);
+    void PWM2_Initialize();
+    void PWM2_LoadDutyValue(uint16_t dutyValue);
 
-void PWM4_Initialize();
-void PWM4_LoadDutyValue(unsigned int dutyValue);
+    void PWM3_Initialize();
+    void PWM3_LoadDutyValue(uint16_t dutyValue);
 
-void PWM5_Initialize();
-void PWM5_LoadDutyValue(unsigned int dutyValue);
+    void PWM4_Initialize();
+    void PWM4_LoadDutyValue(uint16_t dutyValue);
+
+    void PWM5_Initialize();
+    void PWM5_LoadDutyValue(uint16_t dutyValue);
 
 
 #ifdef	__cplusplus

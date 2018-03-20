@@ -14,17 +14,15 @@ extern "C" {
 
 #include "comman.h"
 
-#define TX_BUF_SIZE     48
-#define RX_BUF_SIZE     48    
+    typedef void ( *EUSART_ReceiveInterruptCallback_t ) (uint8_t rcv);
 
-extern unsigned char txBuf[TX_BUF_SIZE];
-extern unsigned char rxBuf[RX_BUF_SIZE];
-extern volatile unsigned char nRcvIdx;
-    
-extern  void EUSART_Initialize();
-extern  void EUSART_RCV_ISR();
-extern  unsigned char eusartReadByte();
-extern  void eusartSendByte(unsigned char byte);
+    extern void EUSART_Initialize();
+    extern void EUSART_Transmit_ISR();
+    extern void EUSART_RCV_ISR();
+    extern uint8_t EUSART_ReadByte();
+//    extern void EUSART_SendByte(uint8_t byte);
+    extern uint8_t EUSART_Write(uint8_t byte);
+    extern void EUSART_SetReceiveCallback(EUSART_ReceiveInterruptCallback_t callback);
 
 #ifdef	__cplusplus
 }

@@ -14,7 +14,7 @@ extern "C" {
 
 #include "comman.h"
     
-void PIN_MANAGER_Initialize (void);
+extern void PIN_Initialize (void);
 
 #ifdef	__cplusplus
 }

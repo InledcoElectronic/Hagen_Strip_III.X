@@ -7,11 +7,6 @@
             <file>file:/Users/liruya/MPLABXProjects/Hagen_Strip_III/Hagen_Strip_III.X/src/led.c</file>
             <file>file:/Users/liruya/MPLABXProjects/Hagen_Strip_III/Hagen_Strip_III.X/src/ble.c</file>
         </group>
-        <group>
-            <file>file:/E:/MPLABXProjects/Hagen_Strip_III/Hagen_Strip_III.X/src/led.h</file>
-            <file>file:/E:/MPLABXProjects/Hagen_Strip_III/Hagen_Strip_III.X/src/led.c</file>
-            <file>file:/E:/MPLABXProjects/Hagen_Strip_III/Hagen_Strip_III.X/src/comman.h</file>
-            <file>file:/E:/MPLABXProjects/Hagen_Strip_III/Hagen_Strip_III.X/src/ble.h</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

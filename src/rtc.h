@@ -12,14 +12,20 @@
 extern "C" {
 #endif
 
-#include "comman.h"
-    
-//current time YYMMdd D HHmmss
-extern volatile DateTime_t gCurrentTime;
+#include <stdbool.h>
+#include <stdint.h>
 
-extern void initRTC();
-extern void runRTC();
-
+    extern void RTC_Initialize();
+    extern void RTC_Run();
+    extern bool RTC_IsSecondReady();
+    extern void RTC_SetCurrentTime(const uint8_t * const time);
+    extern uint8_t RTC_GetYear();
+    extern uint8_t RTC_GetMonth();
+    extern uint8_t RTC_GetDay();
+    extern uint8_t RTC_GetWeekday();
+    extern uint8_t RTC_GetHour();
+    extern uint8_t RTC_GetMinute();
+    extern uint8_t RTC_GetSecond();
 
 #ifdef	__cplusplus
 }

@@ -14,9 +14,10 @@ extern "C" {
 
 #include "comman.h"
 
-extern void writeLedPara( unsigned char addr, LedPara_t para );
-extern LedPara_t readLedPara( unsigned char addr );
-extern void saveLedPara();
+    extern void EEPROM_Write(uint8_t addr, uint8_t byte);
+    extern uint8_t EEPROM_Read(uint8_t addr);
+    extern void EEPROM_WriteBuffer(uint8_t addr, const uint8_t * const pbuf, uint8_t len);
+    extern void EEPROM_ReadBuffer(uint8_t addr, uint8_t * const pbuf, uint8_t len);
 
 #ifdef	__cplusplus
 }

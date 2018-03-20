@@ -1,6 +1,6 @@
 #include "pin.h"
 
-void PIN_MANAGER_Initialize(void)
+void PIN_Initialize(void)
 {
     /**
     LATx registers
@@ -37,13 +37,13 @@ void PIN_MANAGER_Initialize(void)
     ODCONB = 0x00;
     ODCONC = 0x00;
    
-    unsigned char state = GIE;
+    uint8_t state = GIE;
     GIE = 0;
     PPSLOCK = 0x55;
     PPSLOCK = 0xAA;
     PPSLOCKbits.PPSLOCKED = 0x00; // unlock PPS
 
-    RXPPSbits.RXPPS = 0x12;   //RC2->EUSART:RX;
+    RXPPSbits.RXPPS = 0x12;		//RC2->EUSART:RX;
     RB4PPSbits.RB4PPS = 0x14;   //RB4->EUSART:TX;
     RC5PPSbits.RC5PPS = 0x0C;   //RC5->CCP1:CCP1;
     RC4PPSbits.RC4PPS = 0x0D;   //RC4->CCP2:CCP2;

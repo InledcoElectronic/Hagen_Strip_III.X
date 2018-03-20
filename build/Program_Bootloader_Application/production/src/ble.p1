@@ -1,8 +1,8 @@
 Version 3.2 HI-TECH Software Intermediate Code
 "3036 D:\Program Files\Microchip\xc8\v1.41\include\pic16f18345.h
 [v _RCREG `Vuc ~T0 @X0 0 e@409 ]
-"27 src/eusart.h
-[v _eusartSendByte `(v ~T0 @X0 0 ef1`uc ]
+"24 src/eusart.h
+[v _EUSART_Write `(uc ~T0 @X0 0 ef1`uc ]
 "553 D:\Program Files\Microchip\xc8\v1.41\include\pic16f18345.h
 [s S36 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S36 . TMR1IF TMR2IF BCL1IF SSP1IF TXIF RCIF ADIF TMR1GIF ]
@@ -27,58 +27,65 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _LATC1 `Vb ~T0 @X0 0 e@2161 ]
 "21932
 [v _TRMT `Vb ~T0 @X0 0 e@3313 ]
-"20 src/eusart.h
-[v _txBuf `uc ~T0 @X0 -> 0 `x e ]
-[v F7834 `uc ~T0 @X0 -> 5 `i t ]
-"143 src/comman.h
-[s S963 :1 `uc 1 :7 `uc 1 `uc 1 `ui -> 5 `i `F7834 -> 4 `i ]
-[n S963 . fOn fRsv fDyn nBrt nCustomBrt ]
-"142
-[u S962 `S963 1 `uc + * -> 6 `i -> 5 `i -> 2 `i ]
-[n S962 . manualPara array ]
-"132
-[s S960 `uc 1 `uc 1 ]
-[n S960 . hour minute ]
-"137
-[s S961 `S960 1 `S960 1 ]
-[n S961 . start end ]
-"154
-[s S965 `S961 1 `uc -> 5 `i `S961 1 `uc -> 5 `i ]
-[n S965 . sunrise daylight sunset moonlight ]
-"153
-[u S964 `S965 1 `uc + * -> 2 `i -> 5 `i -> 8 `i ]
-[n S964 . autoPara array ]
-"163
-[s S966 `ui 1 `ui 1 ]
-[n S966 . nDayBrt nNightBrt ]
-"168
-[s S967 :1 `uc 1 :2 `uc 1 :5 `uc 1 `S962 1 `S964 1 `S966 1 ]
-[n S967 . fAuto fSta fRsv mPara aPara tPara ]
-"194
-[v _gLedPara `VS967 ~T0 @X0 0 e ]
-"177
-[s S968 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 `uc 1 `uc 1 `uc 1 `ui -> 5 `i `ui -> 5 `i `uc 1 ]
-[n S968 . find fSec fSave fPrev fDr fNr fRsv nFlashCount nPrevCount nSaveDelayCount nTargetBrt nCurrentBrt nCustomIndex ]
-"193
-[v _gLedRunPara `VS968 ~T0 @X0 0 e ]
-"21 src/eusart.h
-[v _rxBuf `uc ~T0 @X0 -> 0 `x e ]
+[v F7971 `uc ~T0 @X0 -> 5 `i t ]
+"105 src/comman.h
+[s S965 :1 `uc 1 :7 `uc 1 `uc 1 `ui -> 5 `i `F7971 -> 4 `i ]
+[n S965 . fOn fRsv fDyn nBrt nCustomBrt ]
+"103
+[u S964 `S965 1 `uc + * -> 6 `i -> 5 `i -> 2 `i ]
+[n S964 . manualPara array ]
+"93
+[s S962 `uc 1 `uc 1 ]
+[n S962 . hour minute ]
+"98
+[s S963 `S962 1 `S962 1 ]
+[n S963 . start end ]
+"117
+[s S967 `S963 1 `uc -> 5 `i `S963 1 `uc -> 5 `i ]
+[n S967 . sunrise daylight sunset moonlight ]
+"115
+[u S966 `S967 1 `uc + * -> 2 `i -> 5 `i -> 8 `i ]
+[n S966 . autoPara array ]
+"126
+[s S968 `ui 1 `ui 1 ]
+[n S968 . nDayBrt nNightBrt ]
+"131
+[s S969 :1 `uc 1 :2 `uc 1 :5 `uc 1 `S964 1 `S966 1 `S968 1 ]
+[n S969 . fAuto fSta fRsv mPara aPara tPara ]
+"156
+[v _gLedPara `VS969 ~T0 @X0 0 e ]
+"51 src/led.h
+[v _LED_SetAuto `(uc ~T0 @X0 0 ef1`uc ]
+"47
+[v _LED_PrepareToSavePara `(v ~T0 @X0 0 ef ]
+"52
+[v _LED_SetOn `(uc ~T0 @X0 0 ef1`uc ]
+[v F8090 `*Cuc ~T0 @X0 1 t ]
+"53
+[v _LED_SetManualBrights `(uc ~T0 @X0 0 ef1`C*Cuc ]
+"54
+[v _LED_SetCustom `(uc ~T0 @X0 0 ef1`uc ]
+[v F8095 `*Cuc ~T0 @X0 1 t ]
+"55
+[v _LED_SetCycle `(uc ~T0 @X0 0 ef1`C*Cuc ]
+"56
+[v _LED_ManualIncrease `(uc ~T0 @X0 0 ef2`uc`uc ]
+"57
+[v _LED_ManualDecrease `(uc ~T0 @X0 0 ef2`uc`uc ]
+[v F8104 `*Cuc ~T0 @X0 1 t ]
+"58
+[v _LED_SetPreviewBrights `(uc ~T0 @X0 0 ef1`C*Cuc ]
+"49
+[v _LED_StartPreview `(v ~T0 @X0 0 ef ]
+"50
+[v _LED_StopPreview `(v ~T0 @X0 0 ef ]
+[v F8027 `*Cuc ~T0 @X0 1 t ]
+"21 src/rtc.h
+[v _RTC_SetCurrentTime `(v ~T0 @X0 0 ef1`C*Cuc ]
 "44 src/led.h
-[v _turnOnLedRamp `(v ~T0 @X0 0 ef ]
-"45
-[v _turnOffLedRamp `(v ~T0 @X0 0 ef ]
-"41
-[v _updatePWM `(v ~T0 @X0 0 ef ]
-"120 src/comman.h
-[s S959 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
-[n S959 . year month day wk hour minute second ]
-"119
-[u S958 `S959 1 `uc -> 7 `i ]
-[n S958 . datetime array ]
-"18 src/rtc.h
-[v _gCurrentTime `VS958 ~T0 @X0 0 e ]
-"53 src/led.h
-[v _indicateLedBle `(v ~T0 @X0 0 ef ]
+[v _LED_IndicateBle `(v ~T0 @X0 0 ef ]
+"48
+[v _LED_StartFlash `(v ~T0 @X0 0 ef ]
 "10613 D:\Program Files\Microchip\xc8\v1.41\include\pic16f18345.h
 [v _NVMADR `Vus ~T0 @X0 0 e@2193 ]
 "11593
@@ -101,6 +108,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p i ___nop ]
 "20298 D:\Program Files\Microchip\xc8\v1.41\include\pic16f18345.h
 [v _LATB5 `Vb ~T0 @X0 0 e@2157 ]
+"21188
+[v _RA2 `Vb ~T0 @X0 0 e@98 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7613,170 +7622,252 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 192: extern unsigned char __resetbits;
 [; ;pic.h: 193: extern __bit __powerdown;
 [; ;pic.h: 194: extern __bit __timeout;
-[; ;comman.h: 119: typedef union{
-[; ;comman.h: 120: struct{
-[; ;comman.h: 121: unsigned char year;
-[; ;comman.h: 122: unsigned char month;
-[; ;comman.h: 123: unsigned char day;
-[; ;comman.h: 124: unsigned char wk;
-[; ;comman.h: 125: unsigned char hour;
-[; ;comman.h: 126: unsigned char minute;
-[; ;comman.h: 127: unsigned char second;
-[; ;comman.h: 128: }datetime;
-[; ;comman.h: 129: unsigned char array[7];
-[; ;comman.h: 130: }DateTime_t;
-[; ;comman.h: 132: typedef struct{
-[; ;comman.h: 133: unsigned char hour;
-[; ;comman.h: 134: unsigned char minute;
-[; ;comman.h: 135: }Time_t;
-[; ;comman.h: 137: typedef struct{
-[; ;comman.h: 138: Time_t start;
-[; ;comman.h: 139: Time_t end;
-[; ;comman.h: 140: }TimeRamp_t;
-[; ;comman.h: 142: typedef union{
-[; ;comman.h: 143: struct{
-[; ;comman.h: 144: unsigned fOn : 1;
-[; ;comman.h: 145: unsigned fRsv : 7;
-[; ;comman.h: 146: unsigned char fDyn;
-[; ;comman.h: 147: unsigned int nBrt[5];
-[; ;comman.h: 148: unsigned char nCustomBrt[4][5];
-[; ;comman.h: 149: }manualPara;
-[; ;comman.h: 150: unsigned char array[6*5+2];
-[; ;comman.h: 151: }ManualPara_t;
-[; ;comman.h: 153: typedef union{
-[; ;comman.h: 154: struct{
-[; ;comman.h: 155: TimeRamp_t sunrise;
-[; ;comman.h: 156: unsigned char daylight[5];
-[; ;comman.h: 157: TimeRamp_t sunset;
-[; ;comman.h: 158: unsigned char moonlight[5];
-[; ;comman.h: 159: }autoPara;
-[; ;comman.h: 160: unsigned char array[2*5+8];
-[; ;comman.h: 161: }AutoPara_t;
-[; ;comman.h: 163: typedef struct{
-[; ;comman.h: 164: unsigned int nDayBrt;
-[; ;comman.h: 165: unsigned int nNightBrt;
-[; ;comman.h: 166: }TouchPara_t;
-[; ;comman.h: 168: typedef struct{
-[; ;comman.h: 169: unsigned fAuto : 1;
-[; ;comman.h: 170: unsigned fSta : 2;
-[; ;comman.h: 171: unsigned fRsv : 5;
-[; ;comman.h: 172: ManualPara_t mPara;
-[; ;comman.h: 173: AutoPara_t aPara;
-[; ;comman.h: 174: TouchPara_t tPara;
-[; ;comman.h: 175: }LedPara_t;
-[; ;comman.h: 177: typedef struct{
-[; ;comman.h: 178: unsigned find : 1;
-[; ;comman.h: 179: unsigned fSec : 1;
-[; ;comman.h: 180: unsigned fSave : 1;
-[; ;comman.h: 181: unsigned fPrev : 1;
-[; ;comman.h: 182: unsigned fDr : 1;
-[; ;comman.h: 183: unsigned fNr : 1;
-[; ;comman.h: 184: unsigned fRsv : 2;
-[; ;comman.h: 185: unsigned char nFlashCount;
-[; ;comman.h: 186: unsigned char nPrevCount;
-[; ;comman.h: 187: unsigned char nSaveDelayCount;
-[; ;comman.h: 188: unsigned int nTargetBrt[5];
-[; ;comman.h: 189: unsigned int nCurrentBrt[5];
-[; ;comman.h: 190: unsigned char nCustomIndex;
-[; ;comman.h: 191: }LedRunPara_t;
-[; ;comman.h: 193: extern volatile LedRunPara_t gLedRunPara;
-[; ;comman.h: 194: extern volatile LedPara_t gLedPara;
-[; ;comman.h: 196: extern void SYSTEM_Initialize();
-[; ;comman.h: 197: extern unsigned char strCmp(const unsigned char *s1, const unsigned char *s2);
-[; ;ble.h: 18: extern void initBLE();
-[; ;ble.h: 19: extern void DecodeDATA();
-[; ;rtc.h: 18: extern volatile DateTime_t gCurrentTime;
-[; ;rtc.h: 20: extern void initRTC();
-[; ;rtc.h: 21: extern void runRTC();
-[; ;eeprom.h: 17: extern void writeLedPara( unsigned char addr, LedPara_t para );
-[; ;eeprom.h: 18: extern LedPara_t readLedPara( unsigned char addr );
-[; ;eeprom.h: 19: extern void saveLedPara();
-[; ;eusart.h: 20: extern unsigned char txBuf[48];
-[; ;eusart.h: 21: extern unsigned char rxBuf[48];
-[; ;eusart.h: 22: extern volatile unsigned char nRcvIdx;
-[; ;eusart.h: 24: extern void EUSART_Initialize();
-[; ;eusart.h: 25: extern void EUSART_RCV_ISR();
-[; ;eusart.h: 26: extern unsigned char eusartReadByte();
-[; ;eusart.h: 27: extern void eusartSendByte(unsigned char byte);
-[; ;led.h: 41: extern void updatePWM();
-[; ;led.h: 42: extern void updateLed();
-[; ;led.h: 43: extern void autoRun();
-[; ;led.h: 44: extern void turnOnLedRamp();
-[; ;led.h: 45: extern void turnOffLedRamp();
-[; ;led.h: 46: extern void turnOffLed();
-[; ;led.h: 47: extern void initLed();
-[; ;led.h: 48: extern void findDeviceFlash();
-[; ;led.h: 49: extern void preview();
-[; ;led.h: 50: extern void indicateLedOff();
-[; ;led.h: 51: extern void indicateLedDay();
-[; ;led.h: 52: extern void indicateLedNight();
-[; ;led.h: 53: extern void indicateLedBle();
-[; ;led.h: 54: extern void updateDayBright();
-[; ;led.h: 55: extern void updateDayRiseStatus();
-[; ;led.h: 56: extern void updateNightBright();
-[; ;led.h: 57: extern void updateNightRiseStatus();
-"26 src/ble.c
-[v _getCRC `(uc ~T0 @X0 1 ef2`*uc`uc ]
-"27
-{
-[; ;ble.c: 26: unsigned char getCRC ( unsigned char *pbuf, unsigned char len )
-[; ;ble.c: 27: {
-[e :U _getCRC ]
-"26
-[v _pbuf `*uc ~T0 @X0 1 r1 ]
-[v _len `uc ~T0 @X0 1 r2 ]
-"27
-[f ]
-"28
-[v _result `uc ~T0 @X0 1 a ]
-[; ;ble.c: 28: unsigned char result = 0x00;
-[e = _result -> -> 0 `i `uc ]
-[; ;ble.c: 29: for ( unsigned char i = 0; i < len; i++ )
+[; ;stdint.h: 13: typedef signed char int8_t;
+[; ;stdint.h: 20: typedef signed int int16_t;
+[; ;stdint.h: 28: typedef signed short long int int24_t;
+[; ;stdint.h: 36: typedef signed long int int32_t;
+[; ;stdint.h: 43: typedef unsigned char uint8_t;
+[; ;stdint.h: 49: typedef unsigned int uint16_t;
+[; ;stdint.h: 56: typedef unsigned short long int uint24_t;
+[; ;stdint.h: 63: typedef unsigned long int uint32_t;
+[; ;stdint.h: 71: typedef signed char int_least8_t;
+[; ;stdint.h: 78: typedef signed int int_least16_t;
+[; ;stdint.h: 90: typedef signed short long int int_least24_t;
+[; ;stdint.h: 98: typedef signed long int int_least32_t;
+[; ;stdint.h: 105: typedef unsigned char uint_least8_t;
+[; ;stdint.h: 111: typedef unsigned int uint_least16_t;
+[; ;stdint.h: 121: typedef unsigned short long int uint_least24_t;
+[; ;stdint.h: 128: typedef unsigned long int uint_least32_t;
+[; ;stdint.h: 137: typedef signed char int_fast8_t;
+[; ;stdint.h: 144: typedef signed int int_fast16_t;
+[; ;stdint.h: 156: typedef signed short long int int_fast24_t;
+[; ;stdint.h: 164: typedef signed long int int_fast32_t;
+[; ;stdint.h: 171: typedef unsigned char uint_fast8_t;
+[; ;stdint.h: 177: typedef unsigned int uint_fast16_t;
+[; ;stdint.h: 187: typedef unsigned short long int uint_fast24_t;
+[; ;stdint.h: 194: typedef unsigned long int uint_fast32_t;
+[; ;stdint.h: 200: typedef int32_t intmax_t;
+[; ;stdint.h: 205: typedef uint32_t uintmax_t;
+[; ;stdint.h: 210: typedef int16_t intptr_t;
+[; ;stdint.h: 215: typedef uint16_t uintptr_t;
+[; ;stdbool.h: 12: typedef unsigned char bool;
+[; ;__size_t.h: 4: typedef unsigned size_t;
+[; ;stdlib.h: 7: typedef unsigned short wchar_t;
+[; ;stdlib.h: 15: typedef struct {
+[; ;stdlib.h: 16: int rem;
+[; ;stdlib.h: 17: int quot;
+[; ;stdlib.h: 18: } div_t;
+[; ;stdlib.h: 19: typedef struct {
+[; ;stdlib.h: 20: unsigned rem;
+[; ;stdlib.h: 21: unsigned quot;
+[; ;stdlib.h: 22: } udiv_t;
+[; ;stdlib.h: 23: typedef struct {
+[; ;stdlib.h: 24: long quot;
+[; ;stdlib.h: 25: long rem;
+[; ;stdlib.h: 26: } ldiv_t;
+[; ;stdlib.h: 27: typedef struct {
+[; ;stdlib.h: 28: unsigned long quot;
+[; ;stdlib.h: 29: unsigned long rem;
+[; ;stdlib.h: 30: } uldiv_t;
+[; ;stdlib.h: 53: extern double atof(const char *);
+[; ;stdlib.h: 54: extern double strtod(const char *, const char **);
+[; ;stdlib.h: 55: extern int atoi(const char *);
+[; ;stdlib.h: 56: extern unsigned xtoi(const char *);
+[; ;stdlib.h: 57: extern long atol(const char *);
+[; ;stdlib.h: 58: extern long strtol(const char *, char **, int);
+[; ;stdlib.h: 60: extern int rand(void);
+[; ;stdlib.h: 61: extern void srand(unsigned int);
+[; ;stdlib.h: 62: extern void * calloc(size_t, size_t);
+[; ;stdlib.h: 63: extern div_t div(int numer, int denom);
+[; ;stdlib.h: 64: extern udiv_t udiv(unsigned numer, unsigned denom);
+[; ;stdlib.h: 65: extern ldiv_t ldiv(long numer, long denom);
+[; ;stdlib.h: 66: extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+[; ;stdlib.h: 67: extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 68: extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 69: extern unsigned int _rotl(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 70: extern unsigned int _rotr(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 75: extern void * malloc(size_t);
+[; ;stdlib.h: 76: extern void free(void *);
+[; ;stdlib.h: 77: extern void * realloc(void *, size_t);
+[; ;stdlib.h: 86: extern int atexit(void (*)(void));
+[; ;stdlib.h: 87: extern char * getenv(const char *);
+[; ;stdlib.h: 88: extern char ** environ;
+[; ;stdlib.h: 89: extern int system(char *);
+[; ;stdlib.h: 90: extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+[; ;stdlib.h: 91: extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+[; ;stdlib.h: 92: extern int abs(int);
+[; ;stdlib.h: 93: extern long labs(long);
+[; ;stdlib.h: 95: extern char * itoa(char * buf, int val, int base);
+[; ;stdlib.h: 96: extern char * utoa(char * buf, unsigned val, int base);
+[; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
+[; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
+[; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
+[; ;comman.h: 93: typedef struct {
+[; ;comman.h: 94: uint8_t hour;
+[; ;comman.h: 95: uint8_t minute;
+[; ;comman.h: 96: } Time_t;
+[; ;comman.h: 98: typedef struct {
+[; ;comman.h: 99: Time_t start;
+[; ;comman.h: 100: Time_t end;
+[; ;comman.h: 101: } TimeRamp_t;
+[; ;comman.h: 103: typedef union {
+[; ;comman.h: 105: struct {
+[; ;comman.h: 106: unsigned fOn : 1;
+[; ;comman.h: 107: unsigned fRsv : 7;
+[; ;comman.h: 108: uint8_t fDyn;
+[; ;comman.h: 109: uint16_t nBrt[5];
+[; ;comman.h: 110: uint8_t nCustomBrt[4][5];
+[; ;comman.h: 111: } manualPara;
+[; ;comman.h: 112: uint8_t array[6 * 5 + 2];
+[; ;comman.h: 113: } ManualPara_t;
+[; ;comman.h: 115: typedef union {
+[; ;comman.h: 117: struct {
+[; ;comman.h: 118: TimeRamp_t sunrise;
+[; ;comman.h: 119: uint8_t daylight[5];
+[; ;comman.h: 120: TimeRamp_t sunset;
+[; ;comman.h: 121: uint8_t moonlight[5];
+[; ;comman.h: 122: } autoPara;
+[; ;comman.h: 123: uint8_t array[2 * 5 + 8];
+[; ;comman.h: 124: } AutoPara_t;
+[; ;comman.h: 126: typedef struct {
+[; ;comman.h: 127: uint16_t nDayBrt;
+[; ;comman.h: 128: uint16_t nNightBrt;
+[; ;comman.h: 129: } TouchPara_t;
+[; ;comman.h: 131: typedef struct {
+[; ;comman.h: 132: unsigned fAuto : 1;
+[; ;comman.h: 133: unsigned fSta : 2;
+[; ;comman.h: 134: unsigned fRsv : 5;
+[; ;comman.h: 135: ManualPara_t mPara;
+[; ;comman.h: 136: AutoPara_t aPara;
+[; ;comman.h: 137: TouchPara_t tPara;
+[; ;comman.h: 138: } LedPara_t;
+[; ;comman.h: 140: typedef struct {
+[; ;comman.h: 141: unsigned find : 1;
+[; ;comman.h: 142: unsigned fSave : 1;
+[; ;comman.h: 143: unsigned fPrev : 1;
+[; ;comman.h: 144: unsigned fDr : 1;
+[; ;comman.h: 145: unsigned fNr : 1;
+[; ;comman.h: 146: unsigned fRsv : 3;
+[; ;comman.h: 147: uint8_t nFlashCount;
+[; ;comman.h: 148: uint8_t nPrevCount;
+[; ;comman.h: 149: uint8_t nSaveDelayCount;
+[; ;comman.h: 150: uint16_t nTargetBrt[5];
+[; ;comman.h: 151: uint16_t nCurrentBrt[5];
+[; ;comman.h: 152: uint8_t nCustomIndex;
+[; ;comman.h: 153: } LedRunPara_t;
+[; ;comman.h: 155: extern volatile LedRunPara_t gLedRunPara;
+[; ;comman.h: 156: extern volatile LedPara_t gLedPara;
+[; ;comman.h: 158: extern void SYSTEM_Initialize();
+[; ;comman.h: 159: extern void registerCallback();
+[; ;ble.h: 17: extern void BLE_Initialize();
+[; ;ble.h: 18: extern void BLE_Receive(uint8_t rcv);
+[; ;ble.h: 19: extern void BLE_DecodeData();
+[; ;ble.h: 20: extern bool BLE_ReadyToReceive();
+[; ;ble.h: 21: extern void BLE_StartReceive();
+[; ;ble.h: 22: extern bool BLE_ReceiveComplete();
+[; ;ble.h: 23: extern void BLE_StopReceive();
+[; ;rtc.h: 18: extern void RTC_Initialize();
+[; ;rtc.h: 19: extern void RTC_Run();
+[; ;rtc.h: 20: extern bool RTC_IsSecondReady();
+[; ;rtc.h: 21: extern void RTC_SetCurrentTime(const uint8_t * const time);
+[; ;rtc.h: 22: extern uint8_t RTC_GetYear();
+[; ;rtc.h: 23: extern uint8_t RTC_GetMonth();
+[; ;rtc.h: 24: extern uint8_t RTC_GetDay();
+[; ;rtc.h: 25: extern uint8_t RTC_GetWeekday();
+[; ;rtc.h: 26: extern uint8_t RTC_GetHour();
+[; ;rtc.h: 27: extern uint8_t RTC_GetMinute();
+[; ;rtc.h: 28: extern uint8_t RTC_GetSecond();
+[; ;eeprom.h: 17: extern void EEPROM_Write(uint8_t addr, uint8_t byte);
+[; ;eeprom.h: 18: extern uint8_t EEPROM_Read(uint8_t addr);
+[; ;eeprom.h: 19: extern void EEPROM_WriteBuffer(uint8_t addr, const uint8_t * const pbuf, uint8_t len);
+[; ;eeprom.h: 20: extern void EEPROM_ReadBuffer(uint8_t addr, uint8_t * const pbuf, uint8_t len);
+[; ;eusart.h: 17: typedef void ( *EUSART_ReceiveInterruptCallback_t ) (uint8_t rcv);
+[; ;eusart.h: 19: extern void EUSART_Initialize();
+[; ;eusart.h: 20: extern void EUSART_Transmit_ISR();
+[; ;eusart.h: 21: extern void EUSART_RCV_ISR();
+[; ;eusart.h: 22: extern uint8_t EUSART_ReadByte();
+[; ;eusart.h: 24: extern uint8_t EUSART_Write(uint8_t byte);
+[; ;eusart.h: 25: extern void EUSART_SetReceiveCallback(EUSART_ReceiveInterruptCallback_t callback);
+[; ;key.h: 28: enum Key_State_t {
+[; ;key.h: 29: KEY_PRESS_SHORT = 0,
+[; ;key.h: 30: KEY_PRESS_LONG,
+[; ;key.h: 31: KEY_PRESS_CONT,
+[; ;key.h: 32: KEY_RELEASE_1
+[; ;key.h: 33: };
+[; ;key.h: 35: typedef void (*Key_OnStateChangedCallback_t)(uint8_t key, enum Key_State_t state);
+[; ;key.h: 37: extern void KEY_Scan();
+[; ;key.h: 38: extern void KEY_SetOnStateChangedCallback(Key_OnStateChangedCallback_t callback);
+[; ;led.h: 42: extern void LED_UpdateBrightRamp();
+[; ;led.h: 43: extern void LED_Initialize();
+[; ;led.h: 44: extern void LED_IndicateBle();
+[; ;led.h: 45: extern void LED_Action_OnKeyStateChanged(uint8_t key, enum Key_State_t state);
+[; ;led.h: 46: extern void LED_ActionOnSecond();
+[; ;led.h: 47: extern void LED_PrepareToSavePara();
+[; ;led.h: 48: extern void LED_StartFlash();
+[; ;led.h: 49: extern void LED_StartPreview();
+[; ;led.h: 50: extern void LED_StopPreview();
+[; ;led.h: 51: extern bool LED_SetAuto(bool a);
+[; ;led.h: 52: extern bool LED_SetOn(bool on);
+[; ;led.h: 53: extern bool LED_SetManualBrights(const uint8_t * const pbuf);
+[; ;led.h: 54: extern bool LED_SetCustom(uint8_t idx);
+[; ;led.h: 55: extern bool LED_SetCycle(const uint8_t * const pbuf);
+[; ;led.h: 56: extern bool LED_ManualIncrease(uint8_t chn, uint8_t delta);
+[; ;led.h: 57: extern bool LED_ManualDecrease(uint8_t chn, uint8_t delta);
+[; ;led.h: 58: extern bool LED_SetPreviewBrights(const uint8_t * const pbuf);
+"28 src/ble.c
+[v _rxBuf `uc ~T0 @X0 -> 64 `i e ]
+[; ;ble.c: 28: uint8_t rxBuf[64];
 "29
-{
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-[e $U 973  ]
+[v _nRcvIdx `Vuc ~T0 @X0 1 s ]
+[i _nRcvIdx
+-> -> 0 `i `uc
+]
+[; ;ble.c: 29: static volatile uint8_t nRcvIdx = 0;
 "30
-[e :U 970 ]
-[; ;ble.c: 30: {
+[v _rcvXor `Vuc ~T0 @X0 1 s ]
+[i _rcvXor
+-> -> 0 `i `uc
+]
+[; ;ble.c: 30: static volatile uint8_t rcvXor = 0;
+"41
+[v _BLE_Receive `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;ble.c: 31: result ^= *( pbuf + i );
-"31
-[e =^ _result *U + _pbuf * -> _i `ux -> -> # *U _pbuf `ui `ux ]
-"32
-}
-"29
-[e ++ _i -> -> 1 `i `uc ]
-[e :U 973 ]
-[e $ < -> _i `i -> _len `i 970  ]
-[e :U 971 ]
-"32
-}
-[; ;ble.c: 32: }
-[; ;ble.c: 33: return result;
-"33
-[e ) _result ]
-[e $UE 969  ]
-[; ;ble.c: 34: }
-"34
-[e :UE 969 ]
-}
-"36
-[v _BLE_SendCMD `(v ~T0 @X0 1 ef1`*Cuc ]
-"37
-{
-[; ;ble.c: 36: void BLE_SendCMD ( const unsigned char *pBuf )
-[; ;ble.c: 37: {
-[e :U _BLE_SendCMD ]
-"36
-[v _pBuf `*Cuc ~T0 @X0 1 r1 ]
-"37
+[; ;ble.c: 41: void BLE_Receive( uint8_t rcv ) {
+[e :U _BLE_Receive ]
+[v _rcv `uc ~T0 @X0 1 r1 ]
 [f ]
-[v F7924 `uc ~T0 @X0 -> 0 `x s ]
-[i F7924
+[; ;ble.c: 42: rxBuf[ nRcvIdx++ ] = rcv;
+"42
+[e = *U + &U _rxBuf * -> ++ _nRcvIdx -> -> 1 `i `uc `ux -> -> # *U &U _rxBuf `ui `ux _rcv ]
+[; ;ble.c: 43: rcvXor ^= rcv;
+"43
+[e =^ _rcvXor _rcv ]
+[; ;ble.c: 44: if ( nRcvIdx >= sizeof ( rxBuf ) ) {
+"44
+[e $ ! >= -> _nRcvIdx `ui -> # _rxBuf `ui 972  ]
+{
+[; ;ble.c: 45: nRcvIdx = 0;
+"45
+[e = _nRcvIdx -> -> 0 `i `uc ]
+"46
+}
+[e :U 972 ]
+[; ;ble.c: 46: }
+[; ;ble.c: 47: }
+"47
+[e :UE 971 ]
+}
+"49
+[v _BLE_SendCMD `(v ~T0 @X0 1 sf1`*Cuc ]
+{
+[; ;ble.c: 49: static void BLE_SendCMD( const uint8_t *pBuf ) {
+[e :U _BLE_SendCMD ]
+[v _pBuf `*Cuc ~T0 @X0 1 r1 ]
+[f ]
+[v F8112 `uc ~T0 @X0 -> 0 `x s ]
+[i F8112
 :U ..
-"38
+"50
 -> -> 65 `ui `uc
 -> -> 84 `ui `uc
 -> -> 43 `ui `uc
@@ -7787,139 +7878,121 @@ Version 3.2 HI-TECH Software Intermediate Code
 ..
 ]
 [v _ack `uc ~T0 @X0 7  a ]
-[; ;ble.c: 38: unsigned char ack[] = { 'A', 'T', '+', 'O', 'K', '\r', '\n' };
-[e = _ack F7924 ]
-"39
-[v _index `uc ~T0 @X0 1 a ]
-[; ;ble.c: 39: unsigned char index = 0;
-[e = _index -> -> 0 `i `uc ]
-"40
-[v _cnt `ui ~T0 @X0 1 a ]
-[; ;ble.c: 40: unsigned int cnt = 0;
-[e = _cnt -> -> 0 `i `ui ]
-"41
-[v _rev `uc ~T0 @X0 1 a ]
-[; ;ble.c: 41: unsigned char rev = RCREG;
-[e = _rev _RCREG ]
-[; ;ble.c: 42: while ( *pBuf != '\0' )
-"42
-[e $U 975  ]
-[e :U 976 ]
-[; ;ble.c: 43: {
-"43
-{
-[; ;ble.c: 44: eusartSendByte(*pBuf++);
-"44
-[e ( _eusartSendByte (1 *U ++ _pBuf * -> -> 1 `i `x -> -> # *U _pBuf `i `x ]
-"45
-}
-[e :U 975 ]
-"42
-[e $ != -> *U _pBuf `ui -> 0 `ui 976  ]
-[e :U 977 ]
-[; ;ble.c: 45: }
-[; ;ble.c: 48: while ( index < sizeof ( ack ) )
-"48
-[e $U 978  ]
-[e :U 979 ]
-[; ;ble.c: 49: {
-"49
-{
-[; ;ble.c: 51: if( PIR1bits.RCIF )
+[; ;ble.c: 50: uint8_t ack[] = { 'A', 'T', '+', 'O', 'K', '\r', '\n' };
+[e = _ack F8112 ]
 "51
-[e $ ! != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 981  ]
-[; ;ble.c: 52: {
+[v _index `uc ~T0 @X0 1 a ]
+[; ;ble.c: 51: uint8_t index = 0;
+[e = _index -> -> 0 `i `uc ]
 "52
-{
-[; ;ble.c: 53: if (RC1STAbits.OERR)
+[v _cnt `ui ~T0 @X0 1 a ]
+[; ;ble.c: 52: uint16_t cnt = 0;
+[e = _cnt -> -> 0 `i `ui ]
 "53
-[e $ ! != -> . . _RC1STAbits 0 1 `i -> -> -> 0 `i `Vuc `i 982  ]
-[; ;ble.c: 54: {
+[v _rev `uc ~T0 @X0 1 a ]
+[; ;ble.c: 53: uint8_t rev = RCREG;
+[e = _rev _RCREG ]
+[; ;ble.c: 54: while ( *pBuf != '\0' ) {
 "54
+[e $U 974  ]
+[e :U 975 ]
 {
-[; ;ble.c: 55: RC1STAbits.CREN = 0;
-"55
-[e = . . _RC1STAbits 0 4 -> -> 0 `i `uc ]
-[; ;ble.c: 56: RC1STAbits.CREN = 1;
+[; ;ble.c: 56: EUSART_Write( *pBuf++ );
 "56
-[e = . . _RC1STAbits 0 4 -> -> 1 `i `uc ]
+[e ( _EUSART_Write (1 *U ++ _pBuf * -> -> 1 `i `x -> -> # *U _pBuf `i `x ]
 "57
 }
-[e :U 982 ]
+[e :U 974 ]
+"54
+[e $ != -> *U _pBuf `ui -> 0 `ui 975  ]
+[e :U 976 ]
 [; ;ble.c: 57: }
-[; ;ble.c: 58: rev = RCREG;
-"58
-[e = _rev _RCREG ]
-[; ;ble.c: 59: if ( rev == ack[index] )
-"59
-[e $ ! == -> _rev `i -> *U + &U _ack * -> _index `ux -> -> # *U &U _ack `ui `ux `i 983  ]
-[; ;ble.c: 60: {
+[; ;ble.c: 60: while ( index < sizeof ( ack ) ) {
 "60
+[e $U 977  ]
+[e :U 978 ]
 {
-[; ;ble.c: 61: index++;
-"61
-[e ++ _index -> -> 1 `i `uc ]
+[; ;ble.c: 62: if ( PIR1bits.RCIF ) {
 "62
-}
-[; ;ble.c: 62: }
-[e $U 984  ]
-"63
-[e :U 983 ]
-[; ;ble.c: 63: else
-[; ;ble.c: 64: {
-"64
+[e $ ! != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 980  ]
 {
-[; ;ble.c: 65: index = 0;
+[; ;ble.c: 63: if ( RC1STAbits.OERR ) {
+"63
+[e $ ! != -> . . _RC1STAbits 0 1 `i -> -> -> 0 `i `Vuc `i 981  ]
+{
+[; ;ble.c: 64: RC1STAbits.CREN = 0;
+"64
+[e = . . _RC1STAbits 0 4 -> -> 0 `i `uc ]
+[; ;ble.c: 65: RC1STAbits.CREN = 1;
 "65
-[e = _index -> -> 0 `i `uc ]
+[e = . . _RC1STAbits 0 4 -> -> 1 `i `uc ]
 "66
-}
-[e :U 984 ]
-"67
 }
 [e :U 981 ]
 [; ;ble.c: 66: }
-[; ;ble.c: 67: }
-[; ;ble.c: 68: _delay((unsigned long)((100)*(16000000/4000000.0)));
+[; ;ble.c: 67: rev = RCREG;
+"67
+[e = _rev _RCREG ]
+[; ;ble.c: 68: if ( rev == ack[index] ) {
 "68
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
-[; ;ble.c: 69: cnt++;
-"69
-[e ++ _cnt -> -> 1 `i `ui ]
-[; ;ble.c: 70: if( cnt > 1000 )
-"70
-[e $ ! > _cnt -> -> 1000 `i `ui 985  ]
-[; ;ble.c: 71: {
-"71
+[e $ ! == -> _rev `i -> *U + &U _ack * -> _index `ux -> -> # *U &U _ack `ui `ux `i 982  ]
 {
-[; ;ble.c: 72: break;
+[; ;ble.c: 69: index++;
+"69
+[e ++ _index -> -> 1 `i `uc ]
+"70
+}
+[; ;ble.c: 70: } else {
+[e $U 983  ]
+[e :U 982 ]
+{
+[; ;ble.c: 71: index = 0;
+"71
+[e = _index -> -> 0 `i `uc ]
 "72
-[e $U 980  ]
+}
+[e :U 983 ]
 "73
 }
-[e :U 985 ]
-"74
-}
-[e :U 978 ]
-"48
-[e $ < -> _index `ui -> # _ack `ui 979  ]
 [e :U 980 ]
+[; ;ble.c: 72: }
 [; ;ble.c: 73: }
-[; ;ble.c: 74: }
-[; ;ble.c: 75: }
+[; ;ble.c: 74: _delay((unsigned long)((100)*(16000000/4000000.0)));
+"74
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
+[; ;ble.c: 75: cnt++;
 "75
-[e :UE 974 ]
-}
-"77
-[v _checkDevID `(uc ~T0 @X0 1 ef ]
-"78
+[e ++ _cnt -> -> 1 `i `ui ]
+[; ;ble.c: 76: if ( cnt > 1000 ) {
+"76
+[e $ ! > _cnt -> -> 1000 `i `ui 984  ]
 {
-[; ;ble.c: 77: unsigned char checkDevID ( )
-[; ;ble.c: 78: {
-[e :U _checkDevID ]
+[; ;ble.c: 77: break;
+"77
+[e $U 979  ]
+"78
+}
+[e :U 984 ]
+"79
+}
+[e :U 977 ]
+"60
+[e $ < -> _index `ui -> # _ack `ui 978  ]
+[e :U 979 ]
+[; ;ble.c: 78: }
+[; ;ble.c: 79: }
+[; ;ble.c: 80: }
+"80
+[e :UE 973 ]
+}
+"82
+[v _BLE_CheckDevID `(uc ~T0 @X0 1 sf ]
+{
+[; ;ble.c: 82: static uint8_t BLE_CheckDevID( ) {
+[e :U _BLE_CheckDevID ]
 [f ]
-[v F7931 `uc ~T0 @X0 -> 0 `x s ]
-[i F7931
+[v F8119 `uc ~T0 @X0 -> 0 `x s ]
+[i F8119
 :U ..
 -> 51 `c
 -> 48 `c
@@ -7940,1081 +8013,821 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-"79
-[v _dev `uc ~T0 @X0 17  a ]
-[; ;ble.c: 79: unsigned char dev[] = "3031333330313032";
-[e = _dev F7931 ]
-"80
-[v _index `uc ~T0 @X0 1 a ]
-[; ;ble.c: 80: unsigned char index = 0;
-[e = _index -> -> 0 `i `uc ]
-"81
-[v _cnt `ui ~T0 @X0 1 a ]
-[; ;ble.c: 81: unsigned int cnt = 0;
-[e = _cnt -> -> 0 `i `ui ]
-"82
-[v _rev `uc ~T0 @X0 1 a ]
-[; ;ble.c: 82: unsigned char rev;
-[; ;ble.c: 83: BLE_SendCMD("AT+ADV_MFR_SPC=?\r\n");
 "83
-[e ( _BLE_SendCMD (1 :s 1C ]
-[; ;ble.c: 84: while ( *(dev+index) != '\0' )
+[v _dev `uc ~T0 @X0 17  a ]
+[; ;ble.c: 83: uint8_t dev[] = "30313333" "30313032";
+[e = _dev F8119 ]
 "84
-[e $U 987  ]
-[e :U 988 ]
-[; ;ble.c: 85: {
+[v _index `uc ~T0 @X0 1 a ]
+[; ;ble.c: 84: uint8_t index = 0;
+[e = _index -> -> 0 `i `uc ]
 "85
-{
-[; ;ble.c: 87: if( PIR1bits.RCIF )
+[v _cnt `ui ~T0 @X0 1 a ]
+[; ;ble.c: 85: uint16_t cnt = 0;
+[e = _cnt -> -> 0 `i `ui ]
+"86
+[v _rev `uc ~T0 @X0 1 a ]
+[; ;ble.c: 86: uint8_t rev;
+[; ;ble.c: 87: BLE_SendCMD( "AT+ADV_MFR_SPC=?\r\n" );
 "87
-[e $ ! != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 990  ]
-[; ;ble.c: 88: {
+[e ( _BLE_SendCMD (1 :s 1C ]
+[; ;ble.c: 88: while ( *( dev + index ) != '\0' ) {
 "88
+[e $U 986  ]
+[e :U 987 ]
 {
-[; ;ble.c: 89: if (RC1STAbits.OERR)
-"89
-[e $ ! != -> . . _RC1STAbits 0 1 `i -> -> -> 0 `i `Vuc `i 991  ]
-[; ;ble.c: 90: {
+[; ;ble.c: 90: if ( PIR1bits.RCIF ) {
 "90
+[e $ ! != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 989  ]
 {
-[; ;ble.c: 91: RC1STAbits.CREN = 0;
+[; ;ble.c: 91: if ( RC1STAbits.OERR ) {
 "91
-[e = . . _RC1STAbits 0 4 -> -> 0 `i `uc ]
-[; ;ble.c: 92: RC1STAbits.CREN = 1;
+[e $ ! != -> . . _RC1STAbits 0 1 `i -> -> -> 0 `i `Vuc `i 990  ]
+{
+[; ;ble.c: 92: RC1STAbits.CREN = 0;
 "92
-[e = . . _RC1STAbits 0 4 -> -> 1 `i `uc ]
+[e = . . _RC1STAbits 0 4 -> -> 0 `i `uc ]
+[; ;ble.c: 93: RC1STAbits.CREN = 1;
 "93
-}
-[e :U 991 ]
-[; ;ble.c: 93: }
-[; ;ble.c: 94: rev = RCREG;
+[e = . . _RC1STAbits 0 4 -> -> 1 `i `uc ]
 "94
-[e = _rev _RCREG ]
-[; ;ble.c: 95: if ( rev == *(dev+index) )
+}
+[e :U 990 ]
+[; ;ble.c: 94: }
+[; ;ble.c: 95: rev = RCREG;
 "95
-[e $ ! == -> _rev `i -> *U + &U _dev * -> _index `ux -> -> # *U &U _dev `ui `ux `i 992  ]
-[; ;ble.c: 96: {
+[e = _rev _RCREG ]
+[; ;ble.c: 96: if ( rev == *( dev + index ) ) {
 "96
+[e $ ! == -> _rev `i -> *U + &U _dev * -> _index `ux -> -> # *U &U _dev `ui `ux `i 991  ]
 {
 [; ;ble.c: 97: index++;
 "97
 [e ++ _index -> -> 1 `i `uc ]
 "98
 }
-[; ;ble.c: 98: }
-[e $U 993  ]
-"99
-[e :U 992 ]
-[; ;ble.c: 99: else
-[; ;ble.c: 100: {
-"100
+[; ;ble.c: 98: } else {
+[e $U 992  ]
+[e :U 991 ]
 {
-[; ;ble.c: 101: return 0;
-"101
+[; ;ble.c: 99: return 0;
+"99
 [e ) -> -> 0 `i `uc ]
-[e $UE 986  ]
+[e $UE 985  ]
+"100
+}
+[e :U 992 ]
+"101
+}
+[e :U 989 ]
+[; ;ble.c: 100: }
+[; ;ble.c: 101: }
+[; ;ble.c: 102: _delay((unsigned long)((100)*(16000000/4000000.0)));
 "102
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
+[; ;ble.c: 103: cnt++;
+"103
+[e ++ _cnt -> -> 1 `i `ui ]
+[; ;ble.c: 104: if ( cnt > 1000 ) {
+"104
+[e $ ! > _cnt -> -> 1000 `i `ui 993  ]
+{
+[; ;ble.c: 105: return 0;
+"105
+[e ) -> -> 0 `i `uc ]
+[e $UE 985  ]
+"106
 }
 [e :U 993 ]
-"103
-}
-[e :U 990 ]
-[; ;ble.c: 102: }
-[; ;ble.c: 103: }
-[; ;ble.c: 104: _delay((unsigned long)((100)*(16000000/4000000.0)));
-"104
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
-[; ;ble.c: 105: cnt++;
-"105
-[e ++ _cnt -> -> 1 `i `ui ]
-[; ;ble.c: 106: if( cnt > 1000 )
-"106
-[e $ ! > _cnt -> -> 1000 `i `ui 994  ]
-[; ;ble.c: 107: {
 "107
-{
-[; ;ble.c: 108: return 0;
+}
+[e :U 986 ]
+"88
+[e $ != -> *U + &U _dev * -> _index `ux -> -> # *U &U _dev `ui `ux `ui -> 0 `ui 987  ]
+[e :U 988 ]
+[; ;ble.c: 106: }
+[; ;ble.c: 107: }
+[; ;ble.c: 108: return 1;
 "108
-[e ) -> -> 0 `i `uc ]
-[e $UE 986  ]
-"109
-}
-[e :U 994 ]
-"110
-}
-[e :U 987 ]
-"84
-[e $ != -> *U + &U _dev * -> _index `ux -> -> # *U &U _dev `ui `ux `ui -> 0 `ui 988  ]
-[e :U 989 ]
-[; ;ble.c: 109: }
-[; ;ble.c: 110: }
-[; ;ble.c: 111: return 1;
-"111
 [e ) -> -> 1 `i `uc ]
-[e $UE 986  ]
-[; ;ble.c: 112: }
-"112
-[e :UE 986 ]
+[e $UE 985  ]
+[; ;ble.c: 109: }
+"109
+[e :UE 985 ]
 }
-"114
-[v _bleSendData `(v ~T0 @X0 1 ef2`*Cuc`uc ]
-"115
+"120
+[v _BLE_StartTransmit `(v ~T0 @X0 1 sf ]
 {
-[; ;ble.c: 114: void bleSendData ( const unsigned char *frame, unsigned char len )
-[; ;ble.c: 115: {
-[e :U _bleSendData ]
-"114
-[v _frame `*Cuc ~T0 @X0 1 r1 ]
-[v _len `uc ~T0 @X0 1 r2 ]
-"115
+[; ;ble.c: 120: static void BLE_StartTransmit( ) {
+[e :U _BLE_StartTransmit ]
 [f ]
-[; ;ble.c: 116: LATC1 = 0;
-"116
+[; ;ble.c: 121: LATC1 = 0;
+"121
 [e = _LATC1 -> -> 0 `i `b ]
-[; ;ble.c: 117: _delay((unsigned long)((800)*(16000000/4000000.0)));
-"117
+[; ;ble.c: 122: _delay((unsigned long)((800)*(16000000/4000000.0)));
+"122
 [e ( __delay (1 -> * -> -> 800 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
-[; ;ble.c: 118: while ( len-- )
-"118
+[; ;ble.c: 123: }
+"123
+[e :UE 994 ]
+}
+"134
+[v _BLE_StopTransmit `(v ~T0 @X0 1 sf ]
+{
+[; ;ble.c: 134: static void BLE_StopTransmit( ) {
+[e :U _BLE_StopTransmit ]
+[f ]
+[; ;ble.c: 135: while ( !TRMT );
+"135
 [e $U 996  ]
 [e :U 997 ]
-[; ;ble.c: 119: {
-"119
-{
-[; ;ble.c: 120: eusartSendByte(*frame++);
-"120
-[e ( _eusartSendByte (1 *U ++ _frame * -> -> 1 `i `x -> -> # *U _frame `i `x ]
-"121
-}
 [e :U 996 ]
-"118
-[e $ != -> -- _len -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 997  ]
+[e $ ! _TRMT 997  ]
 [e :U 998 ]
-[; ;ble.c: 121: }
-[; ;ble.c: 123: while ( !TRMT );
-"123
-[e $U 999  ]
-[e :U 1000 ]
-[e :U 999 ]
-[e $ ! _TRMT 1000  ]
-[e :U 1001 ]
-[; ;ble.c: 124: LATC1 = 1;
-"124
+[; ;ble.c: 136: _delay((unsigned long)((200)*(16000000/4000000.0)));
+"136
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
+[; ;ble.c: 137: LATC1 = 1;
+"137
 [e = _LATC1 -> -> 1 `i `b ]
-[; ;ble.c: 125: }
-"125
+[; ;ble.c: 138: }
+"138
 [e :UE 995 ]
 }
-"127
-[v _bleSendDeviceData `(v ~T0 @X0 1 ef ]
-"128
+"140
+[v _BLE_SendDeviceData `(v ~T0 @X0 1 sf ]
 {
-[; ;ble.c: 127: void bleSendDeviceData ( )
-[; ;ble.c: 128: {
-[e :U _bleSendDeviceData ]
+[; ;ble.c: 140: static void BLE_SendDeviceData( ) {
+[e :U _BLE_SendDeviceData ]
 [f ]
-"129
-[v _i `uc ~T0 @X0 1 a ]
-"130
-[v _len `uc ~T0 @X0 1 a ]
-[; ;ble.c: 129: unsigned char i;
-[; ;ble.c: 130: unsigned char len;
-[; ;ble.c: 131: txBuf[0] = 0x68;
-"131
-[e = *U + &U _txBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _txBuf `ui `ux -> -> 104 `i `uc ]
-[; ;ble.c: 132: txBuf[1] = 0x05;
-"132
-[e = *U + &U _txBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _txBuf `ui `ux -> -> 5 `i `uc ]
-[; ;ble.c: 133: txBuf[2] = gLedPara.fAuto;
-"133
-[e = *U + &U _txBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _txBuf `ui `ux . _gLedPara 0 ]
-[; ;ble.c: 134: if ( gLedPara.fAuto )
-"134
-[e $ ! != -> . _gLedPara 0 `i -> -> -> 0 `i `Vuc `i 1003  ]
-[; ;ble.c: 135: {
-"135
-{
-[; ;ble.c: 136: len = sizeof (gLedPara.aPara.array );
-"136
-[e = _len -> * -> # *U &U . . _gLedPara 4 1 `ui -> + * -> 2 `i -> 5 `i -> 8 `i `ui `uc ]
-[; ;ble.c: 137: for ( i = 0; i < len; i++ )
-"137
-{
-[e = _i -> -> 0 `i `uc ]
-[e $U 1007  ]
-"138
-[e :U 1004 ]
-[; ;ble.c: 138: {
-{
-[; ;ble.c: 139: txBuf[3 + i] = gLedPara.aPara.array[i];
-"139
-[e = *U + &U _txBuf * -> -> + -> 3 `i -> _i `i `ui `ux -> -> # *U &U _txBuf `ui `ux *U + &U . . _gLedPara 4 1 * -> _i `ux -> -> # *U &U . . _gLedPara 4 1 `ui `ux ]
-"140
-}
-"137
-[e ++ _i -> -> 1 `i `uc ]
-[e :U 1007 ]
-[e $ < -> _i `i -> _len `i 1004  ]
-[e :U 1005 ]
-"140
-}
 "141
-}
-[; ;ble.c: 140: }
-[; ;ble.c: 141: }
-[e $U 1008  ]
+[v _i `uc ~T0 @X0 1 a ]
 "142
-[e :U 1003 ]
-[; ;ble.c: 142: else
-[; ;ble.c: 143: {
+[v _len `uc ~T0 @X0 1 a ]
 "143
-{
-[; ;ble.c: 144: len = sizeof (gLedPara.mPara.array );
+[v _xor `uc ~T0 @X0 1 a ]
+[; ;ble.c: 141: uint8_t i;
+[; ;ble.c: 142: uint8_t len;
+[; ;ble.c: 143: uint8_t xor = 0;
+[e = _xor -> -> 0 `i `uc ]
+[; ;ble.c: 144: BLE_StartTransmit( );
 "144
-[e = _len -> * -> # *U &U . . _gLedPara 3 1 `ui -> + * -> 6 `i -> 5 `i -> 2 `i `ui `uc ]
-[; ;ble.c: 145: for ( i = 0; i < len; i++ )
+[e ( _BLE_StartTransmit ..  ]
+[; ;ble.c: 145: xor ^= EUSART_Write( 0x68 );
 "145
+[e =^ _xor ( _EUSART_Write (1 -> -> 104 `i `uc ]
+[; ;ble.c: 146: xor ^= EUSART_Write( 0x05 );
+"146
+[e =^ _xor ( _EUSART_Write (1 -> -> 5 `i `uc ]
+[; ;ble.c: 147: xor ^= EUSART_Write( gLedPara.fAuto );
+"147
+[e =^ _xor ( _EUSART_Write (1 . _gLedPara 0 ]
+[; ;ble.c: 148: if ( gLedPara.fAuto ) {
+"148
+[e $ ! != -> . _gLedPara 0 `i -> -> -> 0 `i `Vuc `i 1000  ]
+{
+[; ;ble.c: 149: len = sizeof (gLedPara.aPara.array );
+"149
+[e = _len -> * -> # *U &U . . _gLedPara 4 1 `ui -> + * -> 2 `i -> 5 `i -> 8 `i `ui `uc ]
+[; ;ble.c: 150: for ( i = 0; i < len; i++ ) {
+"150
 {
 [e = _i -> -> 0 `i `uc ]
-[e $U 1012  ]
-"146
-[e :U 1009 ]
-[; ;ble.c: 146: {
+[e $U 1004  ]
+[e :U 1001 ]
 {
-[; ;ble.c: 147: txBuf[3 + i] = gLedPara.mPara.array[i];
-"147
-[e = *U + &U _txBuf * -> -> + -> 3 `i -> _i `i `ui `ux -> -> # *U &U _txBuf `ui `ux *U + &U . . _gLedPara 3 1 * -> _i `ux -> -> # *U &U . . _gLedPara 3 1 `ui `ux ]
-"148
-}
-"145
-[e ++ _i -> -> 1 `i `uc ]
-[e :U 1012 ]
-[e $ < -> _i `i -> _len `i 1009  ]
-[e :U 1010 ]
-"148
-}
-"149
-}
-[e :U 1008 ]
-[; ;ble.c: 148: }
-[; ;ble.c: 149: }
-[; ;ble.c: 150: txBuf[len + 3] = getCRC(txBuf, len + 3);
-"150
-[e = *U + &U _txBuf * -> -> + -> _len `i -> 3 `i `ui `ux -> -> # *U &U _txBuf `ui `ux ( _getCRC (2 , &U _txBuf -> + -> _len `i -> 3 `i `uc ]
-[; ;ble.c: 151: bleSendData(txBuf, len + 4);
+[; ;ble.c: 151: xor ^= EUSART_Write( gLedPara.aPara.array[i] );
 "151
-[e ( _bleSendData (2 , -> &U _txBuf `*Cuc -> + -> _len `i -> 4 `i `uc ]
-[; ;ble.c: 152: }
+[e =^ _xor ( _EUSART_Write (1 *U + &U . . _gLedPara 4 1 * -> _i `ux -> -> # *U &U . . _gLedPara 4 1 `ui `ux ]
 "152
-[e :UE 1002 ]
 }
+"150
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 1004 ]
+[e $ < -> _i `i -> _len `i 1001  ]
+[e :U 1002 ]
+"152
+}
+"153
+}
+[; ;ble.c: 152: }
+[; ;ble.c: 153: } else {
+[e $U 1005  ]
+[e :U 1000 ]
+{
+[; ;ble.c: 154: len = sizeof (gLedPara.mPara.array );
 "154
-[v _DecodeDATA `(v ~T0 @X0 1 ef ]
+[e = _len -> * -> # *U &U . . _gLedPara 3 1 `ui -> + * -> 6 `i -> 5 `i -> 2 `i `ui `uc ]
+[; ;ble.c: 155: for ( i = 0; i < len; i++ ) {
 "155
 {
-[; ;ble.c: 154: void DecodeDATA ( )
-[; ;ble.c: 155: {
-[e :U _DecodeDATA ]
-[f ]
-[; ;ble.c: 156: if ( gLedRunPara.find || rxBuf[0] != 0x68 )
+[e = _i -> -> 0 `i `uc ]
+[e $U 1009  ]
+[e :U 1006 ]
+{
+[; ;ble.c: 156: xor ^= EUSART_Write( gLedPara.mPara.array[i] );
 "156
-[e $ ! || != -> . _gLedRunPara 0 `i -> -> -> 0 `i `Vuc `i != -> *U + &U _rxBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> 104 `i 1014  ]
-[; ;ble.c: 157: {
+[e =^ _xor ( _EUSART_Write (1 *U + &U . . _gLedPara 3 1 * -> _i `ux -> -> # *U &U . . _gLedPara 3 1 `ui `ux ]
 "157
-{
-[; ;ble.c: 158: return;
+}
+"155
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 1009 ]
+[e $ < -> _i `i -> _len `i 1006  ]
+[e :U 1007 ]
+"157
+}
 "158
-[e $UE 1013  ]
+}
+[e :U 1005 ]
+[; ;ble.c: 157: }
+[; ;ble.c: 158: }
+[; ;ble.c: 159: EUSART_Write( xor );
 "159
-}
-[e :U 1014 ]
-[; ;ble.c: 159: }
-[; ;ble.c: 160: switch ( rxBuf[1] )
+[e ( _EUSART_Write (1 _xor ]
+[; ;ble.c: 160: BLE_StopTransmit( );
 "160
-[e $U 1016  ]
-[; ;ble.c: 161: {
+[e ( _BLE_StopTransmit ..  ]
+[; ;ble.c: 161: }
 "161
-{
-[; ;ble.c: 162: case 0x02:
-"162
-[e :U 1017 ]
-[; ;ble.c: 163: if ( !gLedRunPara.fPrev && getCRC(rxBuf, 4) == 0x00 )
-"163
-[e $ ! && ! != -> . _gLedRunPara 3 `i -> -> -> 0 `i `Vuc `i == -> ( _getCRC (2 , &U _rxBuf -> -> 4 `i `uc `i -> 0 `i 1018  ]
-[; ;ble.c: 164: {
-"164
-{
-[; ;ble.c: 165: if ( rxBuf[2] == 0x00 )
-"165
-[e $ ! == -> *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> 0 `i 1019  ]
-[; ;ble.c: 166: {
-"166
-{
-[; ;ble.c: 167: gLedPara.fAuto = 0;
-"167
-[e = . _gLedPara 0 -> -> 0 `i `uc ]
-[; ;ble.c: 168: if ( gLedPara.mPara.manualPara.fOn )
-"168
-[e $ ! != -> . . . _gLedPara 3 0 0 `i -> -> -> 0 `i `Vuc `i 1020  ]
-[; ;ble.c: 169: {
-"169
-{
-[; ;ble.c: 170: turnOnLedRamp();
-"170
-[e ( _turnOnLedRamp ..  ]
-"171
+[e :UE 999 ]
 }
-[; ;ble.c: 171: }
-[e $U 1021  ]
 "172
-[e :U 1020 ]
-[; ;ble.c: 172: else
-[; ;ble.c: 173: {
+[v _BLE_SendOTAAck `(v ~T0 @X0 1 ef ]
+{
+[; ;ble.c: 172: void BLE_SendOTAAck( ) {
+[e :U _BLE_SendOTAAck ]
+[f ]
+[; ;ble.c: 173: BLE_StartTransmit( );
 "173
-{
-[; ;ble.c: 174: turnOffLedRamp();
+[e ( _BLE_StartTransmit ..  ]
+[; ;ble.c: 174: EUSART_Write( 0x68 );
 "174
-[e ( _turnOffLedRamp ..  ]
+[e ( _EUSART_Write (1 -> -> 104 `i `uc ]
+[; ;ble.c: 175: EUSART_Write( 0x00 );
 "175
-}
-[e :U 1021 ]
+[e ( _EUSART_Write (1 -> -> 0 `i `uc ]
+[; ;ble.c: 176: EUSART_Write( 0x00 );
 "176
-}
-[; ;ble.c: 175: }
-[; ;ble.c: 176: }
-[e $U 1022  ]
+[e ( _EUSART_Write (1 -> -> 0 `i `uc ]
+[; ;ble.c: 177: EUSART_Write( 0x00 );
 "177
-[e :U 1019 ]
-[; ;ble.c: 177: else if ( rxBuf[2] == 0x01 )
-[e $ ! == -> *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> 1 `i 1023  ]
-[; ;ble.c: 178: {
+[e ( _EUSART_Write (1 -> -> 0 `i `uc ]
+[; ;ble.c: 178: EUSART_Write( 0x68 );
 "178
-{
-[; ;ble.c: 179: gLedPara.fAuto = 1;
+[e ( _EUSART_Write (1 -> -> 104 `i `uc ]
+[; ;ble.c: 179: BLE_StopTransmit( );
 "179
-[e = . _gLedPara 0 -> -> 1 `i `uc ]
-"180
-}
-[e :U 1023 ]
-"181
-[e :U 1022 ]
+[e ( _BLE_StopTransmit ..  ]
 [; ;ble.c: 180: }
-[; ;ble.c: 181: gLedRunPara.fSave = 1;
-[e = . _gLedRunPara 2 -> -> 1 `i `uc ]
-[; ;ble.c: 182: gLedRunPara.nSaveDelayCount = 3;
+"180
+[e :UE 1010 ]
+}
 "182
-[e = . _gLedRunPara 9 -> -> 3 `i `uc ]
-[; ;ble.c: 183: bleSendDeviceData();
+[v _BLE_DecodeData `(v ~T0 @X0 1 ef ]
+{
+[; ;ble.c: 182: void BLE_DecodeData( ) {
+[e :U _BLE_DecodeData ]
+[f ]
+[; ;ble.c: 183: if ( rxBuf[0] != 0x68 || rcvXor != 0 ) {
 "183
-[e ( _bleSendDeviceData ..  ]
+[e $ ! || != -> *U + &U _rxBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> 104 `i != -> _rcvXor `i -> 0 `i 1012  ]
+{
+[; ;ble.c: 184: return;
 "184
-}
-[e :U 1018 ]
-[; ;ble.c: 184: }
-[; ;ble.c: 185: break;
+[e $UE 1011  ]
 "185
-[e $U 1015  ]
-[; ;ble.c: 187: case 0x03:
-"187
-[e :U 1024 ]
-[; ;ble.c: 188: if ( !gLedPara.fAuto )
-"188
-[e $ ! ! != -> . _gLedPara 0 `i -> -> -> 0 `i `Vuc `i 1025  ]
-[; ;ble.c: 189: {
-"189
-{
-[; ;ble.c: 190: if ( getCRC(rxBuf, 4) == 0x00 )
-"190
-[e $ ! == -> ( _getCRC (2 , &U _rxBuf -> -> 4 `i `uc `i -> 0 `i 1026  ]
-[; ;ble.c: 191: {
-"191
-{
-[; ;ble.c: 192: if ( rxBuf[2] == 0x00 )
-"192
-[e $ ! == -> *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> 0 `i 1027  ]
-[; ;ble.c: 193: {
-"193
-{
-[; ;ble.c: 194: gLedPara.mPara.manualPara.fOn = 0;
-"194
-[e = . . . _gLedPara 3 0 0 -> -> 0 `i `uc ]
-[; ;ble.c: 195: turnOffLedRamp();
-"195
-[e ( _turnOffLedRamp ..  ]
-"196
 }
-[; ;ble.c: 196: }
-[e $U 1028  ]
-"197
-[e :U 1027 ]
-[; ;ble.c: 197: else if ( rxBuf[2] == 0x01 )
-[e $ ! == -> *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> 1 `i 1029  ]
-[; ;ble.c: 198: {
-"198
+[e :U 1012 ]
+[; ;ble.c: 185: }
+[; ;ble.c: 186: switch ( rxBuf[1] ) {
+"186
+[e $U 1014  ]
 {
-[; ;ble.c: 199: gLedPara.mPara.manualPara.fOn = 1;
+[; ;ble.c: 187: case 0x02:
+"187
+[e :U 1015 ]
+[; ;ble.c: 188: if ( nRcvIdx == 4 ) {
+"188
+[e $ ! == -> _nRcvIdx `i -> 4 `i 1016  ]
+{
+[; ;ble.c: 189: if ( LED_SetAuto( rxBuf[2] ) ) {
+"189
+[e $ ! != -> ( _LED_SetAuto (1 *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> -> -> 0 `i `uc `i 1017  ]
+{
+[; ;ble.c: 190: LED_PrepareToSavePara( );
+"190
+[e ( _LED_PrepareToSavePara ..  ]
+[; ;ble.c: 191: BLE_SendDeviceData( );
+"191
+[e ( _BLE_SendDeviceData ..  ]
+"192
+}
+[e :U 1017 ]
+"193
+}
+[e :U 1016 ]
+[; ;ble.c: 192: }
+[; ;ble.c: 193: }
+[; ;ble.c: 194: break;
+"194
+[e $U 1013  ]
+[; ;ble.c: 196: case 0x03:
+"196
+[e :U 1018 ]
+[; ;ble.c: 197: if ( nRcvIdx == 4 ) {
+"197
+[e $ ! == -> _nRcvIdx `i -> 4 `i 1019  ]
+{
+[; ;ble.c: 198: if ( LED_SetOn( rxBuf[2] ) ) {
+"198
+[e $ ! != -> ( _LED_SetOn (1 *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> -> -> 0 `i `uc `i 1020  ]
+{
+[; ;ble.c: 199: LED_PrepareToSavePara( );
 "199
-[e = . . . _gLedPara 3 0 0 -> -> 1 `i `uc ]
-[; ;ble.c: 200: turnOnLedRamp();
+[e ( _LED_PrepareToSavePara ..  ]
+[; ;ble.c: 200: BLE_SendDeviceData( );
 "200
-[e ( _turnOnLedRamp ..  ]
+[e ( _BLE_SendDeviceData ..  ]
 "201
 }
-[e :U 1029 ]
+[e :U 1020 ]
 "202
-[e :U 1028 ]
-[; ;ble.c: 201: }
-[; ;ble.c: 202: gLedRunPara.fSave = 1;
-[e = . _gLedRunPara 2 -> -> 1 `i `uc ]
-[; ;ble.c: 203: gLedRunPara.nSaveDelayCount = 3;
-"203
-[e = . _gLedRunPara 9 -> -> 3 `i `uc ]
-[; ;ble.c: 204: bleSendDeviceData();
-"204
-[e ( _bleSendDeviceData ..  ]
-"205
 }
-[e :U 1026 ]
+[e :U 1019 ]
+[; ;ble.c: 201: }
+[; ;ble.c: 202: }
+[; ;ble.c: 203: break;
+"203
+[e $U 1013  ]
+[; ;ble.c: 205: case 0x04:
+"205
+[e :U 1021 ]
+[; ;ble.c: 206: if ( nRcvIdx == 3 + 2 * 5 ) {
 "206
+[e $ ! == -> _nRcvIdx `i + -> 3 `i * -> 2 `i -> 5 `i 1022  ]
+{
+[; ;ble.c: 207: if ( LED_SetManualBrights( &rxBuf[2] ) ) {
+"207
+[e $ ! != -> ( _LED_SetManualBrights (1 -> &U *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `C*Cuc `i -> -> -> 0 `i `uc `i 1023  ]
+{
+[; ;ble.c: 208: LED_PrepareToSavePara( );
+"208
+[e ( _LED_PrepareToSavePara ..  ]
+"209
+}
+[e :U 1023 ]
+"210
+}
+[e :U 1022 ]
+[; ;ble.c: 209: }
+[; ;ble.c: 210: }
+[; ;ble.c: 211: break;
+"211
+[e $U 1013  ]
+[; ;ble.c: 213: case 0x05:
+"213
+[e :U 1024 ]
+[; ;ble.c: 214: if ( nRcvIdx == 3 ) {
+"214
+[e $ ! == -> _nRcvIdx `i -> 3 `i 1025  ]
+{
+[; ;ble.c: 215: BLE_SendDeviceData( );
+"215
+[e ( _BLE_SendDeviceData ..  ]
+"216
 }
 [e :U 1025 ]
-[; ;ble.c: 205: }
-[; ;ble.c: 206: }
-[; ;ble.c: 207: break;
-"207
-[e $U 1015  ]
-[; ;ble.c: 209: case 0x04:
-"209
-[e :U 1030 ]
-[; ;ble.c: 210: if ( gLedPara.mPara.manualPara.fOn && ( !gLedPara.fAuto ) )
-"210
-[e $ ! && != -> . . . _gLedPara 3 0 0 `i -> -> -> 0 `i `Vuc `i ! != -> . _gLedPara 0 `i -> -> -> 0 `i `Vuc `i 1031  ]
-[; ;ble.c: 211: {
-"211
-{
-[; ;ble.c: 212: gLedPara.mPara.manualPara.fDyn = 0;
-"212
-[e = . . . _gLedPara 3 0 2 -> -> 0 `i `uc ]
-"213
-[v _len `uc ~T0 @X0 1 a ]
-[; ;ble.c: 213: unsigned char len = 3 + 2 * 5;
-[e = _len -> + -> 3 `i * -> 2 `i -> 5 `i `uc ]
-[; ;ble.c: 214: if ( getCRC(rxBuf, len) == 0x00 )
-"214
-[e $ ! == -> ( _getCRC (2 , &U _rxBuf _len `i -> 0 `i 1032  ]
-[; ;ble.c: 215: {
-"215
-{
-[; ;ble.c: 216: for ( unsigned char i = 0; i < 5; i++ )
-"216
-{
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 5 `i 1033  ]
-[e $U 1034  ]
+[; ;ble.c: 216: }
+[; ;ble.c: 217: break;
 "217
-[e :U 1033 ]
-[; ;ble.c: 217: {
-{
-"218
-[v _val `ui ~T0 @X0 1 a ]
-[; ;ble.c: 218: unsigned int val = ( rxBuf[2 + 2 * i] << 8 ) | rxBuf[3 + 2 * i];
-[e = _val -> | << -> *U + &U _rxBuf * -> -> + -> 2 `i * -> 2 `i -> _i `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> 8 `i -> *U + &U _rxBuf * -> -> + -> 3 `i * -> 2 `i -> _i `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i `ui ]
-[; ;ble.c: 219: if ( val <= 1000 )
+[e $U 1013  ]
+[; ;ble.c: 219: case 0x06:
 "219
-[e $ ! <= _val -> -> 1000 `i `ui 1036  ]
-[; ;ble.c: 220: {
+[e :U 1026 ]
+[; ;ble.c: 220: if ( nRcvIdx == 4 ) {
 "220
+[e $ ! == -> _nRcvIdx `i -> 4 `i 1027  ]
 {
-[; ;ble.c: 221: gLedPara.mPara.manualPara.nBrt[i] = val;
+[; ;ble.c: 221: if ( LED_SetCustom( rxBuf[2] ) ) {
 "221
-[e = *U + &U . . . _gLedPara 3 0 3 * -> _i `ux -> -> # *U &U . . . _gLedPara 3 0 3 `ui `ux _val ]
-[; ;ble.c: 222: gLedRunPara.nTargetBrt[i] = val;
+[e $ ! != -> ( _LED_SetCustom (1 *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> -> -> 0 `i `uc `i 1028  ]
+{
+[; ;ble.c: 222: LED_PrepareToSavePara( );
 "222
-[e = *U + &U . _gLedRunPara 10 * -> _i `ux -> -> # *U &U . _gLedRunPara 10 `ui `ux _val ]
+[e ( _LED_PrepareToSavePara ..  ]
+[; ;ble.c: 223: BLE_SendDeviceData( );
 "223
-}
-[e :U 1036 ]
+[e ( _BLE_SendDeviceData ..  ]
 "224
 }
-"216
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 5 `i 1033  ]
-[e :U 1034 ]
-"224
-}
-[; ;ble.c: 223: }
-[; ;ble.c: 224: }
-[; ;ble.c: 225: gLedRunPara.fSave = 1;
+[e :U 1028 ]
 "225
-[e = . _gLedRunPara 2 -> -> 1 `i `uc ]
-[; ;ble.c: 226: gLedRunPara.nSaveDelayCount = 3;
-"226
-[e = . _gLedRunPara 9 -> -> 3 `i `uc ]
-"227
 }
-[e :U 1032 ]
+[e :U 1027 ]
+[; ;ble.c: 224: }
+[; ;ble.c: 225: }
+[; ;ble.c: 226: break;
+"226
+[e $U 1013  ]
+[; ;ble.c: 228: case 0x07:
 "228
+[e :U 1029 ]
+[; ;ble.c: 229: if ( nRcvIdx == 2 * 5 + 11 ) {
+"229
+[e $ ! == -> _nRcvIdx `i + * -> 2 `i -> 5 `i -> 11 `i 1030  ]
+{
+[; ;ble.c: 230: if ( LED_SetCycle( &rxBuf[2] ) ) {
+"230
+[e $ ! != -> ( _LED_SetCycle (1 -> &U *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `C*Cuc `i -> -> -> 0 `i `uc `i 1031  ]
+{
+[; ;ble.c: 231: LED_PrepareToSavePara( );
+"231
+[e ( _LED_PrepareToSavePara ..  ]
+[; ;ble.c: 232: BLE_SendDeviceData( );
+"232
+[e ( _BLE_SendDeviceData ..  ]
+"233
 }
 [e :U 1031 ]
-[; ;ble.c: 227: }
-[; ;ble.c: 228: }
-[; ;ble.c: 229: break;
-"229
-[e $U 1015  ]
-[; ;ble.c: 231: case 0x05:
-"231
-[e :U 1037 ]
-[; ;ble.c: 232: if ( rxBuf[0] ^ rxBuf[1] == rxBuf[2] )
-"232
-[e $ ! != ^ -> *U + &U _rxBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> == -> *U + &U _rxBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i `i -> 0 `i 1038  ]
-[; ;ble.c: 233: {
-"233
-{
-[; ;ble.c: 234: bleSendDeviceData();
 "234
-[e ( _bleSendDeviceData ..  ]
+}
+[e :U 1030 ]
+[; ;ble.c: 233: }
+[; ;ble.c: 234: }
+[; ;ble.c: 235: break;
 "235
-}
-[e :U 1038 ]
-[; ;ble.c: 235: }
-[; ;ble.c: 236: break;
-"236
-[e $U 1015  ]
-[; ;ble.c: 238: case 0x06:
+[e $U 1013  ]
+[; ;ble.c: 237: case 0x08:
+"237
+[e :U 1032 ]
+[; ;ble.c: 238: if ( nRcvIdx == 5 ) {
 "238
-[e :U 1039 ]
-[; ;ble.c: 239: if ( rxBuf[2] < 4 && getCRC(rxBuf, 4) == 0x00 )
+[e $ ! == -> _nRcvIdx `i -> 5 `i 1033  ]
+{
+[; ;ble.c: 239: if ( LED_ManualIncrease( rxBuf[2], rxBuf[3] ) ) {
 "239
-[e $ ! && < -> *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> 4 `i == -> ( _getCRC (2 , &U _rxBuf -> -> 4 `i `uc `i -> 0 `i 1040  ]
-[; ;ble.c: 240: {
+[e $ ! != -> ( _LED_ManualIncrease (2 , *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux *U + &U _rxBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> -> -> 0 `i `uc `i 1034  ]
+{
+[; ;ble.c: 240: LED_PrepareToSavePara( );
 "240
-{
+[e ( _LED_PrepareToSavePara ..  ]
 "241
-[v _idx `uc ~T0 @X0 1 a ]
-[; ;ble.c: 241: unsigned char idx = rxBuf[2];
-[e = _idx *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux ]
-[; ;ble.c: 242: for ( unsigned char i = 0; i < 5; i++ )
+}
+[e :U 1034 ]
 "242
-{
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 5 `i 1041  ]
-[e $U 1042  ]
+}
+[e :U 1033 ]
+[; ;ble.c: 241: }
+[; ;ble.c: 242: }
+[; ;ble.c: 243: break;
 "243
-[e :U 1041 ]
-[; ;ble.c: 243: {
-{
-[; ;ble.c: 244: gLedPara.mPara.manualPara.nCustomBrt[idx][i] = gLedRunPara.nCurrentBrt[i] / 10;
-"244
-[e = *U + &U *U + &U . . . _gLedPara 3 0 4 * -> _idx `ux -> * -> # *U &U *U &U . . . _gLedPara 3 0 4 `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U . . . _gLedPara 3 0 4 * -> _idx `ux -> * -> # *U &U *U &U . . . _gLedPara 3 0 4 `ui -> -> 5 `i `ui `ux `ui `ux -> / *U + &U . _gLedRunPara 11 * -> _i `ux -> -> # *U &U . _gLedRunPara 11 `ui `ux -> -> 10 `i `ui `uc ]
+[e $U 1013  ]
+[; ;ble.c: 245: case 0x09:
 "245
-}
-"242
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 5 `i 1041  ]
-[e :U 1042 ]
-"245
-}
-[; ;ble.c: 245: }
-[; ;ble.c: 246: gLedRunPara.fSave = 1;
+[e :U 1035 ]
+[; ;ble.c: 246: if ( nRcvIdx == 5 ) {
 "246
-[e = . _gLedRunPara 2 -> -> 1 `i `uc ]
-[; ;ble.c: 247: gLedRunPara.nSaveDelayCount = 3;
+[e $ ! == -> _nRcvIdx `i -> 5 `i 1036  ]
+{
+[; ;ble.c: 247: if ( LED_ManualDecrease( rxBuf[2], rxBuf[3] ) ) {
 "247
-[e = . _gLedRunPara 9 -> -> 3 `i `uc ]
-[; ;ble.c: 248: bleSendDeviceData();
+[e $ ! != -> ( _LED_ManualDecrease (2 , *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux *U + &U _rxBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> -> -> 0 `i `uc `i 1037  ]
+{
+[; ;ble.c: 248: LED_PrepareToSavePara( );
 "248
-[e ( _bleSendDeviceData ..  ]
+[e ( _LED_PrepareToSavePara ..  ]
 "249
 }
-[e :U 1040 ]
-[; ;ble.c: 249: }
-[; ;ble.c: 250: break;
+[e :U 1037 ]
 "250
-[e $U 1015  ]
-[; ;ble.c: 252: case 0x07:
-"252
-[e :U 1044 ]
-[; ;ble.c: 253: if ( !gLedRunPara.fPrev && getCRC(rxBuf, 2 * 5 + 11) == 0x00 )
+}
+[e :U 1036 ]
+[; ;ble.c: 249: }
+[; ;ble.c: 250: }
+[; ;ble.c: 251: break;
+"251
+[e $U 1013  ]
+[; ;ble.c: 253: case 0x0B:
 "253
-[e $ ! && ! != -> . _gLedRunPara 3 `i -> -> -> 0 `i `Vuc `i == -> ( _getCRC (2 , &U _rxBuf -> + * -> 2 `i -> 5 `i -> 11 `i `uc `i -> 0 `i 1045  ]
-[; ;ble.c: 254: {
+[e :U 1038 ]
+[; ;ble.c: 254: if ( nRcvIdx == 3 + 2 * 5 ) {
 "254
+[e $ ! == -> _nRcvIdx `i + -> 3 `i * -> 2 `i -> 5 `i 1039  ]
 {
+[; ;ble.c: 255: if ( LED_SetPreviewBrights( &rxBuf[2] ) ) {
 "255
-[v _len `uc ~T0 @X0 1 a ]
-[; ;ble.c: 255: unsigned char len = sizeof (gLedPara.aPara.array );
-[e = _len -> * -> # *U &U . . _gLedPara 4 1 `ui -> + * -> 2 `i -> 5 `i -> 8 `i `ui `uc ]
-[; ;ble.c: 256: for ( unsigned char i = 0; i < len; i++ )
-"256
+[e $ ! != -> ( _LED_SetPreviewBrights (1 -> &U *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `C*Cuc `i -> -> -> 0 `i `uc `i 1040  ]
 {
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-[e $U 1049  ]
+[; ;ble.c: 257: LED_StartPreview( );
 "257
-[e :U 1046 ]
-[; ;ble.c: 257: {
-{
-[; ;ble.c: 258: gLedPara.aPara.array[i] = rxBuf[2 + i];
+[e ( _LED_StartPreview ..  ]
 "258
-[e = *U + &U . . _gLedPara 4 1 * -> _i `ux -> -> # *U &U . . _gLedPara 4 1 `ui `ux *U + &U _rxBuf * -> -> + -> 2 `i -> _i `i `ui `ux -> -> # *U &U _rxBuf `ui `ux ]
+}
+[e :U 1040 ]
 "259
 }
-"256
-[e ++ _i -> -> 1 `i `uc ]
-[e :U 1049 ]
-[e $ < -> _i `i -> _len `i 1046  ]
-[e :U 1047 ]
-"259
-}
+[e :U 1039 ]
+[; ;ble.c: 258: }
 [; ;ble.c: 259: }
-[; ;ble.c: 260: gLedRunPara.fSave = 1;
+[; ;ble.c: 260: break;
 "260
-[e = . _gLedRunPara 2 -> -> 1 `i `uc ]
-[; ;ble.c: 261: gLedRunPara.nSaveDelayCount = 3;
-"261
-[e = . _gLedRunPara 9 -> -> 3 `i `uc ]
-[; ;ble.c: 262: bleSendDeviceData();
+[e $U 1013  ]
+[; ;ble.c: 262: case 0x0C:
 "262
-[e ( _bleSendDeviceData ..  ]
+[e :U 1041 ]
+[; ;ble.c: 263: if ( nRcvIdx == 3 ) {
 "263
-}
-[e :U 1045 ]
-[; ;ble.c: 263: }
-[; ;ble.c: 264: break;
+[e $ ! == -> _nRcvIdx `i -> 3 `i 1042  ]
+{
+[; ;ble.c: 264: LED_StopPreview( );
 "264
-[e $U 1015  ]
-[; ;ble.c: 266: case 0x08:
+[e ( _LED_StopPreview ..  ]
+"265
+}
+[e :U 1042 ]
+[; ;ble.c: 265: }
+[; ;ble.c: 266: break;
 "266
-[e :U 1050 ]
-[; ;ble.c: 267: if ( gLedPara.mPara.manualPara.fOn && getCRC(rxBuf, 4) == rxBuf[4] && rxBuf[2] < 5 )
-"267
-[e $ ! && && != -> . . . _gLedPara 3 0 0 `i -> -> -> 0 `i `Vuc `i == -> ( _getCRC (2 , &U _rxBuf -> -> 4 `i `uc `i -> *U + &U _rxBuf * -> -> -> 4 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i < -> *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> 5 `i 1051  ]
-[; ;ble.c: 268: {
+[e $U 1013  ]
+[; ;ble.c: 268: case 0x0E:
 "268
-{
+[e :U 1043 ]
+[; ;ble.c: 269: if ( nRcvIdx == 10 ) {
 "269
-[v _idx `uc ~T0 @X0 1 a ]
-[; ;ble.c: 269: unsigned char idx = rxBuf[2];
-[e = _idx *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux ]
-[; ;ble.c: 270: if ( gLedPara.mPara.manualPara.nBrt[idx] + rxBuf[3] < 1000 )
-"270
-[e $ ! < + *U + &U . . . _gLedPara 3 0 3 * -> _idx `ux -> -> # *U &U . . . _gLedPara 3 0 3 `ui `ux -> *U + &U _rxBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `ui -> -> 1000 `i `ui 1052  ]
-[; ;ble.c: 271: {
-"271
+[e $ ! == -> _nRcvIdx `i -> 10 `i 1044  ]
 {
-[; ;ble.c: 272: gLedPara.mPara.manualPara.nBrt[idx] += rxBuf[3];
+[; ;ble.c: 270: RTC_SetCurrentTime( &rxBuf[2] );
+"270
+[e ( _RTC_SetCurrentTime (1 -> &U *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `C*Cuc ]
+[; ;ble.c: 272: LED_IndicateBle( );
 "272
-[e =+ *U + &U . . . _gLedPara 3 0 3 * -> _idx `ux -> -> # *U &U . . . _gLedPara 3 0 3 `ui `ux -> *U + &U _rxBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `ui ]
-[; ;ble.c: 273: gLedRunPara.nTargetBrt[idx] = gLedPara.mPara.manualPara.nBrt[idx];
+[e ( _LED_IndicateBle ..  ]
+[; ;ble.c: 273: BLE_SendDeviceData( );
 "273
-[e = *U + &U . _gLedRunPara 10 * -> _idx `ux -> -> # *U &U . _gLedRunPara 10 `ui `ux *U + &U . . . _gLedPara 3 0 3 * -> _idx `ux -> -> # *U &U . . . _gLedPara 3 0 3 `ui `ux ]
+[e ( _BLE_SendDeviceData ..  ]
 "274
 }
+[e :U 1044 ]
 [; ;ble.c: 274: }
-[e $U 1053  ]
+[; ;ble.c: 275: break;
 "275
-[e :U 1052 ]
-[; ;ble.c: 275: else
-[; ;ble.c: 276: {
-"276
-{
-[; ;ble.c: 277: gLedPara.mPara.manualPara.nBrt[idx] = 1000;
+[e $U 1013  ]
+[; ;ble.c: 277: case 0x0F:
 "277
-[e = *U + &U . . . _gLedPara 3 0 3 * -> _idx `ux -> -> # *U &U . . . _gLedPara 3 0 3 `ui `ux -> -> 1000 `i `ui ]
-[; ;ble.c: 278: gLedRunPara.nTargetBrt[idx] = 1000;
+[e :U 1045 ]
+[; ;ble.c: 278: if ( nRcvIdx == 3 ) {
 "278
-[e = *U + &U . _gLedRunPara 10 * -> _idx `ux -> -> # *U &U . _gLedRunPara 10 `ui `ux -> -> 1000 `i `ui ]
+[e $ ! == -> _nRcvIdx `i -> 3 `i 1046  ]
+{
+[; ;ble.c: 279: LED_StartFlash( );
 "279
-}
-[e :U 1053 ]
-[; ;ble.c: 279: }
-[; ;ble.c: 280: gLedRunPara.fSave = 1;
+[e ( _LED_StartFlash ..  ]
 "280
-[e = . _gLedRunPara 2 -> -> 1 `i `uc ]
-[; ;ble.c: 281: gLedRunPara.nSaveDelayCount = 3;
+}
+[e :U 1046 ]
+[; ;ble.c: 280: }
+[; ;ble.c: 281: break;
 "281
-[e = . _gLedRunPara 9 -> -> 3 `i `uc ]
-"282
-}
-[e :U 1051 ]
-[; ;ble.c: 282: }
-[; ;ble.c: 283: break;
+[e $U 1013  ]
+[; ;ble.c: 283: case 0x00:
 "283
-[e $U 1015  ]
-[; ;ble.c: 285: case 0x09:
+[e :U 1047 ]
+[; ;ble.c: 284: if ( nRcvIdx == 5 ) {
+"284
+[e $ ! == -> _nRcvIdx `i -> 5 `i 1048  ]
+{
+[; ;ble.c: 285: NVMADR = 8192 - 1;
 "285
-[e :U 1054 ]
-[; ;ble.c: 286: if ( gLedPara.mPara.manualPara.fOn && getCRC(rxBuf, 4) == rxBuf[4] && rxBuf[2] < 5 )
+[e = _NVMADR -> - -> 8192 `i -> 1 `i `us ]
+[; ;ble.c: 286: NVMCON1 = 0x94;
 "286
-[e $ ! && && != -> . . . _gLedPara 3 0 0 `i -> -> -> 0 `i `Vuc `i == -> ( _getCRC (2 , &U _rxBuf -> -> 4 `i `uc `i -> *U + &U _rxBuf * -> -> -> 4 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i < -> *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> 5 `i 1055  ]
-[; ;ble.c: 287: {
+[e = _NVMCON1 -> -> 148 `i `uc ]
+[; ;ble.c: 287: NVMCON2 = 0x55;
 "287
-{
+[e = _NVMCON2 -> -> 85 `i `uc ]
+[; ;ble.c: 288: NVMCON2 = 0xAA;
 "288
-[v _idx `uc ~T0 @X0 1 a ]
-[; ;ble.c: 288: unsigned char idx = rxBuf[2];
-[e = _idx *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux ]
-[; ;ble.c: 289: if ( gLedPara.mPara.manualPara.nBrt[idx] > rxBuf[3] )
+[e = _NVMCON2 -> -> 170 `i `uc ]
+[; ;ble.c: 289: NVMCON1bits.WR = 1;
 "289
-[e $ ! > *U + &U . . . _gLedPara 3 0 3 * -> _idx `ux -> -> # *U &U . . . _gLedPara 3 0 3 `ui `ux -> *U + &U _rxBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `ui 1056  ]
-[; ;ble.c: 290: {
+[e = . . _NVMCON1bits 0 1 -> -> 1 `i `uc ]
+[; ;ble.c: 290: __nop();
 "290
-{
-[; ;ble.c: 291: gLedPara.mPara.manualPara.nBrt[idx] -= rxBuf[3];
+[e ( ___nop ..  ]
+[; ;ble.c: 291: __nop();
 "291
-[e =- *U + &U . . . _gLedPara 3 0 3 * -> _idx `ux -> -> # *U &U . . . _gLedPara 3 0 3 `ui `ux -> *U + &U _rxBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `ui ]
-[; ;ble.c: 292: gLedRunPara.nTargetBrt[idx] = gLedPara.mPara.manualPara.nBrt[idx];
+[e ( ___nop ..  ]
+[; ;ble.c: 292: while ( NVMCON1bits.WR );
 "292
-[e = *U + &U . _gLedRunPara 10 * -> _idx `ux -> -> # *U &U . _gLedRunPara 10 `ui `ux *U + &U . . . _gLedPara 3 0 3 * -> _idx `ux -> -> # *U &U . . . _gLedPara 3 0 3 `ui `ux ]
+[e $U 1049  ]
+[e :U 1050 ]
+[e :U 1049 ]
+[e $ != -> . . _NVMCON1bits 0 1 `i -> -> -> 0 `i `Vuc `i 1050  ]
+[e :U 1051 ]
+[; ;ble.c: 293: NVMCON1bits.WREN = 0;
 "293
-}
-[; ;ble.c: 293: }
-[e $U 1057  ]
-"294
-[e :U 1056 ]
-[; ;ble.c: 294: else
-[; ;ble.c: 295: {
+[e = . . _NVMCON1bits 0 2 -> -> 0 `i `uc ]
+[; ;ble.c: 295: BLE_SendOTAAck( );
 "295
-{
-[; ;ble.c: 296: gLedPara.mPara.manualPara.nBrt[idx] = 0;
+[e ( _BLE_SendOTAAck ..  ]
+[; ;ble.c: 296: _delay((unsigned long)((96)*(16000000/4000.0)));
 "296
-[e = *U + &U . . . _gLedPara 3 0 3 * -> _idx `ux -> -> # *U &U . . . _gLedPara 3 0 3 `ui `ux -> -> 0 `i `ui ]
-[; ;ble.c: 297: gLedRunPara.nTargetBrt[idx] = 0;
+[e ( __delay (1 -> * -> -> 96 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;ble.c: 297: asm("reset");
 "297
-[e = *U + &U . _gLedRunPara 10 * -> _idx `ux -> -> # *U &U . _gLedRunPara 10 `ui `ux -> -> 0 `i `ui ]
+[; <" reset ;# ">
 "298
 }
-[e :U 1057 ]
+[e :U 1048 ]
 [; ;ble.c: 298: }
-[; ;ble.c: 299: gLedRunPara.fSave = 1;
+[; ;ble.c: 299: break;
 "299
-[e = . _gLedRunPara 2 -> -> 1 `i `uc ]
-[; ;ble.c: 300: gLedRunPara.nSaveDelayCount = 3;
-"300
-[e = . _gLedRunPara 9 -> -> 3 `i `uc ]
+[e $U 1013  ]
+[; ;ble.c: 301: default:
 "301
-}
-[e :U 1055 ]
-[; ;ble.c: 301: }
+[e :U 1052 ]
 [; ;ble.c: 302: break;
 "302
-[e $U 1015  ]
-[; ;ble.c: 304: case 0x0B:
+[e $U 1013  ]
+"303
+}
+[; ;ble.c: 303: }
+[e $U 1013  ]
+"186
+[e :U 1014 ]
+[e [\ *U + &U _rxBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux , $ -> -> 2 `i `uc 1015
+ , $ -> -> 3 `i `uc 1018
+ , $ -> -> 4 `i `uc 1021
+ , $ -> -> 5 `i `uc 1024
+ , $ -> -> 6 `i `uc 1026
+ , $ -> -> 7 `i `uc 1029
+ , $ -> -> 8 `i `uc 1032
+ , $ -> -> 9 `i `uc 1035
+ , $ -> -> 11 `i `uc 1038
+ , $ -> -> 12 `i `uc 1041
+ , $ -> -> 14 `i `uc 1043
+ , $ -> -> 15 `i `uc 1045
+ , $ -> -> 0 `i `uc 1047
+ 1052 ]
+"303
+[e :U 1013 ]
+[; ;ble.c: 304: }
 "304
-[e :U 1058 ]
-[; ;ble.c: 305: if ( gLedPara.fAuto )
-"305
-[e $ ! != -> . _gLedPara 0 `i -> -> -> 0 `i `Vuc `i 1059  ]
-[; ;ble.c: 306: {
+[e :UE 1011 ]
+}
 "306
+[v _BLE_Initialize `(v ~T0 @X0 1 ef ]
 {
+[; ;ble.c: 306: void BLE_Initialize( ) {
+[e :U _BLE_Initialize ]
+[f ]
+[; ;ble.c: 307: LATC1 = 0;
 "307
-[v _len `uc ~T0 @X0 1 a ]
-[; ;ble.c: 307: unsigned char len = 3 + 2 * 5;
-[e = _len -> + -> 3 `i * -> 2 `i -> 5 `i `uc ]
-[; ;ble.c: 308: if ( getCRC(rxBuf, len) == 0x00 )
+[e = _LATC1 -> -> 0 `i `b ]
+[; ;ble.c: 308: LATB5 = 0;
 "308
-[e $ ! == -> ( _getCRC (2 , &U _rxBuf _len `i -> 0 `i 1060  ]
-[; ;ble.c: 309: {
+[e = _LATB5 -> -> 0 `i `b ]
+[; ;ble.c: 309: _delay((unsigned long)((40)*(16000000/4000.0)));
 "309
-{
-[; ;ble.c: 310: for ( unsigned char i = 0; i < 5; i++ )
+[e ( __delay (1 -> * -> -> 40 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;ble.c: 310: LATB5 = 1;
 "310
-{
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 5 `i 1061  ]
-[e $U 1062  ]
+[e = _LATB5 -> -> 1 `i `b ]
+[; ;ble.c: 311: _delay((unsigned long)((240)*(16000000/4000.0)));
 "311
-[e :U 1061 ]
-[; ;ble.c: 311: {
-{
-"312
-[v _val `ui ~T0 @X0 1 a ]
-[; ;ble.c: 312: unsigned int val = ( rxBuf[2 + 2 * i] << 8 ) | rxBuf[3 + 2 * i];
-[e = _val -> | << -> *U + &U _rxBuf * -> -> + -> 2 `i * -> 2 `i -> _i `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> 8 `i -> *U + &U _rxBuf * -> -> + -> 3 `i * -> 2 `i -> _i `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i `ui ]
-[; ;ble.c: 313: if ( val <= 1000 )
-"313
-[e $ ! <= _val -> -> 1000 `i `ui 1064  ]
-[; ;ble.c: 314: {
+[e ( __delay (1 -> * -> -> 240 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;ble.c: 314: if ( BLE_CheckDevID( ) == 0 ) {
 "314
+[e $ ! == -> ( _BLE_CheckDevID ..  `i -> 0 `i 1054  ]
 {
-[; ;ble.c: 315: gLedRunPara.nCurrentBrt[i] = val;
+[; ;ble.c: 315: _delay((unsigned long)((40)*(16000000/4000.0)));
 "315
-[e = *U + &U . _gLedRunPara 11 * -> _i `ux -> -> # *U &U . _gLedRunPara 11 `ui `ux _val ]
+[e ( __delay (1 -> * -> -> 40 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;ble.c: 316: BLE_SendCMD( "AT+ADV_MFR_SPC=" "30313333" "30313032" "\r\n" );
 "316
-}
-[e :U 1064 ]
+[e ( _BLE_SendCMD (1 :s 2C ]
 "317
 }
-"310
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 5 `i 1061  ]
-[e :U 1062 ]
-"317
-}
-[; ;ble.c: 316: }
+[e :U 1054 ]
 [; ;ble.c: 317: }
-[; ;ble.c: 318: updatePWM();
+[; ;ble.c: 318: _delay((unsigned long)((40)*(16000000/4000.0)));
 "318
-[e ( _updatePWM ..  ]
-[; ;ble.c: 319: gLedRunPara.fPrev = 1;
-"319
-[e = . _gLedRunPara 3 -> -> 1 `i `uc ]
-[; ;ble.c: 320: gLedRunPara.nPrevCount = 3;
+[e ( __delay (1 -> * -> -> 40 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;ble.c: 320: BLE_SendCMD( "AT+SET=1\r\n" );
 "320
-[e = . _gLedRunPara 8 -> -> 3 `i `uc ]
+[e ( _BLE_SendCMD (1 :s 3C ]
+[; ;ble.c: 321: _delay((unsigned long)((40)*(16000000/4000.0)));
 "321
-}
-[e :U 1060 ]
-"322
-}
-[e :U 1059 ]
-[; ;ble.c: 321: }
-[; ;ble.c: 322: }
-[; ;ble.c: 323: break;
+[e ( __delay (1 -> * -> -> 40 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;ble.c: 323: BLE_SendCMD( "AT+MODE=DATA\r\n" );
 "323
-[e $U 1015  ]
-[; ;ble.c: 325: case 0x0C:
+[e ( _BLE_SendCMD (1 :s 4C ]
+[; ;ble.c: 324: _delay((unsigned long)((20)*(16000000/4000.0)));
+"324
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;ble.c: 325: LATC1 = 1;
 "325
-[e :U 1065 ]
-[; ;ble.c: 326: if ( rxBuf[0] ^ rxBuf[1] == rxBuf[2] )
+[e = _LATC1 -> -> 1 `i `b ]
+[; ;ble.c: 326: }
 "326
-[e $ ! != ^ -> *U + &U _rxBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> == -> *U + &U _rxBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i `i -> 0 `i 1066  ]
-[; ;ble.c: 327: {
-"327
-{
-[; ;ble.c: 328: gLedRunPara.fPrev = 0;
-"328
-[e = . _gLedRunPara 3 -> -> 0 `i `uc ]
-[; ;ble.c: 329: gLedRunPara.nPrevCount = 0;
-"329
-[e = . _gLedRunPara 8 -> -> 0 `i `uc ]
-"330
+[e :UE 1053 ]
 }
-[e :U 1066 ]
-[; ;ble.c: 330: }
-[; ;ble.c: 331: break;
-"331
-[e $U 1015  ]
-[; ;ble.c: 333: case 0x0E:
-"333
-[e :U 1067 ]
-[; ;ble.c: 334: if ( getCRC(rxBuf, 10) == 0x00 )
-"334
-[e $ ! == -> ( _getCRC (2 , &U _rxBuf -> -> 10 `i `uc `i -> 0 `i 1068  ]
-[; ;ble.c: 335: {
-"335
-{
-[; ;ble.c: 336: gCurrentTime.datetime.year = rxBuf[2];
-"336
-[e = . . _gCurrentTime 0 0 *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux ]
-[; ;ble.c: 337: gCurrentTime.datetime.month = rxBuf[3];
 "337
-[e = . . _gCurrentTime 0 1 *U + &U _rxBuf * -> -> -> 3 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux ]
-[; ;ble.c: 338: gCurrentTime.datetime.day = rxBuf[4];
+[v _BLE_ReadyToReceive `(uc ~T0 @X0 1 ef ]
+{
+[; ;ble.c: 337: bool BLE_ReadyToReceive( ) {
+[e :U _BLE_ReadyToReceive ]
+[f ]
+[; ;ble.c: 338: if ( ( RA2 == 0 ) && LATC1 ) {
 "338
-[e = . . _gCurrentTime 0 2 *U + &U _rxBuf * -> -> -> 4 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux ]
-[; ;ble.c: 339: gCurrentTime.datetime.wk = rxBuf[5];
+[e $ ! && == -> _RA2 `i -> 0 `i _LATC1 1056  ]
+{
+[; ;ble.c: 339: return 1;
 "339
-[e = . . _gCurrentTime 0 3 *U + &U _rxBuf * -> -> -> 5 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux ]
-[; ;ble.c: 340: gCurrentTime.datetime.hour = rxBuf[6];
+[e ) -> -> 1 `i `uc ]
+[e $UE 1055  ]
 "340
-[e = . . _gCurrentTime 0 4 *U + &U _rxBuf * -> -> -> 6 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux ]
-[; ;ble.c: 341: gCurrentTime.datetime.minute = rxBuf[7];
+}
+[e :U 1056 ]
+[; ;ble.c: 340: }
+[; ;ble.c: 341: return 0;
 "341
-[e = . . _gCurrentTime 0 5 *U + &U _rxBuf * -> -> -> 7 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux ]
-[; ;ble.c: 342: gCurrentTime.datetime.second = rxBuf[8];
+[e ) -> -> 0 `i `uc ]
+[e $UE 1055  ]
+[; ;ble.c: 342: }
 "342
-[e = . . _gCurrentTime 0 6 *U + &U _rxBuf * -> -> -> 8 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux ]
-[; ;ble.c: 343: gLedPara.fSta = 3;
-"343
-[e = . _gLedPara 1 -> -> 3 `i `uc ]
-[; ;ble.c: 344: indicateLedBle();
-"344
-[e ( _indicateLedBle ..  ]
-[; ;ble.c: 345: bleSendDeviceData();
-"345
-[e ( _bleSendDeviceData ..  ]
-"346
+[e :UE 1055 ]
 }
-[e :U 1068 ]
-[; ;ble.c: 346: }
-[; ;ble.c: 347: break;
-"347
-[e $U 1015  ]
-[; ;ble.c: 349: case 0x0F:
-"349
-[e :U 1069 ]
-[; ;ble.c: 350: if ( rxBuf[0] ^ rxBuf[1] == rxBuf[2] )
-"350
-[e $ ! != ^ -> *U + &U _rxBuf * -> -> -> 0 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> == -> *U + &U _rxBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i -> *U + &U _rxBuf * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux `i `i -> 0 `i 1070  ]
-[; ;ble.c: 351: {
-"351
-{
-[; ;ble.c: 352: gLedRunPara.find = 1;
-"352
-[e = . _gLedRunPara 0 -> -> 1 `i `uc ]
-[; ;ble.c: 353: gLedRunPara.nFlashCount = 3;
 "353
-[e = . _gLedRunPara 7 -> -> 3 `i `uc ]
-"354
-}
-[e :U 1070 ]
-[; ;ble.c: 354: }
-[; ;ble.c: 355: break;
-"355
-[e $U 1015  ]
-[; ;ble.c: 357: case 0x00:
-"357
-[e :U 1071 ]
-[; ;ble.c: 358: if ( getCRC(rxBuf, 5) == 0x00 )
-"358
-[e $ ! == -> ( _getCRC (2 , &U _rxBuf -> -> 5 `i `uc `i -> 0 `i 1072  ]
-[; ;ble.c: 359: {
-"359
+[v _BLE_StartReceive `(v ~T0 @X0 1 ef ]
 {
-[; ;ble.c: 360: NVMADR = 8192 - 1;
-"360
-[e = _NVMADR -> - -> 8192 `i -> 1 `i `us ]
-[; ;ble.c: 361: NVMCON1 = 0x94;
-"361
-[e = _NVMCON1 -> -> 148 `i `uc ]
-[; ;ble.c: 362: NVMCON2 = 0x55;
-"362
-[e = _NVMCON2 -> -> 85 `i `uc ]
-[; ;ble.c: 363: NVMCON2 = 0xAA;
-"363
-[e = _NVMCON2 -> -> 170 `i `uc ]
-[; ;ble.c: 364: NVMCON1bits.WR = 1;
-"364
-[e = . . _NVMCON1bits 0 1 -> -> 1 `i `uc ]
-[; ;ble.c: 365: __nop();
-"365
-[e ( ___nop ..  ]
-[; ;ble.c: 366: __nop();
-"366
-[e ( ___nop ..  ]
-[; ;ble.c: 367: while ( NVMCON1bits.WR );
-"367
-[e $U 1073  ]
-[e :U 1074 ]
-[e :U 1073 ]
-[e $ != -> . . _NVMCON1bits 0 1 `i -> -> -> 0 `i `Vuc `i 1074  ]
-[e :U 1075 ]
-[; ;ble.c: 368: NVMCON1bits.WREN = 0;
-"368
-[e = . . _NVMCON1bits 0 2 -> -> 0 `i `uc ]
-[; ;ble.c: 369: bleSendData(rxBuf, 5);
+[; ;ble.c: 353: void BLE_StartReceive( ) {
+[e :U _BLE_StartReceive ]
+[f ]
+[; ;ble.c: 354: nRcvIdx = 0;
+"354
+[e = _nRcvIdx -> -> 0 `i `uc ]
+[; ;ble.c: 355: rcvXor = 0;
+"355
+[e = _rcvXor -> -> 0 `i `uc ]
+[; ;ble.c: 356: _delay((unsigned long)((800)*(16000000/4000000.0)));
+"356
+[e ( __delay (1 -> * -> -> 800 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
+[; ;ble.c: 357: LATC1 = 0;
+"357
+[e = _LATC1 -> -> 0 `i `b ]
+[; ;ble.c: 358: }
+"358
+[e :UE 1057 ]
+}
 "369
-[e ( _bleSendData (2 , -> &U _rxBuf `*Cuc -> -> 5 `i `uc ]
-[; ;ble.c: 370: _delay((unsigned long)((96)*(16000000/4000.0)));
+[v _BLE_ReceiveComplete `(uc ~T0 @X0 1 ef ]
+{
+[; ;ble.c: 369: bool BLE_ReceiveComplete( ) {
+[e :U _BLE_ReceiveComplete ]
+[f ]
+[; ;ble.c: 370: if ( RA2 && ( LATC1 == 0 ) ) {
 "370
-[e ( __delay (1 -> * -> -> 96 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
-[; ;ble.c: 371: asm("reset");
+[e $ ! && _RA2 == -> _LATC1 `i -> 0 `i 1059  ]
+{
+[; ;ble.c: 371: return 1;
 "371
-[; <" reset ;# ">
+[e ) -> -> 1 `i `uc ]
+[e $UE 1058  ]
 "372
 }
-[e :U 1072 ]
+[e :U 1059 ]
 [; ;ble.c: 372: }
-[; ;ble.c: 373: break;
+[; ;ble.c: 373: return 0;
 "373
-[e $U 1015  ]
-[; ;ble.c: 375: default:
-"375
-[e :U 1076 ]
-[; ;ble.c: 376: break;
-"376
-[e $U 1015  ]
-"377
+[e ) -> -> 0 `i `uc ]
+[e $UE 1058  ]
+[; ;ble.c: 374: }
+"374
+[e :UE 1058 ]
 }
-[; ;ble.c: 377: }
-[e $U 1015  ]
-"160
-[e :U 1016 ]
-[e [\ *U + &U _rxBuf * -> -> -> 1 `i `ui `ux -> -> # *U &U _rxBuf `ui `ux , $ -> -> 2 `i `uc 1017
- , $ -> -> 3 `i `uc 1024
- , $ -> -> 4 `i `uc 1030
- , $ -> -> 5 `i `uc 1037
- , $ -> -> 6 `i `uc 1039
- , $ -> -> 7 `i `uc 1044
- , $ -> -> 8 `i `uc 1050
- , $ -> -> 9 `i `uc 1054
- , $ -> -> 11 `i `uc 1058
- , $ -> -> 12 `i `uc 1065
- , $ -> -> 14 `i `uc 1067
- , $ -> -> 15 `i `uc 1069
- , $ -> -> 0 `i `uc 1071
- 1076 ]
-"377
-[e :U 1015 ]
-[; ;ble.c: 378: }
-"378
-[e :UE 1013 ]
-}
-"380
-[v _initBLE `(v ~T0 @X0 1 ef ]
-"381
-{
-[; ;ble.c: 380: void initBLE ( )
-[; ;ble.c: 381: {
-[e :U _initBLE ]
-[f ]
-[; ;ble.c: 382: LATC1 = 0;
-"382
-[e = _LATC1 -> -> 0 `i `b ]
-[; ;ble.c: 383: LATB5 = 0;
-"383
-[e = _LATB5 -> -> 0 `i `b ]
-[; ;ble.c: 384: _delay((unsigned long)((20)*(16000000/4000.0)));
-"384
-[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
-[; ;ble.c: 385: LATB5 = 1;
 "385
-[e = _LATB5 -> -> 1 `i `b ]
-[; ;ble.c: 386: _delay((unsigned long)((240)*(16000000/4000.0)));
-"386
-[e ( __delay (1 -> * -> -> 240 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
-[; ;ble.c: 389: if ( checkDevID() == 0 )
-"389
-[e $ ! == -> ( _checkDevID ..  `i -> 0 `i 1078  ]
-[; ;ble.c: 390: {
-"390
+[v _BLE_StopReceive `(v ~T0 @X0 1 ef ]
 {
-[; ;ble.c: 391: _delay((unsigned long)((40)*(16000000/4000.0)));
-"391
-[e ( __delay (1 -> * -> -> 40 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
-[; ;ble.c: 392: BLE_SendCMD("AT+ADV_MFR_SPC=3031333330313032\r\n");
-"392
-[e ( _BLE_SendCMD (1 :s 2C ]
-"393
-}
-[e :U 1078 ]
-[; ;ble.c: 393: }
-[; ;ble.c: 394: _delay((unsigned long)((40)*(16000000/4000.0)));
-"394
-[e ( __delay (1 -> * -> -> 40 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
-[; ;ble.c: 396: BLE_SendCMD("AT+SET=1\r\n");
-"396
-[e ( _BLE_SendCMD (1 :s 3C ]
-[; ;ble.c: 397: _delay((unsigned long)((40)*(16000000/4000.0)));
-"397
-[e ( __delay (1 -> * -> -> 40 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
-[; ;ble.c: 399: BLE_SendCMD("AT+MODE=DATA\r\n");
-"399
-[e ( _BLE_SendCMD (1 :s 4C ]
-[; ;ble.c: 400: _delay((unsigned long)((20)*(16000000/4000.0)));
-"400
-[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
-[; ;ble.c: 401: LATC1 = 1;
-"401
+[; ;ble.c: 385: void BLE_StopReceive( ) {
+[e :U _BLE_StopReceive ]
+[f ]
+[; ;ble.c: 386: _delay((unsigned long)((100)*(16000000/4000000.0)));
+"386
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
+[; ;ble.c: 387: LATC1 = 1;
+"387
 [e = _LATC1 -> -> 1 `i `b ]
-[; ;ble.c: 402: }
-"402
-[e :UE 1077 ]
+[; ;ble.c: 388: nRcvIdx = 0;
+"388
+[e = _nRcvIdx -> -> 0 `i `uc ]
+[; ;ble.c: 389: rcvXor = 0;
+"389
+[e = _rcvXor -> -> 0 `i `uc ]
+[; ;ble.c: 390: }
+"390
+[e :UE 1060 ]
 }
 [a 4C 65 84 43 77 79 68 69 61 68 65 84 65 13 10 0 ]
 [a 1C 65 84 43 65 68 86 95 77 70 82 95 83 80 67 61 63 13 10 0 ]

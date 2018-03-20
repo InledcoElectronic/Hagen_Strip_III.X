@@ -5,5 +5,6 @@ src/comman.h  \
 src/led.h  \
 src/key.h  \
 src/eeprom.h  \
+src/util.h  \
 src/pwm.h  \
 src/rtc.h 

@@ -1,4 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
+[v F8015 `(v ~T0 @X0 0 tf ]
 "1081 D:\Program Files\Microchip\xc8\v1.41\include\pic16f18345.h
 [v _T0CON0 `Vuc ~T0 @X0 0 e@23 ]
 "1145
@@ -7579,191 +7580,382 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 192: extern unsigned char __resetbits;
 [; ;pic.h: 193: extern __bit __powerdown;
 [; ;pic.h: 194: extern __bit __timeout;
-[; ;comman.h: 119: typedef union{
-[; ;comman.h: 120: struct{
-[; ;comman.h: 121: unsigned char year;
-[; ;comman.h: 122: unsigned char month;
-[; ;comman.h: 123: unsigned char day;
-[; ;comman.h: 124: unsigned char wk;
-[; ;comman.h: 125: unsigned char hour;
-[; ;comman.h: 126: unsigned char minute;
-[; ;comman.h: 127: unsigned char second;
-[; ;comman.h: 128: }datetime;
-[; ;comman.h: 129: unsigned char array[7];
-[; ;comman.h: 130: }DateTime_t;
-[; ;comman.h: 132: typedef struct{
-[; ;comman.h: 133: unsigned char hour;
-[; ;comman.h: 134: unsigned char minute;
-[; ;comman.h: 135: }Time_t;
-[; ;comman.h: 137: typedef struct{
-[; ;comman.h: 138: Time_t start;
-[; ;comman.h: 139: Time_t end;
-[; ;comman.h: 140: }TimeRamp_t;
-[; ;comman.h: 142: typedef union{
-[; ;comman.h: 143: struct{
-[; ;comman.h: 144: unsigned fOn : 1;
-[; ;comman.h: 145: unsigned fRsv : 7;
-[; ;comman.h: 146: unsigned char fDyn;
-[; ;comman.h: 147: unsigned int nBrt[5];
-[; ;comman.h: 148: unsigned char nCustomBrt[4][5];
-[; ;comman.h: 149: }manualPara;
-[; ;comman.h: 150: unsigned char array[6*5+2];
-[; ;comman.h: 151: }ManualPara_t;
-[; ;comman.h: 153: typedef union{
-[; ;comman.h: 154: struct{
-[; ;comman.h: 155: TimeRamp_t sunrise;
-[; ;comman.h: 156: unsigned char daylight[5];
-[; ;comman.h: 157: TimeRamp_t sunset;
-[; ;comman.h: 158: unsigned char moonlight[5];
-[; ;comman.h: 159: }autoPara;
-[; ;comman.h: 160: unsigned char array[2*5+8];
-[; ;comman.h: 161: }AutoPara_t;
-[; ;comman.h: 163: typedef struct{
-[; ;comman.h: 164: unsigned int nDayBrt;
-[; ;comman.h: 165: unsigned int nNightBrt;
-[; ;comman.h: 166: }TouchPara_t;
-[; ;comman.h: 168: typedef struct{
-[; ;comman.h: 169: unsigned fAuto : 1;
-[; ;comman.h: 170: unsigned fSta : 2;
-[; ;comman.h: 171: unsigned fRsv : 5;
-[; ;comman.h: 172: ManualPara_t mPara;
-[; ;comman.h: 173: AutoPara_t aPara;
-[; ;comman.h: 174: TouchPara_t tPara;
-[; ;comman.h: 175: }LedPara_t;
-[; ;comman.h: 177: typedef struct{
-[; ;comman.h: 178: unsigned find : 1;
-[; ;comman.h: 179: unsigned fSec : 1;
-[; ;comman.h: 180: unsigned fSave : 1;
-[; ;comman.h: 181: unsigned fPrev : 1;
-[; ;comman.h: 182: unsigned fDr : 1;
-[; ;comman.h: 183: unsigned fNr : 1;
-[; ;comman.h: 184: unsigned fRsv : 2;
-[; ;comman.h: 185: unsigned char nFlashCount;
-[; ;comman.h: 186: unsigned char nPrevCount;
-[; ;comman.h: 187: unsigned char nSaveDelayCount;
-[; ;comman.h: 188: unsigned int nTargetBrt[5];
-[; ;comman.h: 189: unsigned int nCurrentBrt[5];
-[; ;comman.h: 190: unsigned char nCustomIndex;
-[; ;comman.h: 191: }LedRunPara_t;
-[; ;comman.h: 193: extern volatile LedRunPara_t gLedRunPara;
-[; ;comman.h: 194: extern volatile LedPara_t gLedPara;
-[; ;comman.h: 196: extern void SYSTEM_Initialize();
-[; ;comman.h: 197: extern unsigned char strCmp(const unsigned char *s1, const unsigned char *s2);
-[; ;tmr.h: 17: extern void TMR0_Initialize();
-[; ;tmr.h: 18: extern void TMR0_StartTimer();
-[; ;tmr.h: 20: extern void TMR2_Initialize();
-[; ;tmr.h: 21: extern void TMR2_StartTimer();
-[; ;eusart.h: 20: extern unsigned char txBuf[48];
-[; ;eusart.h: 21: extern unsigned char rxBuf[48];
-[; ;eusart.h: 22: extern volatile unsigned char nRcvIdx;
-[; ;eusart.h: 24: extern void EUSART_Initialize();
-[; ;eusart.h: 25: extern void EUSART_RCV_ISR();
-[; ;eusart.h: 26: extern unsigned char eusartReadByte();
-[; ;eusart.h: 27: extern void eusartSendByte(unsigned char byte);
-[; ;led.h: 41: extern void updatePWM();
-[; ;led.h: 42: extern void updateLed();
-[; ;led.h: 43: extern void autoRun();
-[; ;led.h: 44: extern void turnOnLedRamp();
-[; ;led.h: 45: extern void turnOffLedRamp();
-[; ;led.h: 46: extern void turnOffLed();
-[; ;led.h: 47: extern void initLed();
-[; ;led.h: 48: extern void findDeviceFlash();
-[; ;led.h: 49: extern void preview();
-[; ;led.h: 50: extern void indicateLedOff();
-[; ;led.h: 51: extern void indicateLedDay();
-[; ;led.h: 52: extern void indicateLedNight();
-[; ;led.h: 53: extern void indicateLedBle();
-[; ;led.h: 54: extern void updateDayBright();
-[; ;led.h: 55: extern void updateDayRiseStatus();
-[; ;led.h: 56: extern void updateNightBright();
-[; ;led.h: 57: extern void updateNightRiseStatus();
-[; ;rtc.h: 18: extern volatile DateTime_t gCurrentTime;
-[; ;rtc.h: 20: extern void initRTC();
-[; ;rtc.h: 21: extern void runRTC();
-"7 src/tmr.c
+[; ;stdint.h: 13: typedef signed char int8_t;
+[; ;stdint.h: 20: typedef signed int int16_t;
+[; ;stdint.h: 28: typedef signed short long int int24_t;
+[; ;stdint.h: 36: typedef signed long int int32_t;
+[; ;stdint.h: 43: typedef unsigned char uint8_t;
+[; ;stdint.h: 49: typedef unsigned int uint16_t;
+[; ;stdint.h: 56: typedef unsigned short long int uint24_t;
+[; ;stdint.h: 63: typedef unsigned long int uint32_t;
+[; ;stdint.h: 71: typedef signed char int_least8_t;
+[; ;stdint.h: 78: typedef signed int int_least16_t;
+[; ;stdint.h: 90: typedef signed short long int int_least24_t;
+[; ;stdint.h: 98: typedef signed long int int_least32_t;
+[; ;stdint.h: 105: typedef unsigned char uint_least8_t;
+[; ;stdint.h: 111: typedef unsigned int uint_least16_t;
+[; ;stdint.h: 121: typedef unsigned short long int uint_least24_t;
+[; ;stdint.h: 128: typedef unsigned long int uint_least32_t;
+[; ;stdint.h: 137: typedef signed char int_fast8_t;
+[; ;stdint.h: 144: typedef signed int int_fast16_t;
+[; ;stdint.h: 156: typedef signed short long int int_fast24_t;
+[; ;stdint.h: 164: typedef signed long int int_fast32_t;
+[; ;stdint.h: 171: typedef unsigned char uint_fast8_t;
+[; ;stdint.h: 177: typedef unsigned int uint_fast16_t;
+[; ;stdint.h: 187: typedef unsigned short long int uint_fast24_t;
+[; ;stdint.h: 194: typedef unsigned long int uint_fast32_t;
+[; ;stdint.h: 200: typedef int32_t intmax_t;
+[; ;stdint.h: 205: typedef uint32_t uintmax_t;
+[; ;stdint.h: 210: typedef int16_t intptr_t;
+[; ;stdint.h: 215: typedef uint16_t uintptr_t;
+[; ;stdbool.h: 12: typedef unsigned char bool;
+[; ;__size_t.h: 4: typedef unsigned size_t;
+[; ;stdlib.h: 7: typedef unsigned short wchar_t;
+[; ;stdlib.h: 15: typedef struct {
+[; ;stdlib.h: 16: int rem;
+[; ;stdlib.h: 17: int quot;
+[; ;stdlib.h: 18: } div_t;
+[; ;stdlib.h: 19: typedef struct {
+[; ;stdlib.h: 20: unsigned rem;
+[; ;stdlib.h: 21: unsigned quot;
+[; ;stdlib.h: 22: } udiv_t;
+[; ;stdlib.h: 23: typedef struct {
+[; ;stdlib.h: 24: long quot;
+[; ;stdlib.h: 25: long rem;
+[; ;stdlib.h: 26: } ldiv_t;
+[; ;stdlib.h: 27: typedef struct {
+[; ;stdlib.h: 28: unsigned long quot;
+[; ;stdlib.h: 29: unsigned long rem;
+[; ;stdlib.h: 30: } uldiv_t;
+[; ;stdlib.h: 53: extern double atof(const char *);
+[; ;stdlib.h: 54: extern double strtod(const char *, const char **);
+[; ;stdlib.h: 55: extern int atoi(const char *);
+[; ;stdlib.h: 56: extern unsigned xtoi(const char *);
+[; ;stdlib.h: 57: extern long atol(const char *);
+[; ;stdlib.h: 58: extern long strtol(const char *, char **, int);
+[; ;stdlib.h: 60: extern int rand(void);
+[; ;stdlib.h: 61: extern void srand(unsigned int);
+[; ;stdlib.h: 62: extern void * calloc(size_t, size_t);
+[; ;stdlib.h: 63: extern div_t div(int numer, int denom);
+[; ;stdlib.h: 64: extern udiv_t udiv(unsigned numer, unsigned denom);
+[; ;stdlib.h: 65: extern ldiv_t ldiv(long numer, long denom);
+[; ;stdlib.h: 66: extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+[; ;stdlib.h: 67: extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 68: extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 69: extern unsigned int _rotl(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 70: extern unsigned int _rotr(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 75: extern void * malloc(size_t);
+[; ;stdlib.h: 76: extern void free(void *);
+[; ;stdlib.h: 77: extern void * realloc(void *, size_t);
+[; ;stdlib.h: 86: extern int atexit(void (*)(void));
+[; ;stdlib.h: 87: extern char * getenv(const char *);
+[; ;stdlib.h: 88: extern char ** environ;
+[; ;stdlib.h: 89: extern int system(char *);
+[; ;stdlib.h: 90: extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+[; ;stdlib.h: 91: extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+[; ;stdlib.h: 92: extern int abs(int);
+[; ;stdlib.h: 93: extern long labs(long);
+[; ;stdlib.h: 95: extern char * itoa(char * buf, int val, int base);
+[; ;stdlib.h: 96: extern char * utoa(char * buf, unsigned val, int base);
+[; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
+[; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
+[; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
+[; ;comman.h: 93: typedef struct {
+[; ;comman.h: 94: uint8_t hour;
+[; ;comman.h: 95: uint8_t minute;
+[; ;comman.h: 96: } Time_t;
+[; ;comman.h: 98: typedef struct {
+[; ;comman.h: 99: Time_t start;
+[; ;comman.h: 100: Time_t end;
+[; ;comman.h: 101: } TimeRamp_t;
+[; ;comman.h: 103: typedef union {
+[; ;comman.h: 105: struct {
+[; ;comman.h: 106: unsigned fOn : 1;
+[; ;comman.h: 107: unsigned fRsv : 7;
+[; ;comman.h: 108: uint8_t fDyn;
+[; ;comman.h: 109: uint16_t nBrt[5];
+[; ;comman.h: 110: uint8_t nCustomBrt[4][5];
+[; ;comman.h: 111: } manualPara;
+[; ;comman.h: 112: uint8_t array[6 * 5 + 2];
+[; ;comman.h: 113: } ManualPara_t;
+[; ;comman.h: 115: typedef union {
+[; ;comman.h: 117: struct {
+[; ;comman.h: 118: TimeRamp_t sunrise;
+[; ;comman.h: 119: uint8_t daylight[5];
+[; ;comman.h: 120: TimeRamp_t sunset;
+[; ;comman.h: 121: uint8_t moonlight[5];
+[; ;comman.h: 122: } autoPara;
+[; ;comman.h: 123: uint8_t array[2 * 5 + 8];
+[; ;comman.h: 124: } AutoPara_t;
+[; ;comman.h: 126: typedef struct {
+[; ;comman.h: 127: uint16_t nDayBrt;
+[; ;comman.h: 128: uint16_t nNightBrt;
+[; ;comman.h: 129: } TouchPara_t;
+[; ;comman.h: 131: typedef struct {
+[; ;comman.h: 132: unsigned fAuto : 1;
+[; ;comman.h: 133: unsigned fSta : 2;
+[; ;comman.h: 134: unsigned fRsv : 5;
+[; ;comman.h: 135: ManualPara_t mPara;
+[; ;comman.h: 136: AutoPara_t aPara;
+[; ;comman.h: 137: TouchPara_t tPara;
+[; ;comman.h: 138: } LedPara_t;
+[; ;comman.h: 140: typedef struct {
+[; ;comman.h: 141: unsigned find : 1;
+[; ;comman.h: 142: unsigned fSave : 1;
+[; ;comman.h: 143: unsigned fPrev : 1;
+[; ;comman.h: 144: unsigned fDr : 1;
+[; ;comman.h: 145: unsigned fNr : 1;
+[; ;comman.h: 146: unsigned fRsv : 3;
+[; ;comman.h: 147: uint8_t nFlashCount;
+[; ;comman.h: 148: uint8_t nPrevCount;
+[; ;comman.h: 149: uint8_t nSaveDelayCount;
+[; ;comman.h: 150: uint16_t nTargetBrt[5];
+[; ;comman.h: 151: uint16_t nCurrentBrt[5];
+[; ;comman.h: 152: uint8_t nCustomIndex;
+[; ;comman.h: 153: } LedRunPara_t;
+[; ;comman.h: 155: extern volatile LedRunPara_t gLedRunPara;
+[; ;comman.h: 156: extern volatile LedPara_t gLedPara;
+[; ;comman.h: 158: extern void SYSTEM_Initialize();
+[; ;comman.h: 159: extern void registerCallback();
+[; ;tmr.h: 17: typedef void (*TMR_InterruptCallback_t)();
+[; ;tmr.h: 19: extern void TMR0_Initialize();
+[; ;tmr.h: 20: extern void TMR0_StartTimer();
+[; ;tmr.h: 21: extern void TMR0_StopTimer();
+[; ;tmr.h: 22: extern void TMR0_SetInterruptCallback(TMR_InterruptCallback_t callback);
+[; ;tmr.h: 23: extern void TMR0_ISR();
+[; ;tmr.h: 25: extern void TMR2_Initialize();
+[; ;tmr.h: 26: extern void TMR2_StartTimer();
+[; ;tmr.h: 27: extern void TMR2_StopTimer();
+[; ;tmr.h: 28: extern void TMR2_SetInterruptCallback(TMR_InterruptCallback_t callback);
+[; ;tmr.h: 29: extern void TMR2_ISR();
+[; ;eusart.h: 17: typedef void ( *EUSART_ReceiveInterruptCallback_t ) (uint8_t rcv);
+[; ;eusart.h: 19: extern void EUSART_Initialize();
+[; ;eusart.h: 20: extern void EUSART_Transmit_ISR();
+[; ;eusart.h: 21: extern void EUSART_RCV_ISR();
+[; ;eusart.h: 22: extern uint8_t EUSART_ReadByte();
+[; ;eusart.h: 24: extern uint8_t EUSART_Write(uint8_t byte);
+[; ;eusart.h: 25: extern void EUSART_SetReceiveCallback(EUSART_ReceiveInterruptCallback_t callback);
+[; ;key.h: 28: enum Key_State_t {
+[; ;key.h: 29: KEY_PRESS_SHORT = 0,
+[; ;key.h: 30: KEY_PRESS_LONG,
+[; ;key.h: 31: KEY_PRESS_CONT,
+[; ;key.h: 32: KEY_RELEASE_1
+[; ;key.h: 33: };
+[; ;key.h: 35: typedef void (*Key_OnStateChangedCallback_t)(uint8_t key, enum Key_State_t state);
+[; ;key.h: 37: extern void KEY_Scan();
+[; ;key.h: 38: extern void KEY_SetOnStateChangedCallback(Key_OnStateChangedCallback_t callback);
+[; ;led.h: 42: extern void LED_UpdateBrightRamp();
+[; ;led.h: 43: extern void LED_Initialize();
+[; ;led.h: 44: extern void LED_IndicateBle();
+[; ;led.h: 45: extern void LED_Action_OnKeyStateChanged(uint8_t key, enum Key_State_t state);
+[; ;led.h: 46: extern void LED_ActionOnSecond();
+[; ;led.h: 47: extern void LED_PrepareToSavePara();
+[; ;led.h: 48: extern void LED_StartFlash();
+[; ;led.h: 49: extern void LED_StartPreview();
+[; ;led.h: 50: extern void LED_StopPreview();
+[; ;led.h: 51: extern bool LED_SetAuto(bool a);
+[; ;led.h: 52: extern bool LED_SetOn(bool on);
+[; ;led.h: 53: extern bool LED_SetManualBrights(const uint8_t * const pbuf);
+[; ;led.h: 54: extern bool LED_SetCustom(uint8_t idx);
+[; ;led.h: 55: extern bool LED_SetCycle(const uint8_t * const pbuf);
+[; ;led.h: 56: extern bool LED_ManualIncrease(uint8_t chn, uint8_t delta);
+[; ;led.h: 57: extern bool LED_ManualDecrease(uint8_t chn, uint8_t delta);
+[; ;led.h: 58: extern bool LED_SetPreviewBrights(const uint8_t * const pbuf);
+[; ;rtc.h: 18: extern void RTC_Initialize();
+[; ;rtc.h: 19: extern void RTC_Run();
+[; ;rtc.h: 20: extern bool RTC_IsSecondReady();
+[; ;rtc.h: 21: extern void RTC_SetCurrentTime(const uint8_t * const time);
+[; ;rtc.h: 22: extern uint8_t RTC_GetYear();
+[; ;rtc.h: 23: extern uint8_t RTC_GetMonth();
+[; ;rtc.h: 24: extern uint8_t RTC_GetDay();
+[; ;rtc.h: 25: extern uint8_t RTC_GetWeekday();
+[; ;rtc.h: 26: extern uint8_t RTC_GetHour();
+[; ;rtc.h: 27: extern uint8_t RTC_GetMinute();
+[; ;rtc.h: 28: extern uint8_t RTC_GetSecond();
+"6 src/tmr.c
+[v _fnTmr0Callback `*F8015 ~T0 @X0 1 e ]
+[; ;tmr.c: 6: TMR_InterruptCallback_t fnTmr0Callback;
+"7
+[v _fnTmr2Callback `*F8015 ~T0 @X0 1 e ]
+[; ;tmr.c: 7: TMR_InterruptCallback_t fnTmr2Callback;
+"13
 [v _TMR0_Initialize `(v ~T0 @X0 1 ef ]
-"8
 {
-[; ;tmr.c: 7: void TMR0_Initialize(void)
-[; ;tmr.c: 8: {
+[; ;tmr.c: 13: void TMR0_Initialize( void ) {
 [e :U _TMR0_Initialize ]
 [f ]
-[; ;tmr.c: 12: T0CON0 = 0x00;
-"12
+[; ;tmr.c: 17: T0CON0 = 0x00;
+"17
 [e = _T0CON0 -> -> 0 `i `uc ]
-[; ;tmr.c: 15: T0CON1 = 0xD7;
-"15
+[; ;tmr.c: 20: T0CON1 = 0xD7;
+"20
 [e = _T0CON1 -> -> 215 `i `uc ]
-[; ;tmr.c: 18: TMR0H = 0xFF;
-"18
+[; ;tmr.c: 23: TMR0H = 0xFF;
+"23
 [e = _TMR0H -> -> 255 `i `uc ]
-[; ;tmr.c: 21: TMR0L = 0x00;
-"21
+[; ;tmr.c: 26: TMR0L = 0x00;
+"26
 [e = _TMR0L -> -> 0 `i `uc ]
-[; ;tmr.c: 24: PIR0bits.TMR0IF = 0;
-"24
+[; ;tmr.c: 29: PIR0bits.TMR0IF = 0;
+"29
 [e = . . _PIR0bits 0 3 -> -> 0 `i `uc ]
-[; ;tmr.c: 27: PIE0bits.TMR0IE = 1;
-"27
+[; ;tmr.c: 32: PIE0bits.TMR0IE = 1;
+"32
 [e = . . _PIE0bits 0 3 -> -> 1 `i `uc ]
-[; ;tmr.c: 28: }
-"28
-[e :UE 969 ]
-}
-"30
-[v _TMR0_StartTimer `(v ~T0 @X0 1 ef ]
-"31
-{
-[; ;tmr.c: 30: void TMR0_StartTimer(void)
-[; ;tmr.c: 31: {
-[e :U _TMR0_StartTimer ]
-[f ]
-[; ;tmr.c: 33: T0CON0bits.T0EN = 1;
+[; ;tmr.c: 33: }
 "33
-[e = . . _T0CON0bits 0 4 -> -> 1 `i `uc ]
-[; ;tmr.c: 34: }
-"34
-[e :UE 970 ]
-}
-"37
-[v _TMR2_Initialize `(v ~T0 @X0 1 ef ]
-"38
-{
-[; ;tmr.c: 37: void TMR2_Initialize(void)
-[; ;tmr.c: 38: {
-[e :U _TMR2_Initialize ]
-[f ]
-[; ;tmr.c: 42: T2CON = 0x78;
-"42
-[e = _T2CON -> -> 120 `i `uc ]
-[; ;tmr.c: 45: PR2 = 0xF9;
-"45
-[e = _PR2 -> -> 249 `i `uc ]
-[; ;tmr.c: 48: TMR2 = 0x00;
-"48
-[e = _TMR2 -> -> 0 `i `uc ]
-[; ;tmr.c: 51: PIR1bits.TMR2IF = 0;
-"51
-[e = . . _PIR1bits 0 1 -> -> 0 `i `uc ]
-[; ;tmr.c: 54: PIE1bits.TMR2IE = 1;
-"54
-[e = . . _PIE1bits 0 1 -> -> 1 `i `uc ]
-[; ;tmr.c: 55: }
-"55
 [e :UE 971 ]
 }
-"57
-[v _TMR2_StartTimer `(v ~T0 @X0 1 ef ]
-"58
+"35
+[v _TMR0_StartTimer `(v ~T0 @X0 1 ef ]
 {
-[; ;tmr.c: 57: void TMR2_StartTimer(void)
-[; ;tmr.c: 58: {
+[; ;tmr.c: 35: void TMR0_StartTimer( void ) {
+[e :U _TMR0_StartTimer ]
+[f ]
+[; ;tmr.c: 36: T0CON0bits.T0EN = 1;
+"36
+[e = . . _T0CON0bits 0 4 -> -> 1 `i `uc ]
+[; ;tmr.c: 37: }
+"37
+[e :UE 972 ]
+}
+"39
+[v _TMR0_StopTimer `(v ~T0 @X0 1 ef ]
+{
+[; ;tmr.c: 39: void TMR0_StopTimer( void ) {
+[e :U _TMR0_StopTimer ]
+[f ]
+[; ;tmr.c: 40: T0CON0bits.T0EN = 0;
+"40
+[e = . . _T0CON0bits 0 4 -> -> 0 `i `uc ]
+[; ;tmr.c: 41: }
+"41
+[e :UE 973 ]
+}
+"43
+[v _TMR0_SetInterruptCallback `(v ~T0 @X0 1 ef1`*F8015 ]
+{
+[; ;tmr.c: 43: void TMR0_SetInterruptCallback( TMR_InterruptCallback_t callback ) {
+[e :U _TMR0_SetInterruptCallback ]
+[v _callback `*F8015 ~T0 @X0 1 r1 ]
+[f ]
+[; ;tmr.c: 44: fnTmr0Callback = callback;
+"44
+[e = _fnTmr0Callback _callback ]
+[; ;tmr.c: 45: }
+"45
+[e :UE 974 ]
+}
+"47
+[v _TMR0_ISR `(v ~T0 @X0 1 ef ]
+{
+[; ;tmr.c: 47: void TMR0_ISR( ) {
+[e :U _TMR0_ISR ]
+[f ]
+[; ;tmr.c: 48: PIR0bits.TMR0IF = 0;
+"48
+[e = . . _PIR0bits 0 3 -> -> 0 `i `uc ]
+[; ;tmr.c: 49: if ( fnTmr0Callback != (0) ) {
+"49
+[e $ ! != _fnTmr0Callback -> -> 0 `i `*F8015 976  ]
+{
+[; ;tmr.c: 50: fnTmr0Callback( );
+"50
+[e ( *U _fnTmr0Callback ..  ]
+"51
+}
+[e :U 976 ]
+[; ;tmr.c: 51: }
+[; ;tmr.c: 52: }
+"52
+[e :UE 975 ]
+}
+"58
+[v _TMR2_Initialize `(v ~T0 @X0 1 ef ]
+{
+[; ;tmr.c: 58: void TMR2_Initialize( void ) {
+[e :U _TMR2_Initialize ]
+[f ]
+[; ;tmr.c: 62: T2CON = 0x78;
+"62
+[e = _T2CON -> -> 120 `i `uc ]
+[; ;tmr.c: 65: PR2 = 0xF9;
+"65
+[e = _PR2 -> -> 249 `i `uc ]
+[; ;tmr.c: 68: TMR2 = 0x00;
+"68
+[e = _TMR2 -> -> 0 `i `uc ]
+[; ;tmr.c: 71: PIR1bits.TMR2IF = 0;
+"71
+[e = . . _PIR1bits 0 1 -> -> 0 `i `uc ]
+[; ;tmr.c: 74: PIE1bits.TMR2IE = 1;
+"74
+[e = . . _PIE1bits 0 1 -> -> 1 `i `uc ]
+[; ;tmr.c: 75: }
+"75
+[e :UE 977 ]
+}
+"77
+[v _TMR2_StartTimer `(v ~T0 @X0 1 ef ]
+{
+[; ;tmr.c: 77: void TMR2_StartTimer( void ) {
 [e :U _TMR2_StartTimer ]
 [f ]
-[; ;tmr.c: 60: T2CONbits.TMR2ON = 1;
-"60
+[; ;tmr.c: 78: T2CONbits.TMR2ON = 1;
+"78
 [e = . . _T2CONbits 0 1 -> -> 1 `i `uc ]
-[; ;tmr.c: 61: }
-"61
-[e :UE 972 ]
+[; ;tmr.c: 79: }
+"79
+[e :UE 978 ]
+}
+"81
+[v _TMR2_StopTimer `(v ~T0 @X0 1 ef ]
+{
+[; ;tmr.c: 81: void TMR2_StopTimer( void ) {
+[e :U _TMR2_StopTimer ]
+[f ]
+[; ;tmr.c: 82: T2CONbits.TMR2ON = 0;
+"82
+[e = . . _T2CONbits 0 1 -> -> 0 `i `uc ]
+[; ;tmr.c: 83: }
+"83
+[e :UE 979 ]
+}
+"85
+[v _TMR2_SetInterruptCallback `(v ~T0 @X0 1 ef1`*F8015 ]
+{
+[; ;tmr.c: 85: void TMR2_SetInterruptCallback( TMR_InterruptCallback_t callback ) {
+[e :U _TMR2_SetInterruptCallback ]
+[v _callback `*F8015 ~T0 @X0 1 r1 ]
+[f ]
+[; ;tmr.c: 86: fnTmr2Callback = callback;
+"86
+[e = _fnTmr2Callback _callback ]
+[; ;tmr.c: 87: }
+"87
+[e :UE 980 ]
+}
+"89
+[v _TMR2_ISR `(v ~T0 @X0 1 ef ]
+{
+[; ;tmr.c: 89: void TMR2_ISR( ) {
+[e :U _TMR2_ISR ]
+[f ]
+[; ;tmr.c: 90: PIR1bits.TMR2IF = 0;
+"90
+[e = . . _PIR1bits 0 1 -> -> 0 `i `uc ]
+[; ;tmr.c: 91: if ( fnTmr2Callback != (0) ) {
+"91
+[e $ ! != _fnTmr2Callback -> -> 0 `i `*F8015 982  ]
+{
+[; ;tmr.c: 92: fnTmr2Callback( );
+"92
+[e ( *U _fnTmr2Callback ..  ]
+"93
+}
+[e :U 982 ]
+[; ;tmr.c: 93: }
+[; ;tmr.c: 94: }
+"94
+[e :UE 981 ]
 }

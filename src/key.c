@@ -2,185 +2,67 @@
 #include "led.h"
 #include "eeprom.h"
 
-volatile unsigned char keyValue = KEY_NONE;
+#define	RPT_COUNT		32                  //16ms*32=0.512s
+#define LONG_COUNT      100                 //16ms*100=1.6s
+#define	KEY_MINTIME		2					//按键持续时间最小值
+#define	CONT_COUNT		1					//16ms
 
-/**
- * 
- * @return 
- */
-static unsigned char ReadKey()
-{
-	static unsigned char	Trg;		
-	static unsigned char	Cont;		
-	unsigned char ReadData = (KEY_PORT ^ 0xFF) & KEY_MASK;
-    Trg = ReadData & (ReadData ^ Cont);
-    Cont = ReadData;
-	return (Trg ^ Cont);
+Key_OnStateChangedCallback_t fnKeyAction;
+
+static uint8_t KEY_Read( ) {
+	static uint8_t Trg;
+	static uint8_t Cont;
+	uint8_t ReadData = ( KEY_PORT ^ 0xFF ) & KEY_MASK;
+	Trg = ReadData & ( ReadData ^ Cont );
+	Cont = ReadData;
+	return ( Trg ^ Cont );
 }
 
-void keyScan()
-{	
-	static unsigned char lastKey	= KEY_NONE;					
-	static unsigned char rptCount	= 0;	
-	
-	unsigned char keyNum	= ReadKey();					
-	if(keyNum != KEY_NONE)									
-	{
-		if(keyNum == lastKey)								
-		{		
-            rptCount++;
-			if(rptCount >= RPT_COUNT + CONT_COUNT)			
-			{
-                rptCount = RPT_COUNT;
-				keyValue = KEY_CONT_MASK | keyNum;
+void KEY_Scan( ) {
+	static uint8_t lastKey = KEY_NONE;
+	static uint8_t rptCount = 0;
+
+	uint8_t keyNum = KEY_Read( );
+	if ( keyNum != KEY_NONE ) {
+		if ( keyNum == lastKey ) {
+			rptCount++;
+			if ( rptCount == RPT_COUNT ) {
+//				KEY_Action( keyNum, KEY_PRESS_LONG );
+				if ( fnKeyAction != NULL ) {
+					fnKeyAction( keyNum, KEY_PRESS_LONG );
+				}
+			} else if ( rptCount >= RPT_COUNT + CONT_COUNT ) {
+				rptCount = RPT_COUNT;
+				//				keyValue = KEY_CONT_MASK | keyNum;
+//				KEY_Action( keyNum, KEY_PRESS_CONT );
+				if ( fnKeyAction != NULL ) {
+					fnKeyAction( keyNum, KEY_PRESS_CONT );
+				}
+			}
+		} else {
+			rptCount = 0;
+		}
+	} else {
+		if ( lastKey != KEY_NONE ) {
+			if ( rptCount >= RPT_COUNT ) {
+				//				keyValue = KEY_RELEASE_MASK | lastKey;
+//				KEY_Action( lastKey, KEY_RELEASE_1 );
+				if ( fnKeyAction != NULL ) {
+					fnKeyAction( lastKey, KEY_RELEASE_1 );
+				}
+			} else if ( rptCount > KEY_MINTIME ) {
+				//				keyValue = lastKey;
+//				KEY_Action( lastKey, KEY_PRESS_SHORT );
+				if ( fnKeyAction != NULL ) {
+					fnKeyAction( lastKey, KEY_PRESS_SHORT );
+				}
 			}
 		}
-		else
-		{
-			rptCount = 0;	
-		}
+		rptCount = 0;
 	}
-	else									
-	{
-		if(lastKey != KEY_NONE)				
-		{
-            if (rptCount >= RPT_COUNT) 
-            {
-                keyValue = KEY_RELEASE_MASK | lastKey;
-            }
-            else if( rptCount > KEY_MINTIME )	
-			{
-				keyValue = lastKey;
-			}
-		}
-		rptCount = 0;	
-	}
-	lastKey	= keyNum;
+	lastKey = keyNum;
 }
 
-void keyAction()
-{
-    unsigned char sta;
-    if (keyValue == KEY_PRESS) 
-    {
-        gLedPara.fSta++;
-        sta = gLedPara.fSta;
-        switch(sta)
-        {
-            case LED_STATUS_OFF:
-                for (unsigned char i = 0; i < CHANNEL_COUNT; i++) 
-                {
-                    gLedPara.mPara.manualPara.nBrt[i] = 0;
-                    gLedRunPara.nCurrentBrt[i] = 0;
-                }
-                updatePWM();
-                indicateLedOff();
-                break;
-                
-            case LED_STATUS_DAY:
-                updateDayBright();
-                indicateLedDay();
-                updateDayRiseStatus();
-                break;
-                
-            case LED_STATUS_NIGHT:
-                updateNightBright();
-                indicateLedNight();
-                updateNightRiseStatus();
-                break;
-                
-            case LED_STATUS_BLE:
-                indicateLedBle();
-                gLedPara.fAuto = 1;
-                break;
-                
-            default:          
-                break;
-        }
-    }
-    else if (keyValue == KEY_RELEASE) 
-    {
-        sta = gLedPara.fSta;
-        switch(sta)
-        {
-            case LED_STATUS_DAY:
-                updateDayRiseStatus();
-                break;
-                
-            case LED_STATUS_NIGHT:
-                updateNightRiseStatus();
-                break;
-                
-            default:
-                break;
-        }
-    }
-    else if ( keyValue == KEY_CONT_PRESS )
-    {       
-        sta = gLedPara.fSta;
-        switch(sta)
-        {
-            case LED_STATUS_OFF:
-                gLedPara.tPara.nDayBrt = MIN_LED_BRIGHT;
-                gLedPara.fSta++;
-                gLedRunPara.fDr = 1;
-                updateDayBright();
-                indicateLedDay();
-                break;
-                
-            case LED_STATUS_DAY:
-                if (gLedRunPara.fDr) 
-                {
-                    if (gLedPara.tPara.nDayBrt + LED_DELTA_TOUCH < MAX_LED_BRIGHT) 
-                    {
-                        gLedPara.tPara.nDayBrt += LED_DELTA_TOUCH;
-                    }
-                    else
-                    {
-                        gLedPara.tPara.nDayBrt = MAX_LED_BRIGHT;
-                    }
-                }
-                else
-                {
-                    if (gLedPara.tPara.nDayBrt > MIN_LED_BRIGHT + LED_DELTA_TOUCH) 
-                    {
-                        gLedPara.tPara.nDayBrt -= LED_DELTA_TOUCH;
-                    }
-                    else
-                    {
-                        gLedPara.tPara.nDayBrt = MIN_LED_BRIGHT;
-                    }
-                }
-                updateDayBright();
-                break;
-                
-            case LED_STATUS_NIGHT:
-                if (gLedRunPara.fNr) 
-                {
-                    if (gLedPara.tPara.nNightBrt + LED_DELTA_TOUCH < MAX_LED_BRIGHT) 
-                    {
-                        gLedPara.tPara.nNightBrt += LED_DELTA_TOUCH;
-                    }
-                    else
-                    {
-                        gLedPara.tPara.nNightBrt = MAX_LED_BRIGHT;
-                    }
-                }
-                else
-                {
-                    if (gLedPara.tPara.nNightBrt > MIN_LED_BRIGHT + LED_DELTA_TOUCH) 
-                    {
-                        gLedPara.tPara.nNightBrt -= LED_DELTA_TOUCH;
-                    }
-                    else
-                    {
-                        gLedPara.tPara.nNightBrt = MIN_LED_BRIGHT;
-                    }
-                }
-                updateNightBright();
-                break;
-        }
-    }
-    gLedRunPara.fSave = 1;
-    gLedRunPara.nSaveDelayCount = PARA_SAVE_DELAY;
+void KEY_SetOnStateChangedCallback( Key_OnStateChangedCallback_t callback ) {
+	fnKeyAction = callback;
 }

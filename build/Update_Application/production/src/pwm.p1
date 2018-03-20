@@ -95,16 +95,44 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _PWMTMRSbits `VS451 ~T0 @X0 0 e@1567 ]
 "8872
 [v _PWM5CON `Vuc ~T0 @X0 0 e@1561 ]
-[; ;pwm.h: 15: void PWM1_Initialize();
-[; ;pwm.h: 16: void PWM1_LoadDutyValue(unsigned int dutyValue);
-[; ;pwm.h: 18: void PWM2_Initialize();
-[; ;pwm.h: 19: void PWM2_LoadDutyValue(unsigned int dutyValue);
-[; ;pwm.h: 21: void PWM3_Initialize();
-[; ;pwm.h: 22: void PWM3_LoadDutyValue(unsigned int dutyValue);
-[; ;pwm.h: 24: void PWM4_Initialize();
-[; ;pwm.h: 25: void PWM4_LoadDutyValue(unsigned int dutyValue);
-[; ;pwm.h: 27: void PWM5_Initialize();
-[; ;pwm.h: 28: void PWM5_LoadDutyValue(unsigned int dutyValue);
+[; ;stdint.h: 13: typedef signed char int8_t;
+[; ;stdint.h: 20: typedef signed int int16_t;
+[; ;stdint.h: 28: typedef signed short long int int24_t;
+[; ;stdint.h: 36: typedef signed long int int32_t;
+[; ;stdint.h: 43: typedef unsigned char uint8_t;
+[; ;stdint.h: 49: typedef unsigned int uint16_t;
+[; ;stdint.h: 56: typedef unsigned short long int uint24_t;
+[; ;stdint.h: 63: typedef unsigned long int uint32_t;
+[; ;stdint.h: 71: typedef signed char int_least8_t;
+[; ;stdint.h: 78: typedef signed int int_least16_t;
+[; ;stdint.h: 90: typedef signed short long int int_least24_t;
+[; ;stdint.h: 98: typedef signed long int int_least32_t;
+[; ;stdint.h: 105: typedef unsigned char uint_least8_t;
+[; ;stdint.h: 111: typedef unsigned int uint_least16_t;
+[; ;stdint.h: 121: typedef unsigned short long int uint_least24_t;
+[; ;stdint.h: 128: typedef unsigned long int uint_least32_t;
+[; ;stdint.h: 137: typedef signed char int_fast8_t;
+[; ;stdint.h: 144: typedef signed int int_fast16_t;
+[; ;stdint.h: 156: typedef signed short long int int_fast24_t;
+[; ;stdint.h: 164: typedef signed long int int_fast32_t;
+[; ;stdint.h: 171: typedef unsigned char uint_fast8_t;
+[; ;stdint.h: 177: typedef unsigned int uint_fast16_t;
+[; ;stdint.h: 187: typedef unsigned short long int uint_fast24_t;
+[; ;stdint.h: 194: typedef unsigned long int uint_fast32_t;
+[; ;stdint.h: 200: typedef int32_t intmax_t;
+[; ;stdint.h: 205: typedef uint32_t uintmax_t;
+[; ;stdint.h: 210: typedef int16_t intptr_t;
+[; ;stdint.h: 215: typedef uint16_t uintptr_t;
+[; ;pwm.h: 17: void PWM1_Initialize();
+[; ;pwm.h: 18: void PWM1_LoadDutyValue(uint16_t dutyValue);
+[; ;pwm.h: 20: void PWM2_Initialize();
+[; ;pwm.h: 21: void PWM2_LoadDutyValue(uint16_t dutyValue);
+[; ;pwm.h: 23: void PWM3_Initialize();
+[; ;pwm.h: 24: void PWM3_LoadDutyValue(uint16_t dutyValue);
+[; ;pwm.h: 26: void PWM4_Initialize();
+[; ;pwm.h: 27: void PWM4_LoadDutyValue(uint16_t dutyValue);
+[; ;pwm.h: 29: void PWM5_Initialize();
+[; ;pwm.h: 30: void PWM5_LoadDutyValue(uint16_t dutyValue);
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7619,51 +7647,55 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 194: extern __bit __timeout;
 "4 src/pwm.c
 [v _PWM1_Initialize `(v ~T0 @X0 1 ef ]
-"5
 {
-[; ;pwm.c: 4: void PWM1_Initialize( void )
-[; ;pwm.c: 5: {
+[; ;pwm.c: 4: void PWM1_Initialize( void ) {
 [e :U _PWM1_Initialize ]
 [f ]
-[; ;pwm.c: 9: CCP1CON = 0x8F;
-"9
+[; ;pwm.c: 8: CCP1CON = 0x8F;
+"8
 [e = _CCP1CON -> -> 143 `i `uc ]
-[; ;pwm.c: 12: CCPR1H = 0x00;
-"12
+[; ;pwm.c: 11: CCPR1H = 0x00;
+"11
 [e = _CCPR1H -> -> 0 `i `uc ]
-[; ;pwm.c: 15: CCPR1L = 0x00;
-"15
+[; ;pwm.c: 14: CCPR1L = 0x00;
+"14
 [e = _CCPR1L -> -> 0 `i `uc ]
-[; ;pwm.c: 18: CCPTMRSbits.C1TSEL = 0x1;
-"18
+[; ;pwm.c: 17: CCPTMRSbits.C1TSEL = 0x1;
+"17
 [e = . . _CCPTMRSbits 0 0 -> -> 1 `i `uc ]
-[; ;pwm.c: 19: }
-"19
+[; ;pwm.c: 18: }
+"18
 [e :UE 958 ]
 }
-"21
+"20
 [v _PWM1_LoadDutyValue `(v ~T0 @X0 1 ef1`ui ]
-"22
 {
-[; ;pwm.c: 21: void PWM1_LoadDutyValue( unsigned int dutyValue )
-[; ;pwm.c: 22: {
+[; ;pwm.c: 20: void PWM1_LoadDutyValue( uint16_t dutyValue ) {
 [e :U _PWM1_LoadDutyValue ]
-"21
 [v _dutyValue `ui ~T0 @X0 1 r1 ]
-"22
 [f ]
-[; ;pwm.c: 23: dutyValue &= 0x03FF;
-"23
+[; ;pwm.c: 21: dutyValue &= 0x03FF;
+"21
 [e =& _dutyValue -> -> 1023 `i `ui ]
-[; ;pwm.c: 26: if( CCP1CONbits.CCP1FMT )
-"26
+[; ;pwm.c: 24: if ( CCP1CONbits.CCP1FMT ) {
+"24
 [e $ ! != -> . . _CCP1CONbits 0 1 `i -> -> -> 0 `i `Vuc `i 960  ]
-[; ;pwm.c: 27: {
-"27
 {
-[; ;pwm.c: 28: dutyValue <<= 6;
-"28
+[; ;pwm.c: 25: dutyValue <<= 6;
+"25
 [e =<< _dutyValue -> 6 `i ]
+[; ;pwm.c: 26: CCPR1H = dutyValue >> 8;
+"26
+[e = _CCPR1H -> >> _dutyValue -> 8 `i `uc ]
+[; ;pwm.c: 27: CCPR1L = dutyValue;
+"27
+[e = _CCPR1L -> _dutyValue `uc ]
+"28
+}
+[; ;pwm.c: 28: } else {
+[e $U 961  ]
+[e :U 960 ]
+{
 [; ;pwm.c: 29: CCPR1H = dutyValue >> 8;
 "29
 [e = _CCPR1H -> >> _dutyValue -> 8 `i `uc ]
@@ -7672,304 +7704,246 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _CCPR1L -> _dutyValue `uc ]
 "31
 }
-[; ;pwm.c: 31: }
-[e $U 961  ]
-"32
-[e :U 960 ]
-[; ;pwm.c: 32: else
-[; ;pwm.c: 33: {
-"33
-{
-[; ;pwm.c: 34: CCPR1H = dutyValue >> 8;
-"34
-[e = _CCPR1H -> >> _dutyValue -> 8 `i `uc ]
-[; ;pwm.c: 35: CCPR1L = dutyValue;
-"35
-[e = _CCPR1L -> _dutyValue `uc ]
-"36
-}
 [e :U 961 ]
-[; ;pwm.c: 36: }
-[; ;pwm.c: 37: }
-"37
+[; ;pwm.c: 31: }
+[; ;pwm.c: 32: }
+"32
 [e :UE 959 ]
 }
-"39
+"34
 [v _PWM2_Initialize `(v ~T0 @X0 1 ef ]
-"40
 {
-[; ;pwm.c: 39: void PWM2_Initialize( void )
-[; ;pwm.c: 40: {
+[; ;pwm.c: 34: void PWM2_Initialize( void ) {
 [e :U _PWM2_Initialize ]
 [f ]
-[; ;pwm.c: 44: CCP2CON = 0x8F;
-"44
+[; ;pwm.c: 38: CCP2CON = 0x8F;
+"38
 [e = _CCP2CON -> -> 143 `i `uc ]
-[; ;pwm.c: 47: CCPR2H = 0x00;
-"47
+[; ;pwm.c: 41: CCPR2H = 0x00;
+"41
 [e = _CCPR2H -> -> 0 `i `uc ]
-[; ;pwm.c: 50: CCPR2L = 0x00;
-"50
+[; ;pwm.c: 44: CCPR2L = 0x00;
+"44
 [e = _CCPR2L -> -> 0 `i `uc ]
-[; ;pwm.c: 53: CCPTMRSbits.C2TSEL = 0x1;
-"53
+[; ;pwm.c: 47: CCPTMRSbits.C2TSEL = 0x1;
+"47
 [e = . . _CCPTMRSbits 0 1 -> -> 1 `i `uc ]
-[; ;pwm.c: 54: }
-"54
+[; ;pwm.c: 48: }
+"48
 [e :UE 962 ]
 }
-"56
+"50
 [v _PWM2_LoadDutyValue `(v ~T0 @X0 1 ef1`ui ]
-"57
 {
-[; ;pwm.c: 56: void PWM2_LoadDutyValue( unsigned int dutyValue )
-[; ;pwm.c: 57: {
+[; ;pwm.c: 50: void PWM2_LoadDutyValue( uint16_t dutyValue ) {
 [e :U _PWM2_LoadDutyValue ]
-"56
 [v _dutyValue `ui ~T0 @X0 1 r1 ]
-"57
 [f ]
-[; ;pwm.c: 58: dutyValue &= 0x03FF;
-"58
+[; ;pwm.c: 51: dutyValue &= 0x03FF;
+"51
 [e =& _dutyValue -> -> 1023 `i `ui ]
-[; ;pwm.c: 61: if( CCP2CONbits.CCP2FMT )
-"61
+[; ;pwm.c: 54: if ( CCP2CONbits.CCP2FMT ) {
+"54
 [e $ ! != -> . . _CCP2CONbits 0 1 `i -> -> -> 0 `i `Vuc `i 964  ]
-[; ;pwm.c: 62: {
-"62
 {
-[; ;pwm.c: 63: dutyValue <<= 6;
-"63
+[; ;pwm.c: 55: dutyValue <<= 6;
+"55
 [e =<< _dutyValue -> 6 `i ]
-[; ;pwm.c: 64: CCPR2H = dutyValue >> 8;
-"64
+[; ;pwm.c: 56: CCPR2H = dutyValue >> 8;
+"56
 [e = _CCPR2H -> >> _dutyValue -> 8 `i `uc ]
-[; ;pwm.c: 65: CCPR2L = dutyValue;
-"65
+[; ;pwm.c: 57: CCPR2L = dutyValue;
+"57
 [e = _CCPR2L -> _dutyValue `uc ]
-"66
+"58
 }
-[; ;pwm.c: 66: }
+[; ;pwm.c: 58: } else {
 [e $U 965  ]
-"67
 [e :U 964 ]
-[; ;pwm.c: 67: else
-[; ;pwm.c: 68: {
-"68
 {
-[; ;pwm.c: 69: CCPR2H = dutyValue >> 8;
-"69
+[; ;pwm.c: 59: CCPR2H = dutyValue >> 8;
+"59
 [e = _CCPR2H -> >> _dutyValue -> 8 `i `uc ]
-[; ;pwm.c: 70: CCPR2L = dutyValue;
-"70
+[; ;pwm.c: 60: CCPR2L = dutyValue;
+"60
 [e = _CCPR2L -> _dutyValue `uc ]
-"71
+"61
 }
 [e :U 965 ]
-[; ;pwm.c: 71: }
-[; ;pwm.c: 72: }
-"72
+[; ;pwm.c: 61: }
+[; ;pwm.c: 62: }
+"62
 [e :UE 963 ]
 }
-"74
+"64
 [v _PWM3_Initialize `(v ~T0 @X0 1 ef ]
-"75
 {
-[; ;pwm.c: 74: void PWM3_Initialize( void )
-[; ;pwm.c: 75: {
+[; ;pwm.c: 64: void PWM3_Initialize( void ) {
 [e :U _PWM3_Initialize ]
 [f ]
-[; ;pwm.c: 79: CCP3CON = 0x8F;
-"79
+[; ;pwm.c: 68: CCP3CON = 0x8F;
+"68
 [e = _CCP3CON -> -> 143 `i `uc ]
-[; ;pwm.c: 82: CCPR3H = 0x00;
-"82
+[; ;pwm.c: 71: CCPR3H = 0x00;
+"71
 [e = _CCPR3H -> -> 0 `i `uc ]
-[; ;pwm.c: 85: CCPR3L = 0x00;
-"85
+[; ;pwm.c: 74: CCPR3L = 0x00;
+"74
 [e = _CCPR3L -> -> 0 `i `uc ]
-[; ;pwm.c: 88: CCPTMRSbits.C3TSEL = 0x1;
-"88
+[; ;pwm.c: 77: CCPTMRSbits.C3TSEL = 0x1;
+"77
 [e = . . _CCPTMRSbits 0 2 -> -> 1 `i `uc ]
-[; ;pwm.c: 89: }
-"89
+[; ;pwm.c: 78: }
+"78
 [e :UE 966 ]
 }
-"91
+"80
 [v _PWM3_LoadDutyValue `(v ~T0 @X0 1 ef1`ui ]
-"92
 {
-[; ;pwm.c: 91: void PWM3_LoadDutyValue( unsigned int dutyValue )
-[; ;pwm.c: 92: {
+[; ;pwm.c: 80: void PWM3_LoadDutyValue( uint16_t dutyValue ) {
 [e :U _PWM3_LoadDutyValue ]
-"91
 [v _dutyValue `ui ~T0 @X0 1 r1 ]
-"92
 [f ]
-[; ;pwm.c: 93: dutyValue &= 0x03FF;
-"93
+[; ;pwm.c: 81: dutyValue &= 0x03FF;
+"81
 [e =& _dutyValue -> -> 1023 `i `ui ]
-[; ;pwm.c: 96: if( CCP3CONbits.CCP3FMT )
-"96
+[; ;pwm.c: 84: if ( CCP3CONbits.CCP3FMT ) {
+"84
 [e $ ! != -> . . _CCP3CONbits 0 1 `i -> -> -> 0 `i `Vuc `i 968  ]
-[; ;pwm.c: 97: {
-"97
 {
-[; ;pwm.c: 98: dutyValue <<= 6;
-"98
+[; ;pwm.c: 85: dutyValue <<= 6;
+"85
 [e =<< _dutyValue -> 6 `i ]
-[; ;pwm.c: 99: CCPR3H = dutyValue >> 8;
-"99
+[; ;pwm.c: 86: CCPR3H = dutyValue >> 8;
+"86
 [e = _CCPR3H -> >> _dutyValue -> 8 `i `uc ]
-[; ;pwm.c: 100: CCPR3L = dutyValue;
-"100
+[; ;pwm.c: 87: CCPR3L = dutyValue;
+"87
 [e = _CCPR3L -> _dutyValue `uc ]
-"101
+"88
 }
-[; ;pwm.c: 101: }
+[; ;pwm.c: 88: } else {
 [e $U 969  ]
-"102
 [e :U 968 ]
-[; ;pwm.c: 102: else
-[; ;pwm.c: 103: {
-"103
 {
-[; ;pwm.c: 104: CCPR3H = dutyValue >> 8;
-"104
+[; ;pwm.c: 89: CCPR3H = dutyValue >> 8;
+"89
 [e = _CCPR3H -> >> _dutyValue -> 8 `i `uc ]
-[; ;pwm.c: 105: CCPR3L = dutyValue;
-"105
+[; ;pwm.c: 90: CCPR3L = dutyValue;
+"90
 [e = _CCPR3L -> _dutyValue `uc ]
-"106
+"91
 }
 [e :U 969 ]
-[; ;pwm.c: 106: }
-[; ;pwm.c: 107: }
-"107
+[; ;pwm.c: 91: }
+[; ;pwm.c: 92: }
+"92
 [e :UE 967 ]
 }
-"109
+"94
 [v _PWM4_Initialize `(v ~T0 @X0 1 ef ]
-"110
 {
-[; ;pwm.c: 109: void PWM4_Initialize( void )
-[; ;pwm.c: 110: {
+[; ;pwm.c: 94: void PWM4_Initialize( void ) {
 [e :U _PWM4_Initialize ]
 [f ]
-[; ;pwm.c: 114: CCP4CON = 0x8F;
-"114
+[; ;pwm.c: 98: CCP4CON = 0x8F;
+"98
 [e = _CCP4CON -> -> 143 `i `uc ]
-[; ;pwm.c: 117: CCPR4H = 0x00;
-"117
+[; ;pwm.c: 101: CCPR4H = 0x00;
+"101
 [e = _CCPR4H -> -> 0 `i `uc ]
-[; ;pwm.c: 120: CCPR4L = 0x00;
-"120
+[; ;pwm.c: 104: CCPR4L = 0x00;
+"104
 [e = _CCPR4L -> -> 0 `i `uc ]
-[; ;pwm.c: 123: CCPTMRSbits.C4TSEL = 0x1;
-"123
+[; ;pwm.c: 107: CCPTMRSbits.C4TSEL = 0x1;
+"107
 [e = . . _CCPTMRSbits 0 3 -> -> 1 `i `uc ]
-[; ;pwm.c: 124: }
-"124
+[; ;pwm.c: 108: }
+"108
 [e :UE 970 ]
 }
-"126
+"110
 [v _PWM4_LoadDutyValue `(v ~T0 @X0 1 ef1`ui ]
-"127
 {
-[; ;pwm.c: 126: void PWM4_LoadDutyValue( unsigned int dutyValue )
-[; ;pwm.c: 127: {
+[; ;pwm.c: 110: void PWM4_LoadDutyValue( uint16_t dutyValue ) {
 [e :U _PWM4_LoadDutyValue ]
-"126
 [v _dutyValue `ui ~T0 @X0 1 r1 ]
-"127
 [f ]
-[; ;pwm.c: 128: dutyValue &= 0x03FF;
-"128
+[; ;pwm.c: 111: dutyValue &= 0x03FF;
+"111
 [e =& _dutyValue -> -> 1023 `i `ui ]
-[; ;pwm.c: 131: if( CCP4CONbits.CCP4FMT )
-"131
+[; ;pwm.c: 114: if ( CCP4CONbits.CCP4FMT ) {
+"114
 [e $ ! != -> . . _CCP4CONbits 0 1 `i -> -> -> 0 `i `Vuc `i 972  ]
-[; ;pwm.c: 132: {
-"132
 {
-[; ;pwm.c: 133: dutyValue <<= 6;
-"133
+[; ;pwm.c: 115: dutyValue <<= 6;
+"115
 [e =<< _dutyValue -> 6 `i ]
-[; ;pwm.c: 134: CCPR4H = dutyValue >> 8;
-"134
+[; ;pwm.c: 116: CCPR4H = dutyValue >> 8;
+"116
 [e = _CCPR4H -> >> _dutyValue -> 8 `i `uc ]
-[; ;pwm.c: 135: CCPR4L = dutyValue;
-"135
+[; ;pwm.c: 117: CCPR4L = dutyValue;
+"117
 [e = _CCPR4L -> _dutyValue `uc ]
-"136
+"118
 }
-[; ;pwm.c: 136: }
+[; ;pwm.c: 118: } else {
 [e $U 973  ]
-"137
 [e :U 972 ]
-[; ;pwm.c: 137: else
-[; ;pwm.c: 138: {
-"138
 {
-[; ;pwm.c: 139: CCPR4H = dutyValue >> 8;
-"139
+[; ;pwm.c: 119: CCPR4H = dutyValue >> 8;
+"119
 [e = _CCPR4H -> >> _dutyValue -> 8 `i `uc ]
-[; ;pwm.c: 140: CCPR4L = dutyValue;
-"140
+[; ;pwm.c: 120: CCPR4L = dutyValue;
+"120
 [e = _CCPR4L -> _dutyValue `uc ]
-"141
+"121
 }
 [e :U 973 ]
-[; ;pwm.c: 141: }
-[; ;pwm.c: 142: }
-"142
+[; ;pwm.c: 121: }
+[; ;pwm.c: 122: }
+"122
 [e :UE 971 ]
 }
-"144
+"124
 [v _PWM5_Initialize `(v ~T0 @X0 1 ef ]
-"145
 {
-[; ;pwm.c: 144: void PWM5_Initialize( void )
-[; ;pwm.c: 145: {
+[; ;pwm.c: 124: void PWM5_Initialize( void ) {
 [e :U _PWM5_Initialize ]
 [f ]
-[; ;pwm.c: 146: PWM5DCH = 0;
-"146
+[; ;pwm.c: 125: PWM5DCH = 0;
+"125
 [e = _PWM5DCH -> -> 0 `i `uc ]
-[; ;pwm.c: 147: PWM5DCL = 0;
-"147
+[; ;pwm.c: 126: PWM5DCL = 0;
+"126
 [e = _PWM5DCL -> -> 0 `i `uc ]
-[; ;pwm.c: 148: PWMTMRSbits.P5TSEL = 0X01;
-"148
+[; ;pwm.c: 127: PWMTMRSbits.P5TSEL = 0X01;
+"127
 [e = . . _PWMTMRSbits 0 0 -> -> 1 `i `uc ]
-[; ;pwm.c: 149: PWM5CON = 0X80;
-"149
+[; ;pwm.c: 128: PWM5CON = 0X80;
+"128
 [e = _PWM5CON -> -> 128 `i `uc ]
-[; ;pwm.c: 150: }
-"150
+[; ;pwm.c: 129: }
+"129
 [e :UE 974 ]
 }
-"152
+"131
 [v _PWM5_LoadDutyValue `(v ~T0 @X0 1 ef1`ui ]
-"153
 {
-[; ;pwm.c: 152: void PWM5_LoadDutyValue( unsigned int dutyValue )
-[; ;pwm.c: 153: {
+[; ;pwm.c: 131: void PWM5_LoadDutyValue( uint16_t dutyValue ) {
 [e :U _PWM5_LoadDutyValue ]
-"152
 [v _dutyValue `ui ~T0 @X0 1 r1 ]
-"153
 [f ]
-[; ;pwm.c: 154: dutyValue &= 0x03FF;
-"154
+[; ;pwm.c: 132: dutyValue &= 0x03FF;
+"132
 [e =& _dutyValue -> -> 1023 `i `ui ]
-[; ;pwm.c: 155: PWM5DCH = dutyValue >> 2;
-"155
+[; ;pwm.c: 133: PWM5DCH = dutyValue >> 2;
+"133
 [e = _PWM5DCH -> >> _dutyValue -> 2 `i `uc ]
-[; ;pwm.c: 156: PWM5DCL = dutyValue << 6;
-"156
+[; ;pwm.c: 134: PWM5DCL = dutyValue << 6;
+"134
 [e = _PWM5DCL -> << _dutyValue -> 6 `i `uc ]
-[; ;pwm.c: 157: }
-"157
+[; ;pwm.c: 135: }
+"135
 [e :UE 975 ]
 }

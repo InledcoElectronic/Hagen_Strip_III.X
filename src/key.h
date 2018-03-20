@@ -18,30 +18,24 @@ extern "C" {
 #define KEY_MASK        0x01        //RC0
 #define KEY_NONE        0x00
 #define KEY_PRESS       0x01
-    
-//#define KEY_PORT            PORTA
-//#define KEY_MASK            0x02        //RA1
-//#define KEY_NONE            0x00
-//#define KEY_PRESS           0x02    
-//#define KEY_LONG_MASK       0x80
-//#define KEY_LONG_PRESS      (KEY_LONG_MASK | KEY_PRESS)    
-#define KEY_CONT_MASK       0x40
-#define KEY_CONT_PRESS      (KEY_CONT_MASK | KEY_PRESS)
-#define KEY_RELEASE_MASK    0x20
-#define KEY_RELEASE         (KEY_RELEASE_MASK | KEY_PRESS)
-    
-#define	RPT_COUNT		25                  //20ms*25=0.5s
-#define LONG_COUNT      100                 //20ms*100=2s
-#define	KEY_MINTIME		2					//按键持续时间最小值
-#define	CONT_COUNT		1					//20ms
-    
-extern volatile unsigned char keyValue;
+#define KEY1            0x01
 
-/**
- * scan for key pressed
- */
-extern void keyScan();
-extern void keyAction();
+    //#define KEY_CONT_MASK       0x40
+    //#define KEY_CONT_PRESS      (KEY_CONT_MASK | KEY_PRESS)
+    //#define KEY_RELEASE_MASK    0x20
+    //#define KEY_RELEASE         (KEY_RELEASE_MASK | KEY_PRESS)
+
+    enum Key_State_t {
+        KEY_PRESS_SHORT = 0, //短按
+        KEY_PRESS_LONG, //长按(触发一次)
+        KEY_PRESS_CONT, //持续按(持续触发)
+        KEY_RELEASE_1
+    }; //按键释放(长按或持续按状态释放)
+
+    typedef void (*Key_OnStateChangedCallback_t)(uint8_t key, enum Key_State_t state);
+
+    extern void KEY_Scan();
+    extern void KEY_SetOnStateChangedCallback(Key_OnStateChangedCallback_t callback);
 
 #ifdef	__cplusplus
 }
